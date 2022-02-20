@@ -12,11 +12,13 @@ export default function Navbar() {
         className={`navbar-overlay ${
           hamburgerOpen ? "navbar-overlay--active" : ""
         }`}
-      />
+      ></div>
       <header
-        className={hamburgerOpen ? "navbar-overlay-content--active" : "test"}
+        className={`spacer ${
+          hamburgerOpen ? "navbar-overlay-content--active" : ""
+        }`}
       >
-        <nav className="navbar-nav spacer">
+        <nav className="navbar-nav">
           <Logo className="navbar-logo" />
           <Hamburger
             className="navbar-hamburger"
