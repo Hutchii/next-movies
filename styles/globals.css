@@ -157,6 +157,9 @@ main {
 .title-home--slider + .title-home--slider {
   margin-top: 7rem;
 }
+.title-home--slider-info p:first-of-type {
+  text-transform: uppercase;
+}
 
 @keyframes navbar-active {
   0% {
