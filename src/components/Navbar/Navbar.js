@@ -22,7 +22,7 @@ export default function Navbar() {
         }`}
       ></div>
       <header
-        className={`spacer ${
+        className={`spacer spacer-navbar ${
           hamburgerOpen === true && "navbar-overlay-content--active"
         } ${hamburgerOpen === false && "navbar-overlay-content--inactive"}`}
       >

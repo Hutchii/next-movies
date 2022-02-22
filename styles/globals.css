@@ -50,15 +50,15 @@ img {
   max-width: 178.4rem;
   margin: 0 auto;
 }
-.section-margin {
-  margin-top: 12.8rem;
-}
-
 .heading--30 {
   font-size: 3rem;
 }
 .heading--20 {
   font-size: 2rem;
+}
+.heading--42 {
+  font-size: 4.2rem;
+  font-weight: 500;
 }
 .paragraph--18 {
   font-size: 1.8rem;
@@ -81,6 +81,12 @@ img {
 .color--white {
   color: var(--white);
 }
+.color--darkwhite {
+  color: var(--darkwhite);
+}
+.margin--top {
+  margin-top: 10rem;
+}
 .button {
   border: none;
   outline: none;
@@ -88,14 +94,31 @@ img {
   text-transform: uppercase;
   font-size: 1.2rem;
   cursor: pointer;
+  transition: 300ms cubic-bezier(0.1, 0, 0.1, 1);
 }
 .button--dark {
   background-color: var(--darkwhite);
   border: 1px solid var(--black);
   padding: 1rem 2rem;
+  color: var(--black);
+}
+.button--light {
+  background-color: var(--black);
+  border: 1px solid var(--darkwhite);
+  padding: 1rem 2rem;
+  color: var(--darkwhite);
+}
+.button--dark:hover {
+  background-color: #e4e4e4;
+}
+.button--light:hover {
+  background-color: #1b1b1b;
 }
 
 /* HEADER */
+.title-home--wrapper {
+  margin-top: 5rem;
+}
 header {
   font-weight: 500;
   overflow: hidden;
@@ -170,9 +193,6 @@ header {
 }
 
 /* TITLE */
-main {
-  margin-top: 5rem;
-}
 .title-home--slide-info {
   font-family: var(--inter);
   display: flex;
@@ -226,6 +246,20 @@ main {
 .title-home--slide-pagination,
 .title-home--slide-progress {
   display: none;
+}
+
+/* DIRECTOR */
+.director {
+  background-color: var(--black);
+}
+.director-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 3rem;
+  gap: 2.4rem;
 }
 
 @keyframes navbar-active {
@@ -288,7 +322,7 @@ main {
     pointer-events: none;
     position: relative;
     opacity: 0;
-    transition: opacity 1500ms cubic-bezier(0.1, 0, 0.1, 1);
+    transition: opacity 1500ms cubic-bezier(0.2, 0, 0.2, 1);
   }
   .title-home--more {
     display: flex;
@@ -360,7 +394,7 @@ main {
   }
   .title-home--text-active {
     pointer-events: unset;
-    animation: slider-text 800ms 0.3s forwards cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slider-text 850ms 0.2s forwards cubic-bezier(0.4, 0, 0.2, 1);
   }
   .title-home--slide-image img {
     transition: transform 600ms cubic-bezier(0.1, 0, 0.1, 1);
@@ -382,7 +416,7 @@ main {
     font-family: var(--inter);
     transition: color 350ms cubic-bezier(0.1, 0, 0.1, 1);
     cursor: pointer;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.5rem;
   }
   .title-home--slide-pagination--active {
     color: var(--darkwhite);
@@ -402,7 +436,145 @@ main {
   .title-home--slide-progress-active {
     animation: progress-bar 15s forwards linear;
   }
+  .hamburger-react,
+  .navbar-overlay {
+    display: none;
+  }
+  .navbar-list {
+    position: unset;
+    top: unset;
+    left: unset;
+    text-align: unset;
+    font-size: 2.2rem;
+    color: var(--black);
+    transform: unset;
+    opacity: 1;
+    pointer-events: unset;
+    display: flex;
+  }
+  .navbar-list li + li {
+    margin: 0 0 0 4.6rem;
+  }
+  .navbar-nav {
+    height: 10rem;
+  }
+  .navbar-logo {
+    width: 5rem;
+    height: 5rem;
+  }
+  .director-text {
+    padding: 8rem 4.2rem;
+  }
 }
-
+@media (min-width: 900px) {
+  .heading--42 {
+    font-size: 3.6rem;
+  }
+  .director {
+    background: none;
+    display: flex;
+  }
+  .director-image {
+    flex: 1 1 50%;
+    margin-bottom: -0.3rem;
+  }
+  .director-text{
+    padding: 4.6rem;
+    flex: 1 1 50%;
+    background-color: var(--black);
+  }
+}
 @media (min-width: 1024px) {
+  .spacer {
+    padding: 0 4.6rem 0;
+    max-width: 181.2rem;
+  }
+  .title-home--wrapper {
+    display: flex;
+    gap: 5rem;
+  }
+  .title-home--more {
+    display: block;
+  }
+  .title-home--aside + .title-home--aside {
+    margin-top: 3rem;
+  }
+  .title-home--slider {
+    flex: 1 1 70%;
+  }
+  .title-home--more-wrapper {
+    flex: 1 1 30%;
+  }
+  .title-home--more button {
+    margin-top: 2rem;
+  }
+  .heading--20 {
+    font-size: 1.6rem;
+  }
+  .text--12 {
+    font-size: 1.1rem;
+  }
+  .title-home--heading {
+    margin: 0 0 4rem 0;
+  }
+}
+@media (min-width: 1280px) {
+  .heading--20 {
+    font-size: 1.8rem;
+  }
+  .text--12 {
+    font-size: 1.2rem;
+  }
+  .title-home--wrapper {
+    gap: 6rem;
+  }
+  .heading--42 {
+    font-size: 4.2rem;
+  }
+  .margin--top {
+    margin-top: 12.8rem;
+  }
+  .title-home--wrapper {
+    margin-top: 8rem;
+  }
+}
+@media (min-width: 1440px) {
+  .spacer {
+    padding: 0 5rem 0;
+    max-width: 163.2rem;
+  }
+  .spacer-navbar {
+    padding: 0 5rem 0;
+    max-width: 180rem;
+  }
+  .title-home--wrapper {
+    gap: 8rem;
+  }
+  .title-home--slide-number {
+    margin-bottom: 1.8rem;
+  }
+}
+@media (min-width: 1600px) {
+  .heading--30 {
+    font-size: 3.6rem;
+  }
+  .paragraph--18 {
+    font-size: 2rem;
+  }
+  .title-home--slide-text h1 {
+    margin-bottom: 1rem;
+  }
+  .navbar-logo {
+    width: 6rem;
+    height: 6rem;
+  }
+  .director-text{
+    gap: 3.6rem;
+  }
+  .heading--42 {
+    font-size: 6.4rem;
+  }
+  .margin--top {
+    margin-top: 16rem;
+  }
 }

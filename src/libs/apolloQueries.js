@@ -100,3 +100,25 @@ export const MORE_MOVIES = gql`
     }
   }
 `;
+
+export const DIRECTOR = gql`
+  query FeaturedMovies {
+    directors(filters: { is_featured: { eq: true } }) {
+      data {
+        id
+        attributes {
+          director
+          slug
+          is_featured
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

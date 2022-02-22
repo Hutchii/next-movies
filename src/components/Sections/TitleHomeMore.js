@@ -5,7 +5,7 @@ import Button from "../UI/Button";
 
 export default function TitleHomeMore({ moreMoviesData }) {
   return (
-    <>
+    <div className="title-home--more-wrapper">
       <h2 className="text--16 title-home--heading">More movies</h2>
       <div className="title-home--more">
         {moreMoviesData.map((movie) => {
@@ -34,6 +34,6 @@ export default function TitleHomeMore({ moreMoviesData }) {
         })}
         <Button buttonName="view all" dark />
       </div>
-    </>
+    </div>
   );
 }
