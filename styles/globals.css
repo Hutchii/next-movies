@@ -223,6 +223,10 @@ main {
 .title-home--more button {
   margin-top: 2rem;
 }
+.title-home--slide-pagination,
+.title-home--slide-progress {
+  display: none;
+}
 
 @keyframes navbar-active {
   0% {
@@ -247,6 +251,24 @@ main {
     transform: translateX(50%);
   }
 }
+@keyframes progress-bar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes slider-text {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
 /* MEDIA QUERIES */
 @media (min-width: 768px) {
@@ -258,8 +280,15 @@ main {
     width: unset;
     margin-left: 0;
   }
+  .title-home--slide-text {
+    opacity: 0;
+    pointer-events: none;
+  }
   .title-home--slide-wrapper {
+    pointer-events: none;
     position: relative;
+    opacity: 0;
+    transition: opacity 1500ms cubic-bezier(0.1, 0, 0.1, 1);
   }
   .title-home--more {
     display: flex;
@@ -282,10 +311,9 @@ main {
     grid-template: 1fr / 1fr;
   }
   .title-home--slide {
-    pointer-events: none;
-    opacity: 0;
     grid-row: 1/2;
     grid-column: 1/2;
+    transition: opacity 450ms cubic-bezier(0.1, 0, 0.1, 1);
   }
   .title-home--arrow {
     display: flex;
@@ -326,9 +354,13 @@ main {
   .title-home--arrow-active {
     opacity: 1;
   }
-  .title-home--slide-active {
+  .title-home--image-active {
     opacity: 1;
     pointer-events: unset;
+  }
+  .title-home--text-active {
+    pointer-events: unset;
+    animation: slider-text 800ms 0.3s forwards cubic-bezier(0.4, 0, 0.2, 1);
   }
   .title-home--slide-image img {
     transition: transform 600ms cubic-bezier(0.1, 0, 0.1, 1);
@@ -338,27 +370,37 @@ main {
   }
   .title-home--slide-pagination {
     position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 0;
+    left: 0;
     display: flex;
+    justify-content: center;
     gap: 1rem;
     font-size: 1.4rem;
+    width: 100%;
   }
   .title-home--slide-number {
     font-family: var(--inter);
     transition: color 350ms cubic-bezier(0.1, 0, 0.1, 1);
+    cursor: pointer;
+    margin-bottom: 1.4rem;
   }
   .title-home--slide-pagination--active {
     color: var(--darkwhite);
   }
   .title-home--slide-progress {
     position: absolute;
-    width: 100%;
+    width: 0%;
     height: 0.3rem;
     background-color: var(--gold);
     bottom: 0.3rem;
     left: 0;
+    transition: width 1ms linear;
+  }
+  .title-home--slide-progress {
+    display: unset;
+  }
+  .title-home--slide-progress-active {
+    animation: progress-bar 15s forwards linear;
   }
 }
 

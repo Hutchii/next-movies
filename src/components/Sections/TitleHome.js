@@ -5,12 +5,13 @@ import TitleHomeMore from "./TitleHomeMore";
 import ButtonArrow from "../UI/ButtonArrow";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import ProgressBar from "../Elements/ProgressBar";
 
 export default function TitleHome({ featuredMoviesData, moreMoviesData }) {
   const [hide, setHide] = useState(false);
   const [whichSlide, setWhichSlide] = useState(0);
   const maxSlides = featuredMoviesData.length - 1;
-  const timer = 3000;
+  const timer = 15000;
   const nextSlide = () =>
     setWhichSlide((prevValue) => (prevValue === maxSlides ? 0 : prevValue + 1));
   const prevSlide = () =>
@@ -30,20 +31,17 @@ export default function TitleHome({ featuredMoviesData, moreMoviesData }) {
       <div className="title-home--slider">
         {featuredMoviesData.map((movie, i) => {
           return (
-            <div
-              key={movie.id}
-              className={`title-home--slide ${
-                i === whichSlide ? "title-home--slide-active" : ""
-              }`}
-            >
+            <div key={movie.id} className={`title-home--slide`}>
               <div
-                className="title-home--slide-wrapper"
+                className={`title-home--slide-wrapper ${
+                  i === whichSlide ? "title-home--image-active" : ""
+                }`}
                 onMouseEnter={() => setHide(true)}
                 onMouseLeave={() => setHide(false)}
               >
                 <Link href={`/${movie.attributes.slug}`}>
                   <a>
-                    <div className="title-home--slide-image">
+                    <div className={`title-home--slide-image`}>
                       <Image
                         src={imageUrlBuilder(
                           movie.attributes.image.data.attributes.url
@@ -54,26 +52,34 @@ export default function TitleHome({ featuredMoviesData, moreMoviesData }) {
                         priority
                         unoptimized
                       />
-                      <div className="title-home--slide-pagination">
-                        {featuredMoviesData.map((dot, i) => {
-                          return (
-                            <p
-                              key={dot.id}
-                              className={`title-home--slide-number color--grey ${
-                                i === whichSlide
-                                  ? "title-home--slide-pagination--active"
-                                  : ""
-                              }`}
-                            >
-                              {i + 1}
-                            </p>
-                          );
-                        })}
-                      </div>
-                      <div className="title-home--slide-progress"></div>
                     </div>
                   </a>
                 </Link>
+                <div className="title-home--slide-pagination">
+                  {featuredMoviesData.map((dot, i) => {
+                    return (
+                      <div key={dot.id}>
+                        <p
+                          className={`title-home--slide-number color--grey ${
+                            i === whichSlide
+                              ? "title-home--slide-pagination--active"
+                              : ""
+                          }`}
+                          onClick={() => setWhichSlide(i)}
+                        >
+                          {i + 1}
+                        </p>
+                        <div
+                          className={`title-home--slide-progress ${
+                            i === whichSlide
+                              ? "title-home--slide-progress-active"
+                              : ""
+                          }`}
+                        ></div>
+                      </div>
+                    );
+                  })}
+                </div>
                 <ButtonArrow
                   prev
                   hoverHandler={hide}
@@ -81,7 +87,11 @@ export default function TitleHome({ featuredMoviesData, moreMoviesData }) {
                 />
                 <ButtonArrow hoverHandler={hide} onClickHandler={nextSlide} />
               </div>
-              <div className="title-home--slide-text">
+              <div
+                className={`title-home--slide-text ${
+                  i === whichSlide ? "title-home--text-active" : ""
+                }`}
+              >
                 <div className="title-home--slide-info">
                   <p className="text--14 color--grey">
                     {dateConverter(movie.attributes.createdAt)}
