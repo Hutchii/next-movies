@@ -23,7 +23,7 @@ function createApolloClient() {
       typePolicies: {
         Query: {
           fields: {
-            posts: relayStylePagination(["type", "@connection", ["key"]]),
+            movies: relayStylePagination(),
           },
         },
       },
@@ -62,8 +62,6 @@ export function initializeApollo(initialState = null) {
 
 //Takes Apollo Client and calls cache.extract to pull out the cache and adds it to pageProps to the current pages being rendered
 export function addApolloState(client, pageProps) {
-  console.log("pageProps:",pageProps)
-  
   if (pageProps?.props) {
     pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract();
   }

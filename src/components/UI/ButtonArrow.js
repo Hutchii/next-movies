@@ -1,9 +1,9 @@
-export default function ButtonArrow({ prev, hoverHandler, onClickHandler }) {
+export default function ButtonArrow({ prev, onClickHandler }) {
   return (
     <button
       className={`title-home--arrow ${
         prev ? "title-home--arrow-prev" : "title-home--arrow-next"
-      } ${hoverHandler ? "title-home--arrow-active" : ""}`}
+      }`}
       onClick={onClickHandler}
     />
   );

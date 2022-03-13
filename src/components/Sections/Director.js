@@ -3,7 +3,6 @@ import { imageUrlBuilder } from "../../libs/imageUrlBuilder";
 import ButtonLink from "../UI/ButtonLink";
 
 export default function Director({ directorData }) {
-  console.log(directorData);
   return (
     <section className="director margin--top">
       <div className="director-image">

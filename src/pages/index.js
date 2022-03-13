@@ -1,52 +1,52 @@
 import { initializeApollo, addApolloState } from "../libs/apolloClient";
 import {
-  MOVIES,
   FEATURED_MOVIES,
-  MORE_MOVIES,
   DIRECTOR,
+  MOVIES_FILTERS
 } from "../libs/apolloQueries";
-import { useQuery } from "@apollo/client";
 import TitleHome from "../components/Sections/TitleHome";
 import Director from "../components/Sections/Director";
+import Posts from "../components/Sections/Posts";
+import TitleHomeMore from "../components/Sections/TitleHomeMore";
 
-export default function Home({ featuredMovies, moreMovies, director }) {
-  // const { loading, error, data, fetchMore } = useQuery(MOVIES);
+export default function Home({ featuredMovies, director }) {
   return (
     <>
-      <TitleHome
-        featuredMoviesData={featuredMovies}
-        moreMoviesData={moreMovies}
-      />
+      <TitleHome featuredMoviesData={featuredMovies.slice(0, 4)}>
+        <TitleHomeMore moreMoviesData={featuredMovies.slice(4)} />
+      </TitleHome>
       <Director directorData={director} />
+      <Posts />
     </>
   );
 }
 
 export async function getServerSideProps() {
   const apolloClientFeatured = initializeApollo();
-  const apolloClientMore = initializeApollo();
   const apolloClientDirector = initializeApollo();
+  const apolloClientCache = initializeApollo();
 
-  // await apolloClient.query({
-  //   query: MOVIES,
-  // });
+  await apolloClientCache.query({
+    query: MOVIES_FILTERS,
+    variables: {
+      start: 0,
+      limit: 6,
+      genre: "all",
+      title: ""
+    },
+  });
 
   const { data: featuredData } = await apolloClientFeatured.query({
     query: FEATURED_MOVIES,
-  });
-
-  const { data: moreData } = await apolloClientMore.query({
-    query: MORE_MOVIES,
   });
   const { data: directorData } = await apolloClientDirector.query({
     query: DIRECTOR,
   });
 
-  return {
+  return addApolloState(apolloClientCache, {
     props: {
       featuredMovies: featuredData.movies.data,
-      moreMovies: moreData.movies.data,
       director: directorData.directors.data,
     },
-  };
+  });
 }

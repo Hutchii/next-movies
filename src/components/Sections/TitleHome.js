@@ -1,13 +1,11 @@
 import Image from "next/image";
 import { imageUrlBuilder } from "../../libs/imageUrlBuilder";
 import { dateConverter } from "../../libs/dateConverter";
-import TitleHomeMore from "./TitleHomeMore";
 import ButtonArrow from "../UI/ButtonArrow";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-export default function TitleHome({ featuredMoviesData, moreMoviesData }) {
-  const [hide, setHide] = useState(false);
+export default function TitleHome({ featuredMoviesData, children }) {
   const [whichSlide, setWhichSlide] = useState(0);
   const maxSlides = featuredMoviesData.length - 1;
   const timer = 15000;
@@ -21,10 +19,8 @@ export default function TitleHome({ featuredMoviesData, moreMoviesData }) {
     const interval = setInterval(() => {
       nextSlide();
     }, timer);
-
     return () => clearInterval(interval);
   }, [whichSlide]);
-
   return (
     <main className="spacer">
       <div className="title-home--wrapper">
@@ -36,8 +32,6 @@ export default function TitleHome({ featuredMoviesData, moreMoviesData }) {
                   className={`title-home--slide-wrapper ${
                     i === whichSlide ? "title-home--image-active" : ""
                   }`}
-                  onMouseEnter={() => setHide(true)}
-                  onMouseLeave={() => setHide(false)}
                 >
                   <Link href={`/${movie.attributes.slug}`}>
                     <a>
@@ -75,17 +69,13 @@ export default function TitleHome({ featuredMoviesData, moreMoviesData }) {
                                 ? "title-home--slide-progress-active"
                                 : ""
                             }`}
-                          ></div>
+                          />
                         </div>
                       );
                     })}
                   </div>
-                  <ButtonArrow
-                    prev
-                    hoverHandler={hide}
-                    onClickHandler={prevSlide}
-                  />
-                  <ButtonArrow hoverHandler={hide} onClickHandler={nextSlide} />
+                  <ButtonArrow prev onClickHandler={prevSlide} />
+                  <ButtonArrow onClickHandler={nextSlide} />
                 </div>
                 <div
                   className={`title-home--slide-text ${
@@ -98,7 +88,7 @@ export default function TitleHome({ featuredMoviesData, moreMoviesData }) {
                     </p>
                     <p className="text--14 color--gold">By Sebastian Blaik</p>
                   </div>
-                  <h1 className="heading--30">{movie.attributes.title}</h1>
+                  <h1 className="heading--30 test">{movie.attributes.title}</h1>
                   <p className="paragraph--18">
                     {movie.attributes.description}
                   </p>
@@ -107,7 +97,7 @@ export default function TitleHome({ featuredMoviesData, moreMoviesData }) {
             );
           })}
         </div>
-        <TitleHomeMore moreMoviesData={moreMoviesData} />
+        {children}
       </div>
     </main>
   );
