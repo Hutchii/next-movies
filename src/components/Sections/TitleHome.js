@@ -21,6 +21,7 @@ export default function TitleHome({ featuredMoviesData, children }) {
     }, timer);
     return () => clearInterval(interval);
   }, [whichSlide]);
+  console.log("TITLE_HOME")
   return (
     <main className="spacer">
       <div className="title-home--wrapper">

@@ -6,7 +6,7 @@ import {
 } from "../libs/apolloQueries";
 import TitleHome from "../components/Sections/TitleHome";
 import Director from "../components/Sections/Director";
-import Posts from "../components/Sections/Posts";
+import AllPosts from "../components/Sections/AllPosts";
 import TitleHomeMore from "../components/Sections/TitleHomeMore";
 
 export default function Home({ featuredMovies, director }) {
@@ -16,7 +16,7 @@ export default function Home({ featuredMovies, director }) {
         <TitleHomeMore moreMoviesData={featuredMovies.slice(4)} />
       </TitleHome>
       <Director directorData={director} />
-      <Posts />
+      <AllPosts />
     </>
   );
 }
