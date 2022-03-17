@@ -1,8 +1,9 @@
+const listedGenres = ["all", "drama", "romance", "war", "thriller"];
+
 export default function AllPostGenres({
   onClickHandler,
   onClickStateHandler,
   activeGenre,
-  listedGenres
 }) {
   return (
     <div className="posts-filters">

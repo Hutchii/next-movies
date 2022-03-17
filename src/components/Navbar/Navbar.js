@@ -37,7 +37,7 @@ export default function Navbar() {
             <NavbarLink linkName="Home" linkHref="/" />
             <NavbarLink linkName="All Posts" linkHref="/" />
             <NavbarLink linkName="Directors" linkHref="/" />
-            <NavbarLink linkName="Contact" linkHref="/" />
+            <NavbarLink linkName="About" linkHref="/" />
           </ul>
         </nav>
       </header>

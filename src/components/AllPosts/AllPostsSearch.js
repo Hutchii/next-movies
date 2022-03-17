@@ -1,6 +1,6 @@
 import Search from "../../../public/svg/Search.svg";
 
-export default function AllPostsSearch({ refHandler, onChangeHandler, activeGenre }) {
+export default function AllPostsSearch({ refHandler, onChangeHandler }) {
   return (
     <div className="posts-search">
       <input

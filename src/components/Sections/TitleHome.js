@@ -21,22 +21,22 @@ export default function TitleHome({ featuredMoviesData, children }) {
     }, timer);
     return () => clearInterval(interval);
   }, [whichSlide]);
-  console.log("TITLE_HOME")
   return (
     <main className="spacer">
       <div className="title-home--wrapper">
         <div className="title-home--slider">
           {featuredMoviesData.map((movie, i) => {
             return (
-              <div key={movie.id} className={`title-home--slide`}>
-                <div
-                  className={`title-home--slide-wrapper ${
-                    i === whichSlide ? "title-home--image-active" : ""
-                  }`}
-                >
+              <div
+                key={movie.id}
+                className={`title-home--slide ${
+                  i === whichSlide ? "title-home--slide-active" : ""
+                }`}
+              >
+                <div className="title-home--slide-wrapper">
                   <Link href={`/${movie.attributes.slug}`}>
                     <a>
-                      <div className={`title-home--slide-image`}>
+                      <div className="title-home--slide-image">
                         <Image
                           src={imageUrlBuilder(
                             movie.attributes.image.data.attributes.url
@@ -55,7 +55,7 @@ export default function TitleHome({ featuredMoviesData, children }) {
                       return (
                         <div key={dot.id}>
                           <p
-                            className={`title-home--slide-number color--grey ${
+                            className={`color--grey title-home--slide-number ${
                               i === whichSlide
                                 ? "title-home--slide-pagination--active"
                                 : ""
@@ -64,13 +64,7 @@ export default function TitleHome({ featuredMoviesData, children }) {
                           >
                             {i + 1}
                           </p>
-                          <div
-                            className={`title-home--slide-progress ${
-                              i === whichSlide
-                                ? "title-home--slide-progress-active"
-                                : ""
-                            }`}
-                          />
+                          <div className="title-home--slide-progress" />
                         </div>
                       );
                     })}
@@ -78,22 +72,24 @@ export default function TitleHome({ featuredMoviesData, children }) {
                   <ButtonArrow prev onClickHandler={prevSlide} />
                   <ButtonArrow onClickHandler={nextSlide} />
                 </div>
-                <div
-                  className={`title-home--slide-text ${
-                    i === whichSlide ? "title-home--text-active" : ""
-                  }`}
-                >
-                  <div className="title-home--slide-info">
-                    <p className="text--14 color--grey">
-                      {dateConverter(movie.attributes.createdAt)}
-                    </p>
-                    <p className="text--14 color--gold">By Sebastian Blaik</p>
-                  </div>
-                  <h1 className="heading--30 test">{movie.attributes.title}</h1>
-                  <p className="paragraph--18">
-                    {movie.attributes.description}
-                  </p>
-                </div>
+                <Link href={`/${movie.attributes.slug}`}>
+                  <a>
+                    <div className={`title-home--slide-text`}>
+                      <div className="title-home--slide-info">
+                        <p className="text--14 color--grey">
+                          {dateConverter(movie.attributes.createdAt)}
+                        </p>
+                        <p className="text--14 color--gold">
+                          By Sebastian Blaik
+                        </p>
+                      </div>
+                      <h1 className="heading--30">{movie.attributes.title}</h1>
+                      <p className="paragraph--18">
+                        {movie.attributes.description}
+                      </p>
+                    </div>
+                  </a>
+                </Link>
               </div>
             );
           })}
