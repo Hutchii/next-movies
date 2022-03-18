@@ -53,37 +53,6 @@ export const DIRECTOR = gql`
   }
 `;
 
-export const MOVIES_ALL = gql`
-  query MoviesAll($start: Int!, $limit: Int!) {
-    movies(
-      pagination: { start: $start, limit: $limit }
-      sort: "createdAt:desc"
-    ) {
-      data {
-        id
-        attributes {
-          title
-          description
-          createdAt
-          slug
-          image {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-        }
-      }
-      meta {
-        pagination {
-          total
-        }
-      }
-    }
-  }
-`;
-
 export const MOVIES_FILTERS = gql`
   query MoviesFilters(
     $start: Int!
@@ -125,31 +94,6 @@ export const MOVIES_FILTERS = gql`
       meta {
         pagination {
           total
-        }
-      }
-    }
-  }
-`;
-
-export const MOVIES_CACHE_TOTAL = gql`
-  query MoviesCacheTotal {
-    movies {
-      meta {
-        pagination {
-          total
-        }
-      }
-    }
-  }
-`;
-
-export const GENRES = gql`
-  query FeaturedMovies {
-    genres {
-      data {
-        id
-        attributes {
-          title
         }
       }
     }
