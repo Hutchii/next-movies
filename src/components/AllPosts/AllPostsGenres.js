@@ -1,10 +1,6 @@
 const listedGenres = ["all", "drama", "romance", "war", "thriller"];
 
-export default function AllPostGenres({
-  onClickHandler,
-  onClickStateHandler,
-  activeGenre,
-}) {
+export default function AllPostGenres({ onClickHandler, activeGenre }) {
   return (
     <div className="posts-filters">
       {listedGenres.map((genre, i) => {
@@ -16,7 +12,6 @@ export default function AllPostGenres({
             }`}
             onClick={() => {
               onClickHandler(genre);
-              onClickStateHandler(genre);
             }}
           >
             {genre}

@@ -4,14 +4,14 @@ import { imageUrlBuilder } from "../../libs/imageUrlBuilder";
 import { dateConverter } from "../../libs/dateConverter";
 import Message from "../UI/Message";
 
-export default function AllPostsList({ cacheData, activeGenre, error }) {
-  if (cacheData.length === 0)
+export default function AllPostsList({ moviesData, activeGenre, error }) {
+  if (moviesData.length === 0)
     return <Message activeGenre={activeGenre} empty />;
   if (error) return <Message activeGenre={activeGenre} />;
   return (
     <>
       <div className="posts-cards">
-        {cacheData?.map((movie) => {
+        {moviesData?.map((movie) => {
           return (
             <Link key={movie.id} href={`/${movie.attributes.slug}`}>
               <a className="posts-cards--link">

@@ -1,16 +1,18 @@
 import { useQuery } from "@apollo/client";
 import { MOVIES_FILTERS } from "../../libs/apolloQueries";
 import AllPostGenres from "./AllPostsGenres";
-import { useState, useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { debounce } from "lodash";
 import AllPostsList from "./AllPostsList";
 import AllPostsSearch from "./AllPostsSearch";
 import AllPostsButton from "./AllPostsButton";
 import AllPostsResults from "./AllPostsResults";
+import Router, { useRouter } from "next/router";
 
 export default function AllPosts() {
-  const [activeGenre, setActiveGenre] = useState("all");
   const searchInput = useRef("");
+  const { query } = useRouter();
+  const genreLink = query.genre || "all";
   const { error, data, fetchMore, refetch } = useQuery(MOVIES_FILTERS, {
     variables: {
       start: 0,
@@ -18,12 +20,13 @@ export default function AllPosts() {
       genre: "all",
       title: "",
     },
-    notifyOnNetworkStatusChange: true,
+    //notifyOnNetworkStatusChange: true, //- Use only when using loading state. Otherwise it will re-render unnecessarily.
   });
-  const cacheData = data?.movies.data;
-  const dataLength = data?.movies?.data.length;
-  const totalLength = data?.movies?.meta.pagination.total;
-  const areMorePosts = dataLength >= totalLength;
+  const moviesData = data?.movies.data;
+  const moviesDataLength = data?.movies?.data.length;
+  const moviesDataTotal = data?.movies?.meta.pagination.total;
+  const areMoreMovies = moviesDataLength >= moviesDataTotal;
+
   const refetchHelper = (genre, title) =>
     refetch({
       start: 0,
@@ -32,15 +35,17 @@ export default function AllPosts() {
       title: title,
     });
   const searchHandler = (event) => {
-    setActiveGenre("");
     const search = event.target.value;
     refetchHelper("all", search);
+    Router.push("/", undefined, { shallow: true });
   };
-
   const debouncedSearchHandler = useMemo(
     () => debounce(searchHandler, 300),
     []
   );
+  useEffect(() => {
+    query.genre && refetchHelper(query.genre, "");
+  }, []);
   return (
     <section className="posts spacer">
       <div className="posts-menu margin--top">
@@ -48,33 +53,34 @@ export default function AllPosts() {
           onClickHandler={(currentGenre) => {
             searchInput.current.value = "";
             refetchHelper(currentGenre, "");
+            Router.push(`/?genre=${currentGenre}`, undefined, {
+              shallow: true,
+            });
           }}
-          onClickStateHandler={(activeGenre) => setActiveGenre(activeGenre)}
-          activeGenre={activeGenre}
+          activeGenre={genreLink}
         />
         <AllPostsSearch
           refHandler={searchInput}
           onChangeHandler={debouncedSearchHandler}
-          activeGenre={activeGenre}
         />
       </div>
-      <AllPostsResults totalLength={totalLength} />
+      <AllPostsResults moviesDataTotal={moviesDataTotal} />
       <AllPostsList
-        cacheData={cacheData}
-        activeGenre={activeGenre}
+        moviesData={moviesData}
+        activeGenre={genreLink}
         error={error}
       />
-      {!areMorePosts && (
+      {!areMoreMovies && (
         <AllPostsButton
           onClickHandler={() =>
             fetchMore({
               variables: {
                 start: 0,
-                limit: dataLength + 6,
+                limit: moviesDataLength + 6,
               },
             })
           }
-          areMorePosts={areMorePosts}
+          areMoreMovies={areMoreMovies}
         />
       )}
     </section>

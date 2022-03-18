@@ -1,7 +1,7 @@
-export default function AllPostsResults({ totalLength }) {
+export default function AllPostsResults({ moviesDataTotal }) {
   return (
     <p className="text--14 posts-results">
-      {totalLength} <span className="color--grey">results</span>
+      {moviesDataTotal} <span className="color--grey">results</span>
     </p>
   );
 }

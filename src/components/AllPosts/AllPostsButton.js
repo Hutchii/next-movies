@@ -1,10 +1,10 @@
-export default function AllPostsButton({onClickHandler, areMorePosts}) {
+export default function AllPostsButton({onClickHandler, areMoreMovies}) {
   return (
     <div className="posts-cards--button center">
       <button
         className="button button--dark"
         onClick={onClickHandler}
-        disabled={areMorePosts}
+        disabled={areMoreMovies}
       >
         load more
       </button>
