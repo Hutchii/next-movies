@@ -3,10 +3,10 @@ import { SLUG, SLUG_DATA } from "../libs/apolloQueries";
 import Image from "next/image";
 import { imageUrlBuilder } from "../libs/imageUrlBuilder";
 import { dateConverter } from "../libs/dateConverter";
+import Markdown from "../components/Sections/Markdown";
 
 export default function Slug({ data }) {
   const slugData = data.movies.data[0].attributes;
-  console.log(slugData);
   return (
     <article className="spacer">
       <div className="title-slug margin--header">
@@ -27,7 +27,7 @@ export default function Slug({ data }) {
             unoptimized
           />
         </div>
-        <p className="paragraph--18">{slugData.description}</p>
+        <Markdown content={slugData.content} />
       </div>
     </article>
   );

@@ -120,7 +120,7 @@ export const SLUG_DATA = gql`
         attributes {
           slug
           title
-          description
+          content
           createdAt
           slug
           image {
