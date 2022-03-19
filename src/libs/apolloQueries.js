@@ -99,3 +99,46 @@ export const MOVIES_FILTERS = gql`
     }
   }
 `;
+
+export const SLUG = gql`
+  query Slug {
+    movies {
+      data {
+        attributes {
+          slug
+        }
+      }
+    }
+  }
+`;
+
+export const SLUG_DATA = gql`
+  query SlugData($slug: String!) {
+    movies(filters: { slug: { eq: $slug } }) {
+      data {
+        id
+        attributes {
+          slug
+          title
+          description
+          createdAt
+          slug
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          genres {
+            data {
+              attributes {
+                title
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

@@ -23,7 +23,7 @@ export default function TitleHome({ featuredMoviesData, children }) {
   }, [whichSlide]);
   return (
     <main className="spacer">
-      <div className="title-home--wrapper">
+      <div className="title-home--wrapper margin--header">
         <div className="title-home--slider">
           {featuredMoviesData.map((movie, i) => {
             return (
