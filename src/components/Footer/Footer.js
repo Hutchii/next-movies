@@ -1,11 +1,11 @@
-import Logo from "../../../public/svg/Logo.svg";
+import Logo from "../UI/Logo";
 import NavbarLink from "../Navbar/NavbarLink";
 
 export default function Footer() {
   return (
     <footer className="margin--top">
       <div className="footer-nav spacer">
-        <Logo />
+        <Logo className="footer-logo" />
         <nav>
           <ul className="footer-list">
             <NavbarLink linkName="SSR + Client" linkHref="/" />

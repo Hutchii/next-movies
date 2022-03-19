@@ -20,6 +20,13 @@ export const FEATURED_MOVIES = gql`
               }
             }
           }
+          directors {
+            data {
+              attributes {
+                director
+              }
+            }
+          }
           featured {
             data {
               id
@@ -82,6 +89,13 @@ export const MOVIES_FILTERS = gql`
               }
             }
           }
+          directors {
+            data {
+              attributes {
+                director
+              }
+            }
+          }
           genres {
             data {
               attributes {
@@ -127,6 +141,13 @@ export const SLUG_DATA = gql`
             data {
               attributes {
                 url
+              }
+            }
+          }
+          directors {
+            data {
+              attributes {
+                director
               }
             }
           }

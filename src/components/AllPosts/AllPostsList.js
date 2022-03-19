@@ -3,6 +3,7 @@ import Image from "next/image";
 import { imageUrlBuilder } from "../../libs/imageUrlBuilder";
 import { dateConverter } from "../../libs/dateConverter";
 import Message from "../UI/Message";
+import { directorsFormatter } from "../../libs/directorsFormatter";
 
 export default function AllPostsList({ moviesData, activeGenre, error }) {
   if (moviesData.length === 0)
@@ -39,7 +40,9 @@ export default function AllPostsList({ moviesData, activeGenre, error }) {
                       <p className="text--12 color--grey">
                         {dateConverter(movie.attributes.createdAt)}
                       </p>
-                      <p className="text--12 color--gold">By Sebastian Blaik</p>
+                      <p className="text--12 color--gold">{`By ${directorsFormatter(
+                        movie.attributes.directors.data
+                      )}`}</p>
                     </div>
                   </div>
                 </div>

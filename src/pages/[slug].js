@@ -4,6 +4,7 @@ import Image from "next/image";
 import { imageUrlBuilder } from "../libs/imageUrlBuilder";
 import { dateConverter } from "../libs/dateConverter";
 import Markdown from "../components/Sections/Markdown";
+import { directorsFormatter } from "../libs/directorsFormatter";
 
 export default function Slug({ data }) {
   const slugData = data.movies.data[0].attributes;
@@ -12,7 +13,9 @@ export default function Slug({ data }) {
       <div className="title-slug margin--header">
         <div className="title-slug--info">
           <h1 className="heading--64">{slugData.title}</h1>
-          <p className="text--14 color--gold font--inter">By Sebastian Blaik</p>
+          <p className="text--14 color--gold font--inter">{`By ${directorsFormatter(
+            slugData.directors.data
+          )}`}</p>
           <p className="text--14 color--grey font--inter">
             {dateConverter(slugData.createdAt)}
           </p>

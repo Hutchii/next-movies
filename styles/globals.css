@@ -217,7 +217,7 @@ nav a:hover {
   fill: var(--darkwhite);
 }
 .navbar-overlay-content--active .navbar-list {
-  animation: navbar-active 0.6s 0.3s forwards
+  animation: navbar-active 0.6s 0.35s forwards
     cubic-bezier(0.215, 0.61, 0.355, 1);
   pointer-events: unset;
 }
@@ -383,7 +383,7 @@ footer {
   background-color: var(--black);
   padding: 5rem 0 4rem 0;
 }
-footer svg {
+.footer-logo {
   width: 5rem;
   height: 5rem;
   fill: var(--darkwhite);
@@ -718,7 +718,7 @@ footer svg {
   footer {
     padding: 8rem 0 4rem 0;
   }
-  footer svg {
+  .footer-logo {
     width: 6rem;
     height: 6rem;
     grid-column: 1/2;

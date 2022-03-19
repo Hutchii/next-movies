@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import NavbarLink from "./NavbarLink";
-import Logo from "../../../public/svg/Logo.svg";
 import Hamburger from "hamburger-react";
+import Logo from "../UI/Logo";
 
 export default function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(null);

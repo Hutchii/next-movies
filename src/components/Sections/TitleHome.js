@@ -4,6 +4,7 @@ import { dateConverter } from "../../libs/dateConverter";
 import ButtonArrow from "../UI/ButtonArrow";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { directorsFormatter } from "../../libs/directorsFormatter";
 
 export default function TitleHome({ featuredMoviesData, children }) {
   const [whichSlide, setWhichSlide] = useState(0);
@@ -21,6 +22,7 @@ export default function TitleHome({ featuredMoviesData, children }) {
     }, timer);
     return () => clearInterval(interval);
   }, [whichSlide]);
+
   return (
     <main className="spacer">
       <div className="title-home--wrapper margin--header">
@@ -80,7 +82,7 @@ export default function TitleHome({ featuredMoviesData, children }) {
                           {dateConverter(movie.attributes.createdAt)}
                         </p>
                         <p className="text--14 color--gold">
-                          By Sebastian Blaik
+                          {`By ${directorsFormatter(movie.attributes.directors.data)}`}
                         </p>
                       </div>
                       <h1 className="heading--30">{movie.attributes.title}</h1>
@@ -98,4 +100,9 @@ export default function TitleHome({ featuredMoviesData, children }) {
       </div>
     </main>
   );
+}
+{
+  /* <p key={i} className="text--14 color--gold">
+{directorsFormatter(director.attributes.director)}
+</p> */
 }
