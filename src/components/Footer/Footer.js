@@ -8,12 +8,13 @@ export default function Footer() {
         <Logo />
         <nav>
           <ul className="footer-list">
-            <NavbarLink linkName="Home" linkHref="/" />
-            <NavbarLink linkName="All Posts" linkHref="/" />
+            <NavbarLink linkName="SSR + Client" linkHref="/" />
+            <NavbarLink linkName="SG" linkHref="/" />
             <NavbarLink linkName="Directors" linkHref="/" />
             <NavbarLink linkName="About" linkHref="/" />
           </ul>
         </nav>
+        <p className="footer-copyright">© Sebastian Blaik 2022</p>
       </div>
     </footer>
   );

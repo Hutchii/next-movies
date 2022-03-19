@@ -7,7 +7,7 @@ export default function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(null);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1025px)");
+    const mq = window.matchMedia("(max-width: 768px)");
     if (mq.matches) {
       if (hamburgerOpen)
         document.body.classList.add("navbar-overlay--overflow");
@@ -23,9 +23,11 @@ export default function Navbar() {
         }`}
       />
       <header
-        className={`spacer spacer ${
-          hamburgerOpen === true && "navbar-overlay-content--active"
-        } ${hamburgerOpen === false && "navbar-overlay-content--inactive"}`}
+        className={`spacer ${
+          hamburgerOpen
+            ? "navbar-overlay-content--active"
+            : "navbar-overlay-content--inactive"
+        }`}
       >
         <nav className="navbar-nav">
           <Logo className="navbar-logo" />
@@ -35,8 +37,8 @@ export default function Navbar() {
             toggle={setHamburgerOpen}
           />
           <ul className="navbar-list">
-            <NavbarLink linkName="Home" linkHref="/" />
-            <NavbarLink linkName="All Posts" linkHref="/" />
+            <NavbarLink linkName="SSR + Client" linkHref="/" />
+            <NavbarLink linkName="SG" linkHref="/" />
             <NavbarLink linkName="Directors" linkHref="/" />
             <NavbarLink linkName="About" linkHref="/" />
           </ul>
