@@ -2,7 +2,7 @@
   --white: #ffffff;
   --darkwhite: #f6f6f6;
   --black: #161616;
-  --gold: #cf8804;
+  --gold: #D99C00;
   --grey: #8e8e8e;
   --inter: "Inter", sans-serif;
   --freight: freight-text-pro, serif;
@@ -460,6 +460,27 @@ footer {
 .title-slug--markdown ul {
   list-style: unset;
 }
+.title-slug--share {
+  margin-top: 4rem;
+}
+.title-slug--share > div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+.title-slug--share p {
+  font-size: 1.5rem;
+  font-family: var(--inter);
+  text-transform: uppercase;
+  color: var(--black);
+  margin-right: 1rem;
+}
+.title-slug--share svg {
+  width: 2.9rem;
+  height: 2.9rem;
+  fill: var(--gold);
+}
 
 @keyframes navbar-active {
   0% {
@@ -864,6 +885,30 @@ footer {
   }
   .title-slug.margin--header {
     margin-top: 4rem;
+  }
+}
+@media (min-width: 1360px) {
+  article {
+    position: relative;
+  }
+  .title-slug--share {
+    position: absolute;
+    top: 26rem;
+    right: 10rem;
+  }
+  .title-slug--share > div {
+    gap: 1.8rem;
+    margin-top: 2rem;
+    flex-direction: column;
+  }
+  .title-slug--share p {
+    font-size: 1.2rem;
+    color: var(--grey);
+    margin-right: 0;
+  }
+  .title-slug--share svg {
+    width: 3.6rem;
+    height: 3.6rem;
   }
 }
 @media (min-width: 1440px) {

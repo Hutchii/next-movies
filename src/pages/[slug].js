@@ -5,6 +5,10 @@ import { imageUrlBuilder } from "../libs/imageUrlBuilder";
 import { dateConverter } from "../libs/dateConverter";
 import Markdown from "../components/Sections/Markdown";
 import { directorsFormatter } from "../libs/directorsFormatter";
+import Facebook from "../../public/svg/Facebook.svg";
+import Twitter from "../../public/svg/Twitter.svg";
+import Instagram from "../../public/svg/Instagram.svg";
+import Link from "next/link";
 
 export default function Slug({ data }) {
   const slugData = data.movies.data[0].attributes;
@@ -31,6 +35,26 @@ export default function Slug({ data }) {
           />
         </div>
         <Markdown content={slugData.content} />
+        <div className="title-slug--share">
+          <p>Share</p>
+          <div>
+            <Link href="/">
+              <a>
+                <Facebook />
+              </a>
+            </Link>
+            <Link href="/">
+              <a>
+                <Twitter />
+              </a>
+            </Link>
+            <Link href="/">
+              <a>
+                <Instagram />
+              </a>
+            </Link>
+          </div>
+        </div>
       </div>
     </article>
   );
