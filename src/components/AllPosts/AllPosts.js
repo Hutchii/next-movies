@@ -13,6 +13,7 @@ export default function AllPosts() {
   const searchInput = useRef("");
   const { query } = useRouter();
   const genreLink = query.genre || "all";
+  const searchLink = query.search;
   const { error, data, fetchMore, refetch } = useQuery(MOVIES_FILTERS, {
     variables: {
       start: 0,
@@ -37,14 +38,15 @@ export default function AllPosts() {
   const searchHandler = (event) => {
     const search = event.target.value;
     refetchHelper("all", search);
-    Router.push("/", undefined, { shallow: true });
+    Router.push(`/?search=${search}`, undefined, { shallow: true });
   };
   const debouncedSearchHandler = useMemo(
-    () => debounce(searchHandler, 300),
+    () => debounce(searchHandler, 350),
     []
   );
   useEffect(() => {
     query.genre && refetchHelper(query.genre, "");
+    query.search && refetchHelper("all", query.search);
   }, []);
   return (
     <section className="posts spacer">
@@ -68,6 +70,7 @@ export default function AllPosts() {
       <AllPostsList
         moviesData={moviesData}
         activeGenre={genreLink}
+        activeSearch={searchLink}
         error={error}
       />
       {!areMoreMovies && (

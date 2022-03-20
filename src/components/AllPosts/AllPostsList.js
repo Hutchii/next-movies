@@ -5,10 +5,22 @@ import { dateConverter } from "../../libs/dateConverter";
 import Message from "../UI/Message";
 import { directorsFormatter } from "../../libs/directorsFormatter";
 
-export default function AllPostsList({ moviesData, activeGenre, error }) {
-  if (moviesData.length === 0)
-    return <Message activeGenre={activeGenre} empty />;
-  if (error) return <Message activeGenre={activeGenre} />;
+export default function AllPostsList({
+  moviesData,
+  activeGenre,
+  activeSearch,
+  error,
+}) {
+  const dataLength = moviesData.length === 0;
+  if (activeGenre === "all" && !activeSearch && dataLength)
+    return <Message message="Unfortunately there are no movies." />;
+  if (!activeSearch && dataLength)
+    return (
+      <Message message={`Unfortunately there are no ${activeGenre} movies.`} />
+    );
+  if (activeSearch && dataLength)
+    return <Message message="No results found." />;
+  if (error) return <Message message="Error occured. Try again." />;
   return (
     <>
       <div className="posts-cards">
