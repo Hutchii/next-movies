@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import NavbarLink from "./NavbarLink";
 import Hamburger from "hamburger-react";
 import Logo from "../UI/Logo";
+import NavbarDropdown from "./NavbarDropdown";
 
 export default function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(null);
@@ -37,8 +38,22 @@ export default function Navbar() {
             toggle={setHamburgerOpen}
           />
           <ul className="navbar-list">
-            <NavbarLink linkName="SSR + Client" linkHref="/" />
-            <NavbarLink linkName="SG" linkHref="/" />
+            <NavbarDropdown
+              dropdownName="SSR"
+              dropdownLinks={[
+                { name: "Load More", link: "/ssr-load-more" },
+                { name: "Pagination", link: "/ssr-pagination" },
+                { name: "Infinite Scrolling", link: "/ssr-infinite-scrolling" },
+              ]}
+            />
+            <NavbarDropdown
+              dropdownName="SG"
+              dropdownLinks={[
+                { name: "Load More", link: "/ssg-load-more" },
+                { name: "Pagination", link: "/ssg-pagination" },
+                { name: "Infinite Scrolling", link: "/ssg-infinite-scrolling" },
+              ]}
+            />
             <NavbarLink linkName="Directors" linkHref="/" />
             <NavbarLink linkName="About" linkHref="/" />
           </ul>

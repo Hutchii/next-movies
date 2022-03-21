@@ -5,12 +5,11 @@ import { imageUrlBuilder } from "../libs/imageUrlBuilder";
 import { dateConverter } from "../libs/dateConverter";
 import Markdown from "../components/Sections/Markdown";
 import { directorsFormatter } from "../libs/directorsFormatter";
-import Facebook from "../../public/svg/Facebook.svg";
-import Twitter from "../../public/svg/Twitter.svg";
-import Instagram from "../../public/svg/Instagram.svg";
-import Link from "next/link";
+import Share from "../components/Sections/Share";
+import Error from "next/error";
 
-export default function Slug({ data }) {
+export default function Slug({ data, errorCode }) {
+  if (!data) return <Error statusCode={errorCode} />;
   const slugData = data.movies.data[0].attributes;
   return (
     <article className="spacer">
@@ -35,26 +34,7 @@ export default function Slug({ data }) {
           />
         </div>
         <Markdown content={slugData.content} />
-        <div className="title-slug--share">
-          <p>Share</p>
-          <div>
-            <Link href="/">
-              <a>
-                <Facebook />
-              </a>
-            </Link>
-            <Link href="/">
-              <a>
-                <Twitter />
-              </a>
-            </Link>
-            <Link href="/">
-              <a>
-                <Instagram />
-              </a>
-            </Link>
-          </div>
-        </div>
+        <Share />
       </div>
     </article>
   );
@@ -80,13 +60,21 @@ export async function getStaticProps({ params }) {
   const apolloClientSlugData = initializeApollo();
   const slug = params.slug;
 
-  const { data } = await apolloClientSlugData.query({
-    query: SLUG_DATA,
-    variables: { slug: slug },
-  });
-  return {
-    props: {
-      data,
-    },
-  };
+  try {
+    const { error, data } = await apolloClientSlugData.query({
+      query: SLUG_DATA,
+      variables: { slug: slug },
+      revalidate: 10,
+    });
+    if (data.movies.data.length === 0 || error) {
+      return { notFound: true };
+    }
+    return {
+      props: {
+        data,
+      },
+    };
+  } catch (err) {
+    return { notFound: true };
+  }
 }
