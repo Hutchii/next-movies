@@ -114,6 +114,62 @@ export const MOVIES_FILTERS = gql`
   }
 `;
 
+export const MOVIES_FILTERS_PAGINATION = gql`
+  query MoviesFilters(
+    $page: Int!
+    $pageSize: Int!
+    $genre: String!
+    $title: String!
+  ) {
+    movies(
+      pagination: { page: $page, pageSize: $pageSize }
+      sort: "createdAt:desc"
+      filters: {
+        genres: { title: { eq: $genre } }
+        title: { contains: $title }
+      }
+    ) {
+      data {
+        id
+        attributes {
+          title
+          description
+          createdAt
+          slug
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          directors {
+            data {
+              attributes {
+                director
+              }
+            }
+          }
+          genres {
+            data {
+              attributes {
+                title
+              }
+            }
+          }
+        }
+      }
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+        }
+      }
+    }
+  }
+`;
+
 export const SLUG = gql`
   query Slug {
     movies {

@@ -74,17 +74,19 @@ export default function AllPosts() {
         error={error}
       />
       {!areMoreMovies && (
-        <AllPostsButton
-          onClickHandler={() =>
-            fetchMore({
-              variables: {
-                start: 0,
-                limit: moviesDataLength + 6,
-              },
-            })
-          }
-          areMoreMovies={areMoreMovies}
-        />
+        <div className="posts-cards--button center">
+          <AllPostsButton
+            onClickHandler={() =>
+              fetchMore({
+                variables: {
+                  start: 0,
+                  limit: moviesDataLength + 6,
+                },
+              })
+            }
+            areMoreMovies={areMoreMovies}
+          />
+        </div>
       )}
     </section>
   );

@@ -115,17 +115,16 @@ img {
   cursor: pointer;
   position: relative;
   transition: 100ms cubic-bezier(0, 0, 0, 1);
+  padding: 1rem 2rem;
 }
 .button--dark {
   background-color: var(--darkwhite);
   border: 1px solid var(--black);
-  padding: 1rem 2rem;
   color: var(--black);
 }
 .button--light {
   background-color: var(--black);
   border: 1px solid var(--darkwhite);
-  padding: 1rem 2rem;
   color: var(--darkwhite);
 }
 .button--dark:disabled {
@@ -135,7 +134,6 @@ img {
 .button--active {
   background-color: var(--black);
   border: 1px solid var(--darkwhite);
-  padding: 1rem 2rem;
   color: var(--darkwhite);
 }
 
@@ -491,6 +489,31 @@ footer {
   height: 2.9rem;
   fill: var(--gold);
 }
+.posts-pagination {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.posts-pagination .button {
+  padding: 1rem 1.5rem;
+}
+.posts-pagination--previous svg {
+  transform: rotate(90deg);
+  margin-right: 0.5rem;
+}
+.posts-pagination--next svg {
+  transform: rotate(-90deg);
+  margin-left: 0.5rem;
+}
+.posts-pagination--previous, .posts-pagination--next {
+  border: none;
+}
+.posts-pagination svg {
+  cursor: pointer;
+}
+.posts-pagination--dots {
+  padding: 1rem 1.5rem;
+}
 
 @keyframes navbar-active {
   0% {
@@ -602,7 +625,7 @@ footer {
     display: block;
     white-space: nowrap;
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid #e6e6e6;;
+    border-bottom: 1px solid #e6e6e6;
   }
   .navbar-dropdown--list-active {
     opacity: 1;
