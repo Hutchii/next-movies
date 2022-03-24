@@ -10,6 +10,7 @@ export default function AllPostsList({
   activeGenre,
   activeSearch,
   error,
+  fetchLink
 }) {
   const dataLength = moviesData.length === 0;
   if (activeGenre === "all" && !activeSearch && dataLength)
@@ -26,7 +27,7 @@ export default function AllPostsList({
       <div className="posts-cards">
         {moviesData?.map((movie) => {
           return (
-            <Link key={movie.id} href={`/${movie.attributes.slug}`}>
+            <Link key={movie.id} href={`/${fetchLink}/${movie.attributes.slug}`}>
               <a className="posts-cards--link">
                 <div className="posts-cards--post">
                   <div className="posts-cards--image">

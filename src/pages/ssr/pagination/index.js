@@ -1,21 +1,27 @@
-import { initializeApollo, addApolloState } from "../libs/apolloClient";
+import { initializeApollo, addApolloState } from "../../../libs/apolloClient";
 import {
   FEATURED_MOVIES,
   DIRECTOR,
   MOVIES_FILTERS_PAGINATION,
-} from "../libs/apolloQueries";
-import TitleHome from "../components/Sections/TitleHome";
-import Director from "../components/Sections/Director";
-import AllPostsPagination from "../components/AllPosts/AllPostsPagination";
-import TitleHomeMore from "../components/Sections/TitleHomeMore";
+} from "../../../libs/apolloQueries";
+import TitleHome from "../../../components/Sections/TitleHome";
+import Director from "../../../components/Sections/Director";
+import AllPostsPagination from "../../../components/AllPosts/AllPostsPagination";
+import TitleHomeMore from "../../../components/Sections/TitleHomeMore";
 import Error from "next/error";
 
 export default function SSRPagination({ featuredMovies, director, errorCode }) {
   if (!featuredMovies) return <Error statusCode={errorCode} />;
   return (
     <>
-      <TitleHome featuredMoviesData={featuredMovies.slice(0, 4)}>
-        <TitleHomeMore moreMoviesData={featuredMovies.slice(4)} />
+      <TitleHome
+        featuredMoviesData={featuredMovies.slice(0, 4)}
+        fetchLink="/ssr/pagination"
+      >
+        <TitleHomeMore
+          moreMoviesData={featuredMovies.slice(4)}
+          fetchLink="/ssr/pagination"
+        />
       </TitleHome>
       <Director directorData={director} />
       <AllPostsPagination />

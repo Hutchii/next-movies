@@ -1,14 +1,14 @@
-import { initializeApollo } from "../libs/apolloClient";
-import { SLUG, SLUG_DATA } from "../libs/apolloQueries";
+import { initializeApollo } from "../../../libs/apolloClient";
+import { SLUG, SLUG_DATA } from "../../../libs/apolloQueries";
 import Image from "next/image";
-import { imageUrlBuilder } from "../libs/imageUrlBuilder";
-import { dateConverter } from "../libs/dateConverter";
-import Markdown from "../components/Sections/Markdown";
-import { directorsFormatter } from "../libs/directorsFormatter";
-import Share from "../components/Sections/Share";
+import { imageUrlBuilder } from "../../../libs/imageUrlBuilder";
+import { dateConverter } from "../../../libs/dateConverter";
+import Markdown from "../../../components/Sections/Markdown";
+import { directorsFormatter } from "../../../libs/directorsFormatter";
+import Share from "../../../components/Sections/Share";
 import Error from "next/error";
 
-export default function Slug({ data, errorCode }) {
+export default function SlugPagination({ data, errorCode }) {
   if (!data) return <Error statusCode={errorCode} />;
   const slugData = data.movies.data[0].attributes;
   return (

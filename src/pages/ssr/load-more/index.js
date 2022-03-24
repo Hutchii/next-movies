@@ -1,21 +1,27 @@
-import { initializeApollo, addApolloState } from "../libs/apolloClient";
+import { initializeApollo, addApolloState } from "../../../libs/apolloClient";
 import {
   FEATURED_MOVIES,
   DIRECTOR,
   MOVIES_FILTERS,
-} from "../libs/apolloQueries";
-import TitleHome from "../components/Sections/TitleHome";
-import Director from "../components/Sections/Director";
-import AllPosts from "../components/AllPosts/AllPosts";
-import TitleHomeMore from "../components/Sections/TitleHomeMore";
+} from "../../../libs/apolloQueries";
+import TitleHome from "../../../components/Sections/TitleHome";
+import Director from "../../../components/Sections/Director";
+import AllPosts from "../../../components/AllPosts/AllPosts";
+import TitleHomeMore from "../../../components/Sections/TitleHomeMore";
 import Error from "next/error";
 
-export default function Home({ featuredMovies, director, errorCode }) {
+export default function SSRLoadMore({ featuredMovies, director, errorCode }) {
   if (!featuredMovies) return <Error statusCode={errorCode} />;
   return (
     <>
-      <TitleHome featuredMoviesData={featuredMovies.slice(0, 4)}>
-        <TitleHomeMore moreMoviesData={featuredMovies.slice(4)} />
+      <TitleHome
+        featuredMoviesData={featuredMovies.slice(0, 4)}
+        fetchLink="ssr/load-more"
+      >
+        <TitleHomeMore
+          moreMoviesData={featuredMovies.slice(4)}
+          fetchLink="ssr/load-more"
+        />
       </TitleHome>
       <Director directorData={director} />
       <AllPosts />

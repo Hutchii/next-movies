@@ -492,21 +492,19 @@ footer {
 .posts-pagination {
   display: flex;
   gap: 1rem;
-  align-items: center;
 }
 .posts-pagination .button {
   padding: 1rem 1.5rem;
 }
-.posts-pagination--previous svg {
-  transform: rotate(90deg);
-  margin-right: 0.5rem;
-}
 .posts-pagination--next svg {
-  transform: rotate(-90deg);
-  margin-left: 0.5rem;
+  transform: rotate(180deg);
 }
 .posts-pagination--previous, .posts-pagination--next {
   border: none;
+  background: none;
+}
+.posts-pagination--previous:disabled, .posts-pagination--next:disabled {
+ opacity: 0.26;
 }
 .posts-pagination svg {
   cursor: pointer;
@@ -586,7 +584,7 @@ footer {
   .navbar-nav {
     height: 10rem;
   }
-  .navbar-logo {
+  .navbar-logo svg{
     width: 5rem;
     height: 5rem;
   }
@@ -596,7 +594,6 @@ footer {
   .navbar-dropdown--link {
     position: relative;
     cursor: pointer;
-    padding: 0 0 1rem 0;
   }
   .navbar-dropdown--link p {
     display: inline-block;
@@ -605,13 +602,13 @@ footer {
     fill: var(--black);
     margin-left: 0.6rem;
     height: 1.2rem;
+    transition: 250ms cubic-bezier(0.1, 0, 0.1, 1);
   }
   .navbar-dropdown--list {
     position: absolute;
     background-color: var(--white);
     left: 0;
     margin-left: -1.5rem;
-    margin-top: 0.5rem;
     z-index: 200;
     opacity: 0;
     border-radius: 6px;
@@ -627,9 +624,12 @@ footer {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid #e6e6e6;
   }
-  .navbar-dropdown--list-active {
+  .navbar-dropdown--list-active ul{
     opacity: 1;
     pointer-events: unset;
+  }
+  .navbar-dropdown--list-active svg {
+    transform: rotate(-180deg);
   }
   .heading--64 {
     font-size: 6.4rem;
@@ -1015,7 +1015,7 @@ footer {
   .title-home--slide-text h1 {
     margin-bottom: 1rem;
   }
-  .navbar-logo {
+  .navbar-logo svg{
     width: 6rem;
     height: 6rem;
   }

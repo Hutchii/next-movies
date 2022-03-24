@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { MOVIES_FILTERS_PAGINATION } from "../../libs/apolloQueries";
+import { MOVIES_FILTERS } from "../../libs/apolloQueries";
 import AllPostGenres from "./AllPostsGenres";
 import { useRef, useMemo, useEffect } from "react";
 import { debounce } from "lodash";
@@ -7,34 +7,33 @@ import AllPostsList from "./AllPostsList";
 import AllPostsSearch from "./AllPostsSearch";
 import AllPostsResults from "./AllPostsResults";
 import Router, { useRouter } from "next/router";
-import AllPostsPaginationUI from "./AllPostsPaginationUI";
+import InfiniteScroll from "react-infinite-scroller";
 
-export default function AllPosts() {
+export default function AllPostsInfiniteScrolling() {
   const searchInput = useRef("");
   const { query } = useRouter();
-  const pageQuery = +query.page || 1;
   const genreQuery = query.genre || "all";
   const searchQuery = query.search || "";
-  const { error, data, fetchMore, refetch } = useQuery(
-    MOVIES_FILTERS_PAGINATION,
-    {
-      variables: {
-        page: 1,
-        pageSize: 6,
-        genre: "all",
-        title: "",
-      },
-    }
-  );
+  const { error, data, fetchMore, refetch } = useQuery(MOVIES_FILTERS, {
+    variables: {
+      start: 0,
+      limit: 6,
+      genre: "all",
+      title: "",
+    },
+  });
   const moviesData = data?.movies.data;
+  const moviesDataLength = data?.movies?.data.length;
   const moviesDataTotal = data?.movies?.meta.pagination.total;
+  const areMoreMovies = moviesDataLength >= moviesDataTotal;
+
   const searchHandler = ({ target }) => {
     const search = target.value;
     refetch({
       genre: "all",
       title: search,
     });
-    Router.push(`/ssr/pagination/?search=${search}`, undefined, {
+    Router.push(`/ssr/infinite-scrolling/?search=${search}`, undefined, {
       shallow: true,
     });
   };
@@ -46,7 +45,6 @@ export default function AllPosts() {
     if (Object.keys(query).length !== 0) {
       fetchMore({
         variables: {
-          page: pageQuery,
           genre: genreQuery,
           title: searchQuery,
         },
@@ -63,9 +61,13 @@ export default function AllPosts() {
               genre: currentGenre,
               title: "",
             });
-            Router.push(`/ssr/pagination/?genre=${currentGenre}`, undefined, {
-              shallow: true,
-            });
+            Router.push(
+              `/ssr/infinite-scrolling/?genre=${currentGenre}`,
+              undefined,
+              {
+                shallow: true,
+              }
+            );
           }}
           activeGenre={genreQuery}
         />
@@ -75,38 +77,28 @@ export default function AllPosts() {
         />
       </div>
       <AllPostsResults moviesDataTotal={moviesDataTotal} />
-      <AllPostsList
-        moviesData={moviesData}
-        activeGenre="all"
-        error={error}
-        fetchLink="ssr/pagination"
-      />
-      <AllPostsPaginationUI
-        data={moviesData}
-        morePostsAmount={6}
-        currentPage={pageQuery}
-        pageSize={6}
-        totalCount={moviesDataTotal}
-        fetchMore={(sign, pageNumber = false) => {
-          const pageCondition = pageNumber ? pageNumber : pageQuery + sign;
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={() =>
           fetchMore({
             variables: {
-              page: pageCondition,
+              start: 0,
+              limit: moviesDataLength + 6,
               genre: genreQuery,
               title: searchQuery,
             },
-          });
-          Router.push(
-            `/ssr/pagination/?${query.genre ? `genre=${query.genre}&` : ""}${
-              query.search ? `search=${query.search}&` : ""
-            }page=${pageCondition}`,
-            undefined,
-            {
-              shallow: true,
-            }
-          );
-        }}
-      />
+          })
+        }
+        hasMore={!areMoreMovies}
+      >
+        <AllPostsList
+          moviesData={moviesData}
+          activeGenre={genreQuery}
+          activeSearch={searchQuery}
+          error={error}
+          fetchLink="ssr/infinite-scrolling"
+        />
+      </InfiniteScroll>
     </section>
   );
 }

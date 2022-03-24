@@ -1,6 +1,6 @@
 import React from "react";
 import { usePagination, DOTS } from "../../libs/pagination";
-import Arrow from "../../../public/svg/Arrow.svg";
+import ArrowPagination from "../../../public/svg/ArrowPagination.svg";
 import AllPostsButton from "./AllPostsButton";
 
 export default function AllPostsPaginationUI({
@@ -29,7 +29,7 @@ export default function AllPostsPaginationUI({
         className="posts-pagination--previous"
         onClick={() => fetchMore(-1)}
       >
-        <Arrow />
+        <ArrowPagination />
       </button>
       {paginationRange.map((pageNumber, i) => {
         if (pageNumber === DOTS) {
@@ -55,7 +55,7 @@ export default function AllPostsPaginationUI({
         className="posts-pagination--next"
         onClick={() => fetchMore(+1)}
       >
-        <Arrow />
+        <ArrowPagination />
       </button>
     </div>
   );

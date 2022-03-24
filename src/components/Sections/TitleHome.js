@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { directorsFormatter } from "../../libs/directorsFormatter";
 
-export default function TitleHome({ featuredMoviesData, children }) {
+export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
   const [whichSlide, setWhichSlide] = useState(0);
   const maxSlides = featuredMoviesData.length - 1;
   const timer = 15000;
@@ -36,7 +36,7 @@ export default function TitleHome({ featuredMoviesData, children }) {
                 }`}
               >
                 <div className="title-home--slide-wrapper">
-                  <Link href={`/${movie.attributes.slug}`}>
+                  <Link href={`/${fetchLink}/${movie.attributes.slug}`}>
                     <a>
                       <div className="title-home--slide-image">
                         <Image

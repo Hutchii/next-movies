@@ -41,17 +41,16 @@ export default function Navbar() {
             <NavbarDropdown
               dropdownName="SSR"
               dropdownLinks={[
-                { name: "Load More", link: "/ssr-load-more" },
-                { name: "Pagination", link: "/ssr-pagination" },
-                { name: "Infinite Scrolling", link: "/ssr-infinite-scrolling" },
+                { name: "Load More", link: "/ssr/load-more" },
+                { name: "Pagination", link: "/ssr/pagination" },
+                { name: "Infinite Scrolling", link: "/ssr/infinite-scrolling" },
               ]}
             />
             <NavbarDropdown
               dropdownName="SG"
               dropdownLinks={[
-                { name: "Load More", link: "/ssg-load-more" },
-                { name: "Pagination", link: "/ssg-pagination" },
-                { name: "Infinite Scrolling", link: "/ssg-infinite-scrolling" },
+                { name: "Load More", link: "/ssg/load-more" },
+                { name: "Pagination", link: "/ssg/pagination" },
               ]}
             />
             <NavbarLink linkName="Directors" linkHref="/" />

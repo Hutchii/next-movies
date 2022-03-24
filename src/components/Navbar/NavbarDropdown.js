@@ -7,17 +7,15 @@ export default function NavbarDropdown({ dropdownName, dropdownLinks }) {
   const [showDropdown, setShowDropdown] = useState();
   return (
     <li
-      className="navbar-dropdown--link"
+      className={`navbar-dropdown--link ${
+        showDropdown ? "navbar-dropdown--list-active" : ""
+      }`}
       onMouseEnter={() => setShowDropdown(true)}
       onMouseLeave={() => setShowDropdown(false)}
     >
       <p>{dropdownName}</p>
       <Arrow />
-      <ul
-        className={`navbar-dropdown--list ${
-          showDropdown ? "navbar-dropdown--list-active" : ""
-        }`}
-      >
+      <ul className="navbar-dropdown--list">
         {dropdownLinks.map((link, i) => {
           return (
             <NavbarLink
