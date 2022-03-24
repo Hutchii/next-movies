@@ -5,8 +5,10 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <link rel="stylesheet" href="https://use.typekit.net/erq2dah.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap"
           rel="stylesheet"
         />
       </Head>

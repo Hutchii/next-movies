@@ -5,13 +5,28 @@ export default function Footer() {
   return (
     <footer className="margin--top">
       <div className="footer-nav spacer">
-        <Logo className="footer-logo" />
+        <div className="footer-home">
+          <Logo className="footer-logo" />
+        </div>
         <nav>
           <ul className="footer-list">
-            <NavbarLink linkName="SSR + Client" linkHref="/" />
-            <NavbarLink linkName="SG" linkHref="/" />
-            <NavbarLink linkName="Directors" linkHref="/" />
-            <NavbarLink linkName="About" linkHref="/" />
+            <p>Server Side Rendering</p>
+            <NavbarLink linkName="Load More" linkHref="/ssr/load-more" />
+            <NavbarLink linkName="Pagination" linkHref="/ssr/pagination" />
+            <NavbarLink
+              linkName="Infinite Scrolling"
+              linkHref="/ssr/infinite-scrolling"
+            />
+          </ul>
+          <ul className="footer-list">
+            <p>Static Generation</p>
+            <NavbarLink linkName="Load More" linkHref="/ssr/load-more" />
+            <NavbarLink linkName="Pagination" linkHref="/ssr/pagination" />
+          </ul>
+          <ul className="footer-list">
+            <p>Informations</p>
+            <NavbarLink linkName="Home" linkHref="/" />
+            <NavbarLink linkName="About" linkHref="/about" />
           </ul>
         </nav>
         <p className="footer-copyright">© Sebastian Blaik 2022</p>

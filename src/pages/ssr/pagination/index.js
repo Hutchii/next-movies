@@ -16,11 +16,11 @@ export default function SSRPagination({ featuredMovies, director, errorCode }) {
     <>
       <TitleHome
         featuredMoviesData={featuredMovies.slice(0, 4)}
-        fetchLink="/ssr/pagination"
+        fetchLink="ssr/pagination"
       >
         <TitleHomeMore
           moreMoviesData={featuredMovies.slice(4)}
-          fetchLink="/ssr/pagination"
+          fetchLink="ssr/pagination"
         />
       </TitleHome>
       <Director directorData={director} />

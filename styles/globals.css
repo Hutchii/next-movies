@@ -116,6 +116,7 @@ img {
   position: relative;
   transition: 100ms cubic-bezier(0, 0, 0, 1);
   padding: 1rem 2rem;
+  font-weight: 600;
 }
 .button--dark {
   background-color: var(--darkwhite);
@@ -238,6 +239,7 @@ nav a:hover {
   gap: 2rem;
   justify-content: space-between;
   margin: 0.5rem 0 2rem 0;
+  font-weight: 600;
 }
 .title-home--slide-text h1 {
   margin-bottom: 0.6rem;
@@ -261,11 +263,13 @@ nav a:hover {
   text-transform: uppercase;
   font-family: var(--inter);
   margin: 8rem 0 2.8rem 0;
+  font-weight: 600;
 }
 .title-home--text p {
   font-family: var(--inter);
   text-transform: uppercase;
   margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 .title-home--aside {
   display: flex;
@@ -317,12 +321,14 @@ nav a:hover {
   text-transform: uppercase;
   font-family: var(--inter);
   margin-top: 1.5rem;
+  font-weight: 600;
 }
 .posts-cards--info {
   font-family: var(--inter);
   display: flex;
   justify-content: space-between;
   margin-top: 4rem;
+  font-weight: 600;
 }
 .posts-cards--info p:first-of-type {
   text-transform: uppercase;
@@ -361,11 +367,13 @@ nav a:hover {
   outline: none;
   font-family: var(--inter);
   width: 28rem;
+  font-weight: 600;
 }
 .posts-search input::placeholder {
   color: var(--darkwhite);
   font-family: var(--inter);
   text-transform: uppercase;
+  font-weight: 600;
 }
 .posts-search-icon svg {
   fill: var(--white);
@@ -397,13 +405,23 @@ footer {
   fill: var(--darkwhite);
 }
 .footer-list {
-  color: var(--white);
-  font-size: 2rem;
   font-weight: 500;
   margin-top: 4rem;
 }
+.footer-list p {
+  color: var(--white);
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+.footer-list li {
+  color: var(--grey);
+  font-family: var(--inter);
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
 .footer-list li + li {
-  margin-top: 1.5rem;
+  margin-top: 1.4rem;
 }
 .footer-copyright {
   margin-top: 4rem;
@@ -483,6 +501,7 @@ footer {
   text-transform: uppercase;
   color: var(--black);
   margin-right: 1rem;
+  font-weight: 600;
 }
 .title-slug--share svg {
   width: 2.9rem;
@@ -499,12 +518,15 @@ footer {
 .posts-pagination--next svg {
   transform: rotate(180deg);
 }
-.posts-pagination--previous, .posts-pagination--next {
+.posts-pagination--previous,
+.posts-pagination--next {
   border: none;
   background: none;
 }
-.posts-pagination--previous:disabled, .posts-pagination--next:disabled {
- opacity: 0.26;
+.posts-pagination--previous:disabled,
+.posts-pagination--next:disabled {
+  opacity: 0.26;
+  pointer-events: none;
 }
 .posts-pagination svg {
   cursor: pointer;
@@ -584,7 +606,7 @@ footer {
   .navbar-nav {
     height: 10rem;
   }
-  .navbar-logo svg{
+  .navbar-logo svg {
     width: 5rem;
     height: 5rem;
   }
@@ -624,7 +646,7 @@ footer {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid #e6e6e6;
   }
-  .navbar-dropdown--list-active ul{
+  .navbar-dropdown--list-active ul {
     opacity: 1;
     pointer-events: unset;
   }
@@ -765,6 +787,7 @@ footer {
     transition: color 350ms cubic-bezier(0.1, 0, 0.1, 1);
     cursor: pointer;
     margin-bottom: 1.5rem;
+    font-weight: 600;
   }
   .title-home--slide-pagination--active {
     color: var(--darkwhite);
@@ -817,20 +840,18 @@ footer {
   footer {
     padding: 8rem 0 4rem 0;
   }
-  .footer-logo {
-    width: 6rem;
-    height: 6rem;
+  .footer-home {
     grid-column: 1/2;
     grid-row: 1/2;
+  }
+  .footer-logo svg {
+    width: 6rem;
+    height: 6rem;
   }
   .footer-list {
     margin-top: 0rem;
     grid-column: 2/3;
     grid-row: 1/2;
-    display: flex;
-  }
-  .footer-list li + li {
-    margin: 0 0 0 4rem;
   }
   .footer-copyright {
     margin-top: 7rem;
@@ -840,9 +861,18 @@ footer {
   }
   .footer-nav {
     display: grid;
-    grid-template: auto auto/ auto auto;
+    grid-template: auto auto/ 1fr auto;
     justify-content: space-between;
     align-items: center;
+  }
+  .footer-nav nav {
+    display: flex;
+    gap: 4rem;
+  }
+  .footer-list p {
+    color: var(--white);
+    font-size: 2rem;
+    margin-bottom: 2rem;
   }
 }
 @media (min-width: 900px) {
@@ -900,6 +930,9 @@ footer {
   .posts-search {
     margin-top: 0;
   }
+  .footer-nav nav {
+    gap: 8rem;
+  }
 }
 @media (min-width: 1024px) {
   .title-slug--markdown p,
@@ -940,6 +973,9 @@ footer {
   }
   .title-home--heading {
     margin: 0 0 4rem 0;
+  }
+  .footer-list p {
+    font-size: 2.2rem;
   }
 }
 @media (min-width: 1280px) {
@@ -988,6 +1024,9 @@ footer {
     width: 3.6rem;
     height: 3.6rem;
   }
+  .footer-list p {
+    font-size: 2.4rem;
+  }
 }
 @media (min-width: 1440px) {
   .spacer {
@@ -1015,7 +1054,7 @@ footer {
   .title-home--slide-text h1 {
     margin-bottom: 1rem;
   }
-  .navbar-logo svg{
+  .navbar-logo svg {
     width: 6rem;
     height: 6rem;
   }
