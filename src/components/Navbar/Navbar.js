@@ -38,6 +38,7 @@ export default function Navbar() {
             toggle={setHamburgerOpen}
           />
           <ul className="navbar-list">
+            <NavbarLink linkName="Home" linkHref="/" />
             <NavbarDropdown
               dropdownName="SSR"
               dropdownLinks={[
@@ -53,7 +54,6 @@ export default function Navbar() {
                 { name: "Pagination", link: "/ssg/pagination" },
               ]}
             />
-            <NavbarLink linkName="Directors" linkHref="/" />
             <NavbarLink linkName="About" linkHref="/" />
           </ul>
         </nav>

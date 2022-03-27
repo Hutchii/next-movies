@@ -1,5 +1,4 @@
 import Arrow from "../../../public/svg/Arrow.svg";
-import Link from "next/link";
 import { useState } from "react";
 import NavbarLink from "./NavbarLink";
 
@@ -12,8 +11,9 @@ export default function NavbarDropdown({ dropdownName, dropdownLinks }) {
       }`}
       onMouseEnter={() => setShowDropdown(true)}
       onMouseLeave={() => setShowDropdown(false)}
+      onKeyDown={({ key }) => key === "ENTER" && setShowDropdown(true)}
     >
-      <p>{dropdownName}</p>
+      <button href="/">{dropdownName}</button>
       <Arrow />
       <ul className="navbar-dropdown--list">
         {dropdownLinks.map((link, i) => {

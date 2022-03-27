@@ -9,11 +9,15 @@ import Director from "../../../components/Sections/Director";
 import AllPostsPagination from "../../../components/AllPosts/AllPostsPagination";
 import TitleHomeMore from "../../../components/Sections/TitleHomeMore";
 import Error from "next/error";
+import Head from "next/head";
 
 export default function SSRPagination({ featuredMovies, director, errorCode }) {
   if (!featuredMovies) return <Error statusCode={errorCode} />;
   return (
     <>
+      <Head>
+        <title>Server Side Rendering - Pagination</title>
+      </Head>
       <TitleHome
         featuredMoviesData={featuredMovies.slice(0, 4)}
         fetchLink="ssr/pagination"

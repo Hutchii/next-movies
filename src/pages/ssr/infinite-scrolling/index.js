@@ -9,6 +9,7 @@ import Director from "../../../components/Sections/Director";
 import AllPostsInfiniteScrolling from "../../../components/AllPosts/AllPostsInfiniteScrolling";
 import TitleHomeMore from "../../../components/Sections/TitleHomeMore";
 import Error from "next/error";
+import Head from "next/head";
 
 export default function SSRInfiniteScrolling({
   featuredMovies,
@@ -18,6 +19,9 @@ export default function SSRInfiniteScrolling({
   if (!featuredMovies) return <Error statusCode={errorCode} />;
   return (
     <>
+      <Head>
+        <title>Server Side Rendering - Infinite Scrolling</title>
+      </Head>
       <TitleHome
         featuredMoviesData={featuredMovies.slice(0, 4)}
         fetchLink="ssr/infinite-scrolling"

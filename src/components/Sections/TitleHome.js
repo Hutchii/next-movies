@@ -82,7 +82,9 @@ export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
                           {dateConverter(movie.attributes.createdAt)}
                         </p>
                         <p className="text--14 color--gold">
-                          {`By ${directorsFormatter(movie.attributes.directors.data)}`}
+                          {`By ${directorsFormatter(
+                            movie.attributes.directors.data
+                          )}`}
                         </p>
                       </div>
                       <h1 className="heading--30">{movie.attributes.title}</h1>
@@ -100,9 +102,4 @@ export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
       </div>
     </main>
   );
-}
-{
-  /* <p key={i} className="text--14 color--gold">
-{directorsFormatter(director.attributes.director)}
-</p> */
 }

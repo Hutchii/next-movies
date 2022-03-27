@@ -14,57 +14,73 @@ export default function AllPosts() {
   const { query } = useRouter();
   const genreQuery = query.genre || "all";
   const searchQuery = query.search || "";
-  const { error, data, fetchMore, refetch } = useQuery(MOVIES_FILTERS, {
+  const {
+    error,
+    data: { movies },
+    fetchMore,
+  } = useQuery(MOVIES_FILTERS, {
     variables: {
       start: 0,
       limit: 6,
       genre: "all",
       title: "",
     },
-    //notifyOnNetworkStatusChange: true, //- Use only when using loading state. Otherwise it will re-render unnecessarily.
+    //notifyOnNetworkStatusChange: true, //Use only when using loading state. Otherwise it will re-render unnecessarily.
   });
-  const moviesData = data?.movies.data;
-  const moviesDataLength = data?.movies?.data.length;
-  const moviesDataTotal = data?.movies?.meta.pagination.total;
+  const moviesData = movies?.data;
+  const moviesDataLength = movies?.data.length;
+  const moviesDataTotal = movies?.meta.pagination.total;
   const areMoreMovies = moviesDataLength >= moviesDataTotal;
 
-  const searchHandler = ({ target }) => {
+  const fetchMoreHelper = (genre, search, limit = 6) =>
+    fetchMore({
+      variables: {
+        limit: limit,
+        genre: genre,
+        title: search,
+      },
+    });
+
+  const searchHelper = ({ target }) => {
     const search = target.value;
-    refetch({
-      genre: "all",
-      title: search,
-    });
-    Router.push(`/ssr/load-more/?search=${search}`, undefined, {
-      shallow: true,
-    });
+    const searchEmpty = search !== "";
+    fetchMoreHelper(genreQuery, search);
+    Router.push(
+      `/ssr/load-more/${searchEmpty || query.genre ? "?" : ""}${
+        query.genre ? `genre=${query.genre}${searchEmpty ? "&" : ""}` : ""
+      }${searchEmpty ? `search=${search}` : ""}`,
+      undefined,
+      {
+        shallow: true,
+      }
+    );
   };
   const debouncedSearchHandler = useMemo(
-    () => debounce(searchHandler, 350),
-    []
+    () => debounce(searchHelper, 350),
+    [query.genre]
   );
+
   useEffect(() => {
-    if (Object.keys(query).length !== 0) {
-      fetchMore({
-        variables: {
-          genre: genreQuery,
-          title: searchQuery,
-        },
-      });
-    }
+    if (Object.keys(query).length !== 0)
+      fetchMoreHelper(genreQuery, searchQuery);
   }, []);
+
   return (
     <section className="posts spacer">
       <div className="posts-menu margin--top">
         <AllPostGenres
           onClickHandler={(currentGenre) => {
             searchInput.current.value = "";
-            refetch({
-              genre: currentGenre,
-              title: "",
-            });
-            Router.push(`/ssr/load-more/?genre=${currentGenre}`, undefined, {
-              shallow: true,
-            });
+            fetchMoreHelper(currentGenre, "");
+            Router.push(
+              `/ssr/load-more/${
+                currentGenre !== "all" ? `?genre=${currentGenre}` : ""
+              }`,
+              undefined,
+              {
+                shallow: true,
+              }
+            );
           }}
           activeGenre={genreQuery}
         />
@@ -85,11 +101,7 @@ export default function AllPosts() {
         <div className="posts-cards--button center">
           <AllPostsButton
             onClickHandler={() =>
-              fetchMore({
-                variables: {
-                  limit: moviesDataLength + 6,
-                },
-              })
+              fetchMoreHelper(genreQuery, searchQuery, moviesDataLength + 6)
             }
             areMoreMovies={areMoreMovies}
           />

@@ -10,6 +10,11 @@ export default function Footer() {
         </div>
         <nav>
           <ul className="footer-list">
+            <p>Informations</p>
+            <NavbarLink linkName="Home" linkHref="/" />
+            <NavbarLink linkName="About" linkHref="/about" />
+          </ul>
+          <ul className="footer-list">
             <p>Server Side Rendering</p>
             <NavbarLink linkName="Load More" linkHref="/ssr/load-more" />
             <NavbarLink linkName="Pagination" linkHref="/ssr/pagination" />
@@ -22,11 +27,6 @@ export default function Footer() {
             <p>Static Generation</p>
             <NavbarLink linkName="Load More" linkHref="/ssr/load-more" />
             <NavbarLink linkName="Pagination" linkHref="/ssr/pagination" />
-          </ul>
-          <ul className="footer-list">
-            <p>Informations</p>
-            <NavbarLink linkName="Home" linkHref="/" />
-            <NavbarLink linkName="About" linkHref="/about" />
           </ul>
         </nav>
         <p className="footer-copyright">© Sebastian Blaik 2022</p>

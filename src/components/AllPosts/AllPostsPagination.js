@@ -15,57 +15,69 @@ export default function AllPosts() {
   const pageQuery = +query.page || 1;
   const genreQuery = query.genre || "all";
   const searchQuery = query.search || "";
-  const { error, data, fetchMore, refetch } = useQuery(
-    MOVIES_FILTERS_PAGINATION,
-    {
-      variables: {
-        page: 1,
-        pageSize: 6,
-        genre: "all",
-        title: "",
-      },
-    }
-  );
-  const moviesData = data?.movies.data;
-  const moviesDataTotal = data?.movies?.meta.pagination.total;
-  const searchHandler = ({ target }) => {
-    const search = target.value;
-    refetch({
+  const {
+    error,
+    data: { movies },
+    fetchMore,
+  } = useQuery(MOVIES_FILTERS_PAGINATION, {
+    variables: {
+      page: 1,
+      pageSize: 6,
       genre: "all",
-      title: search,
+      title: "",
+    },
+  });
+  const moviesData = movies?.data;
+  const moviesDataTotal = movies?.meta.pagination.total;
+
+  const fetchMoreHelper = (genre, search, page = 1) =>
+    fetchMore({
+      variables: {
+        page: page,
+        genre: genre,
+        title: search,
+      },
     });
-    Router.push(`/ssr/pagination/?search=${search}`, undefined, {
-      shallow: true,
-    });
+
+  const searchHelper = ({ target }) => {
+    const search = target.value;
+    const searchEmpty = search !== "";
+    fetchMoreHelper(genreQuery, search);
+    Router.push(
+      `/ssr/pagination/${searchEmpty || query.genre ? "?" : ""}${
+        query.genre ? `genre=${query.genre}${searchEmpty ? "&" : ""}` : ""
+      }${searchEmpty ? `search=${search}` : ""}`,
+      undefined,
+      {
+        shallow: true,
+      }
+    );
   };
   const debouncedSearchHandler = useMemo(
-    () => debounce(searchHandler, 350),
-    []
+    () => debounce(searchHelper, 350),
+    [query.genre]
   );
   useEffect(() => {
-    if (Object.keys(query).length !== 0) {
-      fetchMore({
-        variables: {
-          page: pageQuery,
-          genre: genreQuery,
-          title: searchQuery,
-        },
-      });
-    }
+    if (Object.keys(query).length !== 0)
+      fetchMoreHelper(genreQuery, searchQuery, pageQuery);
   }, []);
+
   return (
     <section className="posts spacer">
       <div className="posts-menu margin--top">
         <AllPostGenres
           onClickHandler={(currentGenre) => {
             searchInput.current.value = "";
-            refetch({
-              genre: currentGenre,
-              title: "",
-            });
-            Router.push(`/ssr/pagination/?genre=${currentGenre}`, undefined, {
-              shallow: true,
-            });
+            fetchMoreHelper(currentGenre, "");
+            Router.push(
+              `/ssr/pagination/${
+                currentGenre !== "all" ? `?genre=${currentGenre}` : ""
+              }`,
+              undefined,
+              {
+                shallow: true,
+              }
+            );
           }}
           activeGenre={genreQuery}
         />
@@ -84,18 +96,12 @@ export default function AllPosts() {
       <AllPostsPaginationUI
         data={moviesData}
         morePostsAmount={6}
-        currentPage={pageQuery}
         pageSize={6}
+        currentPage={pageQuery}
         totalCount={moviesDataTotal}
         fetchMore={(sign, pageNumber = false) => {
           const pageCondition = pageNumber ? pageNumber : pageQuery + sign;
-          fetchMore({
-            variables: {
-              page: pageCondition,
-              genre: genreQuery,
-              title: searchQuery,
-            },
-          });
+          fetchMoreHelper(genreQuery, searchQuery, pageCondition);
           Router.push(
             `/ssr/pagination/?${query.genre ? `genre=${query.genre}&` : ""}${
               query.search ? `search=${query.search}&` : ""
