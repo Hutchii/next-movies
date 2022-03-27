@@ -18,7 +18,6 @@ export default function AllPostsInfiniteScrolling() {
     error,
     data: { movies },
     fetchMore,
-    refetch,
   } = useQuery(MOVIES_FILTERS, {
     variables: {
       start: 0,
@@ -63,7 +62,7 @@ export default function AllPostsInfiniteScrolling() {
     if (Object.keys(query).length !== 0)
       fetchMoreHelper(genreQuery, searchQuery);
   }, []);
-  
+
   return (
     <section className="posts spacer">
       <div className="posts-menu margin--top">

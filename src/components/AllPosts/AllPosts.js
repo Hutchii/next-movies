@@ -15,6 +15,7 @@ export default function AllPosts() {
   const genreQuery = query.genre || "all";
   const searchQuery = query.search || "";
   const {
+    loading,
     error,
     data: { movies },
     fetchMore,
@@ -25,7 +26,7 @@ export default function AllPosts() {
       genre: "all",
       title: "",
     },
-    //notifyOnNetworkStatusChange: true, //Use only when using loading state. Otherwise it will re-render unnecessarily.
+    // notifyOnNetworkStatusChange: true,
   });
   const moviesData = movies?.data;
   const moviesDataLength = movies?.data.length;
