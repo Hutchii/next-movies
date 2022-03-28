@@ -171,10 +171,11 @@ header {
   top: 10rem;
   left: 50%;
   text-align: center;
-  transform: translateX(-100%);
+  transform: translateX(-50%);
   z-index: 100;
   opacity: 0;
   pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .navbar-list a {
   color: var(--white);
@@ -230,7 +231,8 @@ nav a:hover {
   pointer-events: unset;
 }
 .navbar-overlay-content--inactive .navbar-list {
-  animation: navbar-inactive 300ms forwards cubic-bezier(0.4, 0, 0.2, 1);
+  /* animation: navbar-inactive 300ms forwards cubic-bezier(0.4, 0, 0.2, 1); */
+  opacity: 0;
 }
 .navbar-overlay--overflow {
   overflow-y: hidden;
@@ -556,10 +558,6 @@ footer {
 
 @keyframes navbar-active {
   0% {
-    transform: translateY(-2.4rem) translateX(50%);
-    opacity: 0;
-  }
-  1% {
     transform: translateY(-2.4rem) translateX(-50%);
     opacity: 0;
   }

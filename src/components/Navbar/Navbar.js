@@ -22,7 +22,7 @@ export default function Navbar() {
         className={`navbar-overlay ${
           hamburgerOpen ? "navbar-overlay--active" : ""
         }`}
-      ></div>
+      />
       <header
         className={`spacer ${
           hamburgerOpen
@@ -60,7 +60,6 @@ export default function Navbar() {
               ]}
               onClickHamburgerHandler={() => setHamburgerOpen(false)}
             />
-
             <NavbarLink
               linkName="About"
               linkHref="/"
