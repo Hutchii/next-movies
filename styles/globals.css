@@ -5,7 +5,7 @@
   --gold: #d99c00;
   --grey: #8e8e8e;
   --inter: "Inter", sans-serif;
-  --freight: freight-text-pro, serif;
+  --freight: "freight-text-pro";
 }
 
 * {
