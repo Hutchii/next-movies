@@ -38,7 +38,11 @@ export default function Navbar() {
             toggle={setHamburgerOpen}
           />
           <ul className="navbar-list">
-            <NavbarLink linkName="Home" linkHref="/" />
+            <NavbarLink
+              linkName="Home"
+              linkHref="/"
+              onClickHamburgerHandler={() => setHamburgerOpen(false)}
+            />
             <NavbarDropdown
               dropdownName="SSR"
               dropdownLinks={[
@@ -46,6 +50,7 @@ export default function Navbar() {
                 { name: "Pagination", link: "/ssr/pagination" },
                 { name: "Infinite Scrolling", link: "/ssr/infinite-scrolling" },
               ]}
+              onClickHamburgerHandler={() => setHamburgerOpen(false)}
             />
             <NavbarDropdown
               dropdownName="SG"
@@ -53,8 +58,14 @@ export default function Navbar() {
                 { name: "Load More", link: "/ssg/load-more" },
                 { name: "Pagination", link: "/ssg/pagination" },
               ]}
+              onClickHamburgerHandler={() => setHamburgerOpen(false)}
             />
-            <NavbarLink linkName="About" linkHref="/" />
+
+            <NavbarLink
+              linkName="About"
+              linkHref="/"
+              onClickHamburgerHandler={() => setHamburgerOpen(false)}
+            />
           </ul>
         </nav>
       </header>

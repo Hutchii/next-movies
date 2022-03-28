@@ -2,8 +2,12 @@ import Arrow from "../../../public/svg/Arrow.svg";
 import { useState } from "react";
 import NavbarLink from "./NavbarLink";
 
-export default function NavbarDropdown({ dropdownName, dropdownLinks }) {
-  const [showDropdown, setShowDropdown] = useState();
+export default function NavbarDropdown({
+  dropdownName,
+  dropdownLinks,
+  onClickHamburgerHandler,
+}) {
+  const [showDropdown, setShowDropdown] = useState(null);
   return (
     <li
       className={`navbar-dropdown--link ${
@@ -22,6 +26,10 @@ export default function NavbarDropdown({ dropdownName, dropdownLinks }) {
               key={link + i}
               linkHref={link.link}
               linkName={link.name}
+              onClickHamburgerHandler={() => {
+                onClickHamburgerHandler();
+                setShowDropdown(false);
+              }}
             />
           );
         })}
