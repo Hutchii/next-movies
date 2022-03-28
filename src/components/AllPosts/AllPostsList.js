@@ -38,7 +38,6 @@ export default function AllPostsList({
                       alt="Movie"
                       width={1024}
                       height={600}
-                      priority
                       unoptimized
                     />
                   </div>

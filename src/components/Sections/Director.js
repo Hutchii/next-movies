@@ -13,7 +13,6 @@ export default function Director({ directorData }) {
           alt="Movie"
           width={960}
           height={600}
-          priority
           unoptimized
         />
       </div>
