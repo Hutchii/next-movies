@@ -590,6 +590,11 @@ footer {
   }
 }
 /* MEDIA QUERIES */
+@media (min-width: 480px) {
+  .title-home--slide-info .text--12 {
+    font-size: 1.4rem;
+  }
+}
 @media (min-width: 768px) {
   .navbar-dropdown--link svg {
     display: unset;
