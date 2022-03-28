@@ -3,6 +3,7 @@ import { imageUrlBuilder } from "../../libs/imageUrlBuilder";
 import { dateConverter } from "../../libs/dateConverter";
 import Button from "../UI/Button";
 import Link from "next/link";
+import { Link as ScrollLink } from "react-scroll";
 
 export default function TitleHomeMore({ moreMoviesData, fetchLink }) {
   return (
@@ -40,7 +41,9 @@ export default function TitleHomeMore({ moreMoviesData, fetchLink }) {
             </Link>
           );
         })}
-        <Button buttonName="view all" dark />
+        <ScrollLink to="posts" smooth={true} offset={-50}>
+          <Button buttonName="view all" dark />
+        </ScrollLink>
       </div>
     </div>
   );

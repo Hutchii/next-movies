@@ -67,7 +67,7 @@ export default function AllPosts() {
   }, []);
 
   return (
-    <section className="posts spacer">
+    <section className="posts spacer" id="posts">
       <div className="posts-menu margin--top">
         <AllPostGenres
           onClickHandler={(currentGenre) => {
