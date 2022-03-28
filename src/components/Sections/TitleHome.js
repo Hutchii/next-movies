@@ -77,7 +77,7 @@ export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
                 <Link href={`/${movie.attributes.slug}`}>
                   <a>
                     <div className={`title-home--slide-text`}>
-                      {/* <div className="title-home--slide-info">
+                      <div className="title-home--slide-info">
                         <p className="text--12 color--grey">
                           {dateConverter(movie.attributes.createdAt)}
                         </p>
@@ -86,7 +86,7 @@ export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
                             movie.attributes.directors.data
                           )}`}
                         </p>
-                      </div> */}
+                      </div>
                       <h1 className="heading--30">{movie.attributes.title}</h1>
                       <p className="paragraph--18">
                         {movie.attributes.description}

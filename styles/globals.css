@@ -296,10 +296,12 @@ nav a:hover {
   margin-top: 2rem;
 }
 .title-home--slide-pagination,
-.title-home--slide-progress {
+.title-home--slide-progress, .title-home--arrow {
   display: none;
 }
-
+.title-home--slide-text {
+  margin-top: 2rem;
+}
 /* DIRECTOR */
 .director {
   background-color: var(--black);
@@ -596,6 +598,9 @@ footer {
   }
 }
 @media (min-width: 768px) {
+  .title-home--slide-text {
+    margin-top: 0;
+  }
   .navbar-dropdown--link svg {
     display: unset;
   }
