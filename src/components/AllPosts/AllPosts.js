@@ -60,12 +60,10 @@ export default function AllPosts() {
     () => debounce(searchHelper, 350),
     [query.genre]
   );
-
   useEffect(() => {
     if (Object.keys(query).length !== 0)
       fetchMoreHelper(genreQuery, searchQuery);
   }, []);
-
   return (
     <section className="posts spacer" id="posts">
       <div className="posts-menu margin--top">

@@ -4,7 +4,7 @@ import NavbarLink from "./NavbarLink";
 export default function NavbarDropdown({
   dropdownName,
   dropdownLinks,
-  onClickHamburgerHandler,
+  onClickHandler,
 }) {
   const [showDropdown, setShowDropdown] = useState(false);
   return (
@@ -25,8 +25,8 @@ export default function NavbarDropdown({
               key={link + i}
               linkHref={link.link}
               linkName={link.name}
-              onClickHamburgerHandler={() => {
-                onClickHamburgerHandler();
+              onClickHandler={() => {
+                onClickHandler();
                 setShowDropdown(false);
               }}
             />

@@ -12,7 +12,6 @@ export default function Footer() {
           <ul className="footer-list">
             <p>Informations</p>
             <NavbarLink linkName="Home" linkHref="/" />
-            <NavbarLink linkName="About" linkHref="/about" />
           </ul>
           <ul className="footer-list">
             <p>Server Side Rendering</p>

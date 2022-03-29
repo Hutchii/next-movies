@@ -26,9 +26,7 @@ export default function Navbar() {
       />
       <header
         className={`spacer ${
-          hamburgerOpen
-            ? "navbar-overlay-content--active"
-            : "navbar-overlay-content--inactiv"
+          hamburgerOpen ? "navbar-overlay-content--active" : ""
         }`}
       >
         <nav className="navbar-nav">
@@ -42,7 +40,7 @@ export default function Navbar() {
             <NavbarLink
               linkName="Home"
               linkHref="/"
-              onClickHamburgerHandler={setHamburgerOpenHandler}
+              onClickHandler={setHamburgerOpenHandler}
             />
             <NavbarDropdown
               dropdownName="SSR"
@@ -51,7 +49,7 @@ export default function Navbar() {
                 { name: "Pagination", link: "/ssr/pagination" },
                 { name: "Infinite Scrolling", link: "/ssr/infinite-scrolling" },
               ]}
-              onClickHamburgerHandler={setHamburgerOpenHandler}
+              onClickHandler={setHamburgerOpenHandler}
             />
             <NavbarDropdown
               dropdownName="SG"
@@ -59,12 +57,7 @@ export default function Navbar() {
                 { name: "Load More", link: "/ssg/load-more" },
                 { name: "Pagination", link: "/ssg/pagination" },
               ]}
-              onClickHamburgerHandler={setHamburgerOpenHandler}
-            />
-            <NavbarLink
-              linkName="About"
-              linkHref="/"
-              onClickHamburgerHandler={setHamburgerOpenHandler}
+              onClickHandler={setHamburgerOpenHandler}
             />
           </ul>
         </nav>

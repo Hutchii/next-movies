@@ -1,15 +1,21 @@
-import React from "react";
 import { usePagination, DOTS } from "../../libs/pagination";
 import ArrowPagination from "../../../public/svg/ArrowPagination.svg";
 import AllPostsButton from "./AllPostsButton";
+import { useEffect, useState } from "react";
 
 export default function AllPostsPaginationUI({
   totalCount,
-  siblingCount = 1,
   currentPage,
   pageSize,
   fetchMore,
 }) {
+  const [mediaQuery, setMediaQuery] = useState(true);
+  let siblingCount = mediaQuery ? 1 : 0;
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 480px)");
+    if (mq.matches) setMediaQuery(false);
+  }, []);
+
   const paginationRange = usePagination({
     currentPage,
     totalCount,
@@ -21,7 +27,6 @@ export default function AllPostsPaginationUI({
     return null;
   }
   let lastPage = paginationRange[paginationRange.length - 1];
-
   return (
     <div className="posts-pagination posts-cards--button center">
       <button
