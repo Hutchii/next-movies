@@ -9,7 +9,8 @@ import Share from "../../../components/Sections/Share";
 import Error from "next/error";
 
 export default function SlugLoadMore({ data, errorCode }) {
-  if (!data) return <Error statusCode={errorCode} />;
+  console.log("TEST");
+  // if (!data) return <Error statusCode={errorCode} />;
   const slugData = data.movies.data[0].attributes;
   return (
     <article className="spacer">
@@ -57,8 +58,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params, preview }) {
-  const publicationState = preview ? "PREVIEW" : "LIVE";
+  console.log(preview)
   const apolloClientSlugData = initializeApollo();
+  const publicationState = preview ? "PREVIEW" : "LIVE";
   const slug = params.slug;
 
   try {

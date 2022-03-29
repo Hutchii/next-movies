@@ -183,8 +183,11 @@ export const SLUG = gql`
 `;
 
 export const SLUG_DATA = gql`
-  query SlugData($slug: String!) {
-    movies(filters: { slug: { eq: $slug } }) {
+  query SlugData($slug: String!, $publicationState: PublicationState!) {
+    movies(
+      filters: { slug: { eq: $slug } }
+      publicationState: $publicationState
+    ) {
       data {
         id
         attributes {
@@ -214,6 +217,18 @@ export const SLUG_DATA = gql`
               }
             }
           }
+        }
+      }
+    }
+  }
+`;
+
+export const PREVIEW = gql`
+  query SlugData($slug: String!) {
+    movies(filters: { slug: { eq: $slug } }, publicationState: PREVIEW) {
+      data {
+        attributes {
+          slug
         }
       }
     }
