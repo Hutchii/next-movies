@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import { initializeApollo } from "../../libs/apolloClient";
 
 const prev = async (req, res) => {
-  if (req.query.secret !== (process.env.PREVIEW_SECRET || !req.query.slug)) {
+  if (req.query.secret !== (process.env.PREVIEW || !req.query.slug)) {
     return res.status(401).json({ message: "Invalid token" });
   }
 
