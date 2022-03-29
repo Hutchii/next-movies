@@ -56,14 +56,15 @@ export async function getStaticPaths() {
   return { paths, fallback: "blocking" };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, preview }) {
+  const publicationState = preview ? "PREVIEW" : "LIVE";
   const apolloClientSlugData = initializeApollo();
   const slug = params.slug;
 
   try {
     const { error, data } = await apolloClientSlugData.query({
       query: SLUG_DATA,
-      variables: { slug: slug },
+      variables: { slug: slug, publicationState: publicationState },
       revalidate: 10,
     });
     if (data.movies.data.length === 0 || error) {
