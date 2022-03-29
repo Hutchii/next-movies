@@ -7,9 +7,9 @@ export default function NavbarLink({
   onClickHamburgerHandler,
 }) {
   return (
-    <li onClick={onClickHamburgerHandler}>
+    <li>
       <Link href={linkHref}>
-        <a>{linkName || children}</a>
+        <a onClick={onClickHamburgerHandler}>{linkName || children}</a>
       </Link>
     </li>
   );

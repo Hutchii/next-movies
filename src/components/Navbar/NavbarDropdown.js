@@ -7,7 +7,8 @@ export default function NavbarDropdown({
   dropdownLinks,
   onClickHamburgerHandler,
 }) {
-  const [showDropdown, setShowDropdown] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  console.log(showDropdown);
   return (
     <li
       className={`navbar-dropdown--link ${
@@ -15,9 +16,16 @@ export default function NavbarDropdown({
       }`}
       onMouseEnter={() => setShowDropdown(true)}
       onMouseLeave={() => setShowDropdown(false)}
-      onKeyDown={({ key }) => key === "ENTER" && setShowDropdown(true)}
     >
-      <button href="/">{dropdownName}</button>
+      <button
+        type="button"
+        aria-haspopup="menu"
+        href="/"
+        // onClick={() => setShowDropdown((prevValue) => !prevValue)}
+        // aria-expanded={showDropdown ? "true" : "false"}
+      >
+        {dropdownName}
+      </button>
       <Arrow />
       <ul className="navbar-dropdown--list">
         {dropdownLinks.map((link, i) => {

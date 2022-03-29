@@ -605,7 +605,7 @@ footer {
     width: 28rem;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 268px) {
   .margin--header {
     margin-top: 5rem;
   }

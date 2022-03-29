@@ -7,6 +7,8 @@ import NavbarDropdown from "./NavbarDropdown";
 export default function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(null);
 
+  const setHamburgerOpenHandler = () => setHamburgerOpen(false);
+
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
     if (mq.matches) {
@@ -15,7 +17,6 @@ export default function Navbar() {
       else document.body.classList.remove("navbar-overlay--overflow");
     }
   }, [hamburgerOpen]);
-
   return (
     <>
       <div
@@ -27,7 +28,7 @@ export default function Navbar() {
         className={`spacer ${
           hamburgerOpen
             ? "navbar-overlay-content--active"
-            : "navbar-overlay-content--inactive"
+            : "navbar-overlay-content--inactiv"
         }`}
       >
         <nav className="navbar-nav">
@@ -41,7 +42,7 @@ export default function Navbar() {
             <NavbarLink
               linkName="Home"
               linkHref="/"
-              onClickHamburgerHandler={() => setHamburgerOpen(false)}
+              onClickHamburgerHandler={setHamburgerOpenHandler}
             />
             <NavbarDropdown
               dropdownName="SSR"
@@ -50,7 +51,7 @@ export default function Navbar() {
                 { name: "Pagination", link: "/ssr/pagination" },
                 { name: "Infinite Scrolling", link: "/ssr/infinite-scrolling" },
               ]}
-              onClickHamburgerHandler={() => setHamburgerOpen(false)}
+              onClickHamburgerHandler={setHamburgerOpenHandler}
             />
             <NavbarDropdown
               dropdownName="SG"
@@ -58,12 +59,12 @@ export default function Navbar() {
                 { name: "Load More", link: "/ssg/load-more" },
                 { name: "Pagination", link: "/ssg/pagination" },
               ]}
-              onClickHamburgerHandler={() => setHamburgerOpen(false)}
+              onClickHamburgerHandler={setHamburgerOpenHandler}
             />
             <NavbarLink
               linkName="About"
               linkHref="/"
-              onClickHamburgerHandler={() => setHamburgerOpen(false)}
+              onClickHamburgerHandler={setHamburgerOpenHandler}
             />
           </ul>
         </nav>
