@@ -17,6 +17,7 @@ export const FEATURED_MOVIES = gql`
             data {
               attributes {
                 url
+                formats
               }
             }
           }
@@ -86,6 +87,7 @@ export const MOVIES_FILTERS = gql`
             data {
               attributes {
                 url
+                formats
               }
             }
           }

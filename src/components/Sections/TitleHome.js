@@ -9,17 +9,17 @@ import { directorsFormatter } from "../../libs/directorsFormatter";
 export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
   const [whichSlide, setWhichSlide] = useState(0);
   const maxSlides = featuredMoviesData.length - 1;
-  const timer = 15000;
   const nextSlide = () =>
     setWhichSlide((prevValue) => (prevValue === maxSlides ? 0 : prevValue + 1));
   const prevSlide = () =>
     setWhichSlide((prevValue) => (prevValue === 0 ? maxSlides : prevValue - 1));
 
   useEffect(() => {
-    if (featuredMoviesData.length < 2) return;
+    const mq = window.matchMedia("(max-width: 768px)");
+    if (featuredMoviesData.length < 2 || mq.matches) return;
     const interval = setInterval(() => {
       nextSlide();
-    }, timer);
+    }, 15000);
     return () => clearInterval(interval);
   }, [whichSlide]);
 
@@ -46,7 +46,7 @@ export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
                           alt="Movie"
                           width={1024}
                           height={600}
-                          priority
+                          priority={i === 0 ? true : false}
                           unoptimized
                         />
                       </div>
