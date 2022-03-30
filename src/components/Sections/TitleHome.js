@@ -47,8 +47,7 @@ export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
                           width={1024}
                           height={600}
                           priority={i === 0 ? true : false}
-                          // unoptimized
-                          quality={95}
+                          unoptimized
                           layout="responsive"
                         />
                       </div>

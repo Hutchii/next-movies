@@ -27,6 +27,7 @@ export default function TitleHomeMore({ moreMoviesData, fetchLink }) {
                       width={1024}
                       height={600}
                       priority
+                      unoptimized
                     />
                   </div>
                   <div className="title-home--text">
