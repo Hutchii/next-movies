@@ -852,7 +852,7 @@ footer {
     width: 0%;
     height: 0.3rem;
     background-color: var(--gold);
-    bottom: 0.3rem;
+    bottom: 0;
     left: 0;
     transition: width 1ms linear;
   }

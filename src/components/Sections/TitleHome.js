@@ -47,7 +47,10 @@ export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
                           width={1024}
                           height={600}
                           priority={i === 0 ? true : false}
-                          unoptimized
+                          // unoptimized
+                          quality={90}
+                          layout="responsive"
+                          sizes="(max-width: 480px) 480px, (max-width: 900px) 900px, (max-width: 1280px) 810px, (max-width: 1920px) 1020px,"
                         />
                       </div>
                     </a>
