@@ -2,9 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["movies.luckyseven.li"],
-    imageSizes: [],
-    deviceSizes: [900, 1024, 1920],
+    // domains: ["movies.luckyseven.li"],
+    // deviceSizes: [200],
+    // imageSizes: [1024, 900, 480],
   },
 };
 
