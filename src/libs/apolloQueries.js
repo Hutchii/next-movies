@@ -17,7 +17,6 @@ export const FEATURED_MOVIES = gql`
             data {
               attributes {
                 url
-                formats
               }
             }
           }
@@ -25,33 +24,6 @@ export const FEATURED_MOVIES = gql`
             data {
               attributes {
                 director
-              }
-            }
-          }
-          featured {
-            data {
-              id
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const DIRECTOR = gql`
-  query Director {
-    directors(filters: { is_featured: { eq: true } }) {
-      data {
-        id
-        attributes {
-          director
-          slug
-          is_featured
-          image {
-            data {
-              attributes {
-                url
               }
             }
           }
@@ -87,7 +59,6 @@ export const MOVIES_FILTERS = gql`
             data {
               attributes {
                 url
-                formats
               }
             }
           }
@@ -110,6 +81,27 @@ export const MOVIES_FILTERS = gql`
       meta {
         pagination {
           total
+        }
+      }
+    }
+  }
+`;
+
+export const DIRECTOR = gql`
+  query Director {
+    directors(filters: { is_featured: { eq: true } }) {
+      data {
+        id
+        attributes {
+          director
+          slug
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
         }
       }
     }

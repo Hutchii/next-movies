@@ -21,11 +21,11 @@ export default function TitleHomeMore({ moreMoviesData, fetchLink }) {
                   <div className="title-home--image">
                     <Image
                       src={imageUrlBuilder(
-                        movie.attributes.image.data.attributes.formats.small.url
+                        movie.attributes.image.data.attributes.url
                       )}
                       alt="Movie"
-                      width={1024}
-                      height={600}
+                      width={158}
+                      height={92}
                       priority
                       unoptimized
                     />

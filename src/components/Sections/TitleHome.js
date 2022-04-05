@@ -5,10 +5,24 @@ import ButtonArrow from "../UI/ButtonArrow";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { directorsFormatter } from "../../libs/directorsFormatter";
+import { useQuery } from "@apollo/client";
+import { MOVIES_FILTERS } from "../../libs/apolloQueries";
+import { initializeApollo, addApolloState } from "../../libs/apolloClient";
 
 export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
   const [whichSlide, setWhichSlide] = useState(0);
+  // const client = initializeApollo();
+  // const data = client.readQuery({
+  //   query: MOVIES_FILTERS,
+  //   variables: {
+  //     start: 0,
+  //     limit: 6,
+  //     genre: "all",
+  //     title: "",
+  //   },
+  // });
   const maxSlides = featuredMoviesData.length - 1;
+  // console.log("DATA", data);
   const nextSlide = () =>
     setWhichSlide((prevValue) => (prevValue === maxSlides ? 0 : prevValue + 1));
   const prevSlide = () =>
@@ -75,26 +89,22 @@ export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
                   <ButtonArrow prev onClickHandler={prevSlide} />
                   <ButtonArrow onClickHandler={nextSlide} />
                 </div>
-                <Link href={`/${movie.attributes.slug}`}>
-                  <a>
-                    <div className={`title-home--slide-text`}>
-                      <div className="title-home--slide-info">
-                        <p className="text--12 color--grey">
-                          {dateConverter(movie.attributes.createdAt)}
-                        </p>
-                        <p className="text--12 color--gold">
-                          {`By ${directorsFormatter(
-                            movie.attributes.directors.data
-                          )}`}
-                        </p>
-                      </div>
-                      <h1 className="heading--30">{movie.attributes.title}</h1>
-                      <p className="paragraph--18">
-                        {movie.attributes.description}
-                      </p>
-                    </div>
-                  </a>
-                </Link>
+                <div className={`title-home--slide-text`}>
+                  <div className="title-home--slide-info">
+                    <p className="text--12 color--grey">
+                      {dateConverter(movie.attributes.createdAt)}
+                    </p>
+                    <p className="text--12 color--gold">
+                      {`By ${directorsFormatter(
+                        movie.attributes.directors.data
+                      )}`}
+                    </p>
+                  </div>
+                  <h1 className="heading--30">{movie.attributes.title}</h1>
+                  <p className="paragraph--18">
+                    {movie.attributes.description}
+                  </p>
+                </div>
               </div>
             );
           })}

@@ -9,29 +9,36 @@ import AllPostsButton from "./AllPostsButton";
 import AllPostsResults from "./AllPostsResults";
 import Router, { useRouter } from "next/router";
 
-export default function AllPosts() {
+export default function AllPosts(props) {
   const searchInput = useRef("");
   const { query } = useRouter();
   const genreQuery = query.genre || "all";
   const searchQuery = query.search || "";
-  const {
-    loading,
-    error,
-    data: { movies },
-    fetchMore,
-  } = useQuery(MOVIES_FILTERS, {
-    variables: {
-      start: 0,
-      limit: 6,
-      genre: "all",
-      title: "",
-    },
-    // notifyOnNetworkStatusChange: true,
-  });
-  const moviesData = movies?.data;
-  const moviesDataLength = movies?.data.length;
-  const moviesDataTotal = movies?.meta.pagination.total;
+  const { loading, error, data, fetchMore, refetch, client } = useQuery(
+    MOVIES_FILTERS,
+    {
+      variables: {
+        start: 0,
+        limit: 4,
+        genre: "all",
+        title: "",
+      },
+      // fetchPolicy: "cache-first"
+      // notifyOnNetworkStatusChange: true,
+    }
+  );
+
+  const moviesData = data?.movies?.data;
+  const moviesDataLength = data?.movies?.data.length;
+  const moviesDataTotal = data?.movies?.meta.pagination.total;
   const areMoreMovies = moviesDataLength >= moviesDataTotal;
+
+  const refetchHelper = (genre, search, limit = 6) =>
+    refetch({
+      limit: limit,
+      genre: genre,
+      title: search,
+    });
 
   const fetchMoreHelper = (genre, search, limit = 6) =>
     fetchMore({
@@ -71,6 +78,7 @@ export default function AllPosts() {
           onClickHandler={(currentGenre) => {
             searchInput.current.value = "";
             fetchMoreHelper(currentGenre, "");
+            // refetchHelper(currentGenre, "");
             Router.push(
               `/ssr/load-more/${
                 currentGenre !== "all" ? `?genre=${currentGenre}` : ""
@@ -95,6 +103,7 @@ export default function AllPosts() {
         activeSearch={searchQuery}
         error={error}
         fetchLink="ssr/load-more"
+        loading={loading}
       />
       {!areMoreMovies && (
         <div className="posts-cards--button center">
