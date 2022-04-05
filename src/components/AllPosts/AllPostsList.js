@@ -21,31 +21,11 @@ export default function AllPostsList({
   if (activeSearch && dataLength)
     return <Message message="No results found." />;
   if (error) return <Message message="Error occured. Try again." />;
-  // if (loading)
-  //   return (
-  //     <div className={`posts-cards posts-placeholder`}>
-  //       <div className="posts-cards--post">
-  //         <div className="posts-placeholder--image"></div>
-  //         <div className="posts-cards--text spacer">
-  //           <div className="posts-cards--content">
-  //             <div className="posts-placeholder--heading">&nbsp;</div>
-  //             <div className="posts-placeholder--desc">&nbsp;</div>
-  //             <div className="posts-placeholder--desc">&nbsp;</div>
-  //             <div className="posts-placeholder--desc">&nbsp;</div>
-  //           </div>
-  //           <div className="posts-cards--info">
-  //             <div className="posts-placeholder--desc">&nbsp;</div>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-
   return (
     <div className={`posts-cards`}>
       {moviesData?.map((movie) => {
         return (
-          <Link key={movie.id} href={`/${fetchLink}/${movie.attributes.slug}`} className="">
+          <Link key={movie.id} href={`/${fetchLink}/${movie.attributes.slug}`}>
             <a className="posts-cards--link posts-real">
               <div className="posts-cards--post">
                 <AllPostsImage

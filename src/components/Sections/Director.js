@@ -5,7 +5,7 @@ import { DIRECTOR } from "../../libs/apolloQueries";
 import { useQuery } from "@apollo/client";
 
 export default function Director() {
-  const { error, data } = useQuery(DIRECTOR, {
+  const { loading, error, data } = useQuery(DIRECTOR, {
     variables: {
       start: 0,
       limit: 4,
@@ -16,11 +16,11 @@ export default function Director() {
   const directorData = data?.directors.data[0].attributes;
   return (
     <section className="director margin--top">
-      {!error && (
+      {!loading && !error && (
         <>
           <div className="director-image">
             <Image
-              src={imageUrlBuilder(directorData?.image.data.attributes.url)}
+              src={imageUrlBuilder(directorData.image.data.attributes?.url)}
               alt="Movie"
               width={960}
               height={600}
@@ -30,12 +30,9 @@ export default function Director() {
           <div className="director-text">
             <p className="paragraph--18 color--darkwhite">Discover movies by</p>
             <h2 className="heading--42 color--darkwhite">
-              {directorData?.director}
+              {directorData.director}
             </h2>
-            <ButtonLink
-              linkHref={`/`}
-              linkName="DISCOVER"
-            />
+            <ButtonLink linkHref="/" linkName="DISCOVER" />
           </div>
         </>
       )}

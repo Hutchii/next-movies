@@ -1,21 +1,14 @@
 import { initializeApollo, addApolloState } from "../../../libs/apolloClient";
-import {
-  FEATURED_MOVIES,
-  DIRECTOR,
-  MOVIES_FILTERS,
-} from "../../../libs/apolloQueries";
+import { FEATURED_MOVIES } from "../../../libs/apolloQueries";
 import TitleHome from "../../../components/Sections/TitleHome";
 import Director from "../../../components/Sections/Director";
 import AllPosts from "../../../components/AllPosts/AllPosts";
 import TitleHomeMore from "../../../components/Sections/TitleHomeMore";
 import Error from "next/error";
 import Head from "next/head";
-import client from "../../../libs/apolloClient2";
-// { featuredMovies, director, errorCode }
+
 export default function SSRLoadMore({ featuredMovies }) {
-  // console.log("PAGE", props);
-  console.log("FEATURED", featuredMovies);
-  // if (!featuredMovies) return <Error statusCode={errorCode} />;
+  if (!featuredMovies) return <Error statusCode={errorCode} />;
   return (
     <>
       <Head>
@@ -38,33 +31,16 @@ export default function SSRLoadMore({ featuredMovies }) {
 
 export async function getServerSideProps() {
   const apolloClientFeatured = initializeApollo();
-  // const apolloClientDirector = initializeApollo();
-  // const apolloClientCache = initializeApollo();
 
   try {
-    // await apolloClientCache.query({
-    //   query: MOVIES_FILTERS,
-    //   variables: {
-    //     start: 0,
-    //     limit: 6,
-    //     genre: "all",
-    //     title: "",
-    //   },
-    // });
     const { data: featuredData } = await apolloClientFeatured.query({
       query: FEATURED_MOVIES,
     });
-    // const { data: directorData } = await apolloClientDirector.query({
-    //   query: DIRECTOR,
-    // });
     return addApolloState(apolloClientFeatured, {
       props: {
         featuredMovies: featuredData.movies.data,
       },
     });
-
-    // featuredMovies: featuredData.movies.data,
-    // director: directorData.directors.data,
   } catch (err) {
     return {
       props: {

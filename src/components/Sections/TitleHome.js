@@ -5,24 +5,11 @@ import ButtonArrow from "../UI/ButtonArrow";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { directorsFormatter } from "../../libs/directorsFormatter";
-import { useQuery } from "@apollo/client";
-import { MOVIES_FILTERS } from "../../libs/apolloQueries";
-import { initializeApollo, addApolloState } from "../../libs/apolloClient";
 
 export default function TitleHome({ featuredMoviesData, children, fetchLink }) {
   const [whichSlide, setWhichSlide] = useState(0);
-  // const client = initializeApollo();
-  // const data = client.readQuery({
-  //   query: MOVIES_FILTERS,
-  //   variables: {
-  //     start: 0,
-  //     limit: 6,
-  //     genre: "all",
-  //     title: "",
-  //   },
-  // });
   const maxSlides = featuredMoviesData.length - 1;
-  // console.log("DATA", data);
+
   const nextSlide = () =>
     setWhichSlide((prevValue) => (prevValue === maxSlides ? 0 : prevValue + 1));
   const prevSlide = () =>

@@ -103,7 +103,6 @@ export default function AllPosts(props) {
         activeSearch={searchQuery}
         error={error}
         fetchLink="ssr/load-more"
-        loading={loading}
       />
       {!areMoreMovies && (
         <div className="posts-cards--button center">

@@ -2,7 +2,7 @@
   --white: #ffffff;
   --darkwhite: #f6f6f6;
   --black: #161616;
-  --gold: #CF9500;
+  --gold: #cf9500;
   --grey: #979797;
   --lightgrey: #e8e8e8;
   --inter: "Inter", sans-serif;
@@ -46,7 +46,9 @@ img {
   content: "";
   position: absolute;
 }
-::selection { background: #cecece; }
+::selection {
+  background: #cecece;
+}
 .spacer {
   padding: 0 3.2rem 0;
   max-width: 178.4rem;
@@ -623,10 +625,10 @@ footer {
 }
 @keyframes progress-bar {
   0% {
-    width: 0%;
+    transform: translateX(-100%);
   }
   100% {
-    width: 100%;
+    transform: translateX(0);
   }
 }
 @keyframes slider-text {
@@ -771,6 +773,7 @@ footer {
   }
   .title-home--slide {
     position: relative;
+    overflow: hidden;
   }
   .title-home--slide-image,
   .title-slug--image {
@@ -893,12 +896,12 @@ footer {
   }
   .title-home--slide-progress {
     position: absolute;
-    width: 0%;
+    width: 100%;
     height: 0.3rem;
     background-color: var(--gold);
     bottom: 0;
     left: 0;
-    transition: width 1ms linear;
+    transform: translateX(-100%);
   }
   .title-home--slide-progress {
     display: unset;

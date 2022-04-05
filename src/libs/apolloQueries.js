@@ -94,7 +94,6 @@ export const DIRECTOR = gql`
         id
         attributes {
           director
-          slug
           image {
             data {
               attributes {
