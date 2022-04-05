@@ -32,13 +32,13 @@ export default function SSRLoadMore({ featuredMovies }) {
 export async function getServerSideProps({ res }) {
   const apolloClientFeatured = initializeApollo();
   try {
-    const { data: featuredData } = await apolloClientFeatured.query({
-      query: FEATURED_MOVIES,
-    });
     res.setHeader(
       "Cache-Control",
       "public, s-maxage=10, stale-while-revalidate=59"
     );
+    const { data: featuredData } = await apolloClientFeatured.query({
+      query: FEATURED_MOVIES,
+    });
     return addApolloState(apolloClientFeatured, {
       props: {
         featuredMovies: featuredData.movies.data,
