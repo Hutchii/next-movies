@@ -33,10 +33,10 @@ export default function Director() {
               {directorData?.director}
             </h2>
             <ButtonLink
-              linkHref={`/${directorData?.slug}`}
+              linkHref={`/`}
               linkName="DISCOVER"
             />
-          </div>{" "}
+          </div>
         </>
       )}
     </section>
