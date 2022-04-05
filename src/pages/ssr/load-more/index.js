@@ -30,12 +30,12 @@ export default function SSRLoadMore({ featuredMovies }) {
 }
 
 export async function getServerSideProps({ res }) {
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
   const apolloClientFeatured = initializeApollo();
   try {
-    res.setHeader(
-      "Cache-Control",
-      "public, s-maxage=10, stale-while-revalidate=59"
-    );
     const { data: featuredData } = await apolloClientFeatured.query({
       query: FEATURED_MOVIES,
     });
