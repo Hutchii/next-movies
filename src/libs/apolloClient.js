@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
-// import { relayStylePagination } from "@apollo/client/utilities";
+import { relayStylePagination } from "@apollo/client/utilities";
 import merge from "deepmerge";
 import isEqual from "lodash/isEqual";
 
@@ -19,16 +19,18 @@ function createApolloClient() {
       // credentials: "same-origin",
     }),
     //typePolicies for cursor pagination:
-    cache: new InMemoryCache({}),
+    cache: new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            movies: relayStylePagination(),
+          },
+        },
+      },
+    }),
     connectToDevTools: true,
     //new InMemoryCache({
-    // typePolicies: {
-    //   Query: {
-    //     fields: {
-    //       movies: relayStylePagination(),
-    //     },
-    //   },
-    // },
+
     //}),
   });
 }

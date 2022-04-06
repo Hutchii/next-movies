@@ -7,7 +7,7 @@ import TitleHomeMore from "../../../components/Sections/TitleHomeMore";
 import Error from "next/error";
 import Head from "next/head";
 
-export default function SSRLoadMore({ featuredMovies }) {
+export default function SSRLoadMore({ featuredMovies, errorCode }) {
   if (!featuredMovies) return <Error statusCode={errorCode} />;
   return (
     <>

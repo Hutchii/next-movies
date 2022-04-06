@@ -77,8 +77,8 @@ export default function AllPosts(props) {
         <AllPostGenres
           onClickHandler={(currentGenre) => {
             searchInput.current.value = "";
-            fetchMoreHelper(currentGenre, "");
-            // refetchHelper(currentGenre, "");
+            // fetchMoreHelper(currentGenre, "");
+            refetchHelper(currentGenre, "");
             Router.push(
               `/ssr/load-more/${
                 currentGenre !== "all" ? `?genre=${currentGenre}` : ""
