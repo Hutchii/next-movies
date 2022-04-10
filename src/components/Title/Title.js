@@ -1,5 +1,5 @@
 import { dateConverter } from "../../libs/dateConverter";
-import ButtonArrow from "../UI/ButtonArrow";
+import ButtonArrow from "../UI/SliderButton";
 import { useState, useEffect } from "react";
 import { directorsFormatter } from "../../libs/directorsFormatter";
 import styled, { keyframes, css } from "styled-components";

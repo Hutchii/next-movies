@@ -7,6 +7,7 @@ import TitleMore from "../../../components/Title/TitleMore";
 import Error from "next/error";
 import Head from "next/head";
 import SpecialPosts from "../../../components/Sections/SpecialPosts";
+import Articles from "../../../components/Articles/Articles";
 
 export default function SSRLoadMore({ featuredMovies, errorCode }) {
   if (!featuredMovies) return <Error statusCode={errorCode} />;
@@ -25,6 +26,7 @@ export default function SSRLoadMore({ featuredMovies, errorCode }) {
         />
       </Title>
       <Director />
+      <Articles/>
       {/* <SpecialPosts data={featuredMovies.slice(0, 4)} />
       <AllPosts /> */}
     </>

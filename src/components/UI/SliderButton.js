@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function ButtonArrow({ prev, onClickHandler }) {
+export default function SliderButton({ prev, onClickHandler }) {
   return <Arrow prev={prev} onClick={onClickHandler} />;
 }
 
@@ -33,5 +33,3 @@ const Arrow = styled.button`
     }
   }
 `;
-
-// dodac tole button

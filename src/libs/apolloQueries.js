@@ -107,6 +107,29 @@ export const DIRECTOR = gql`
   }
 `;
 
+export const ARTICLES = gql`
+  query Articles {
+    articles {
+      data {
+        id
+        attributes {
+          title
+          createdAt
+          description
+          slug
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const MOVIES_FILTERS_PAGINATION = gql`
   query MoviesFilters(
     $page: Int!

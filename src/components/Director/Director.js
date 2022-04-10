@@ -20,9 +20,11 @@ export default function Director() {
         <>
           <DirectorImage imageUrl={directorData.image.data.attributes?.url} />
           <StyledContent>
-            <StyledHeading>Discover movies by</StyledHeading>
-            <StyledText>{directorData.director}</StyledText>
-            <Button buttonHref="/" buttonName="DISCOVER" mode="light" />
+            <StyledTitle>
+              Discover <StyledTitleItalic>movies from</StyledTitleItalic>
+            </StyledTitle>
+            <StyledHeading>{directorData.director}</StyledHeading>
+            <Button buttonHref="/" buttonName="see all" mode="light" />
           </StyledContent>
         </>
       )}
@@ -47,9 +49,9 @@ const StyledContent = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 6rem 3rem;
+  padding: 4rem 3rem;
   gap: 2.4rem;
-  @media (mid-width: 768px) {
+  @media (min-width: 768px) {
     padding: 8rem 4.2rem;
   }
   @media (min-width: 900px) {
@@ -61,31 +63,37 @@ const StyledContent = styled.div`
     gap: 3.6rem;
   }
 `;
-const StyledHeading = styled.h2`
-  font-family: var(--le);
-  font-weight: 300;
-  font-size: 1.8rem;
+const StyledTitle = styled.p`
+  font-family: var(--inter);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 1.5rem;
   color: var(--darkwhite);
 `;
-const StyledText = styled.p`
+const StyledHeading = styled.h1`
   font-family: var(--le);
-  font-size: 3.2rem;
+  font-size: 3rem;
   font-weight: 500;
   color: var(--darkwhite);
   line-height: 1.4;
-  @media(min-width: 480px) {
+  @media (min-width: 480px) {
     font-size: 3.6rem;
   }
-  @media(min-width: 900px) {
-    font-size: 2.8rem;
-  }
-  @media(min-width: 1280px) {
-    font-size: 3.6rem;
-  }
-  @media(min-width: 1440px) {
+  @media (min-width: 768px) {
     font-size: 4.6rem;
   }
-  @media(min-width: 1600px) {
-    font-size: 6.4rem;
+  @media (min-width: 768px) {
+    font-size: 3.6rem;
   }
+  @media (min-width: 1280px) {
+    font-size: 4.6rem;
+  }
+  @media (min-width: 1600px) {
+    font-size: 7.2rem;
+  }
+`;
+const StyledTitleItalic = styled.span`
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 500;
 `;
