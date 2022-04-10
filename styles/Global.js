@@ -53,9 +53,9 @@ img {
   content: "";
   position: absolute;
 }
-::selection {
+/* ::selection {
   background: #cecece;
-}
+} */
 .spacer {
   padding: 0 3.2rem 0;
   max-width: 178.4rem;

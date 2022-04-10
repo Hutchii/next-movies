@@ -9,9 +9,10 @@ export default function DirectorImage({ imageUrl }) {
         src={imageUrlBuilder(imageUrl)}
         alt="Director"
         width={960}
-        height={600}
+        height={540}
         unoptimized
         layout="responsive"
+        objectFit="cover"
       />
     </StyledImage>
   );

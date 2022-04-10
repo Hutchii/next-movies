@@ -69,10 +69,19 @@ const StyledHeading = styled.h2`
 `;
 const StyledText = styled.p`
   font-family: var(--le);
-  font-size: 4rem;
+  font-size: 3.2rem;
   font-weight: 500;
   color: var(--darkwhite);
   line-height: 1.4;
+  @media(min-width: 480px) {
+    font-size: 3.6rem;
+  }
+  @media(min-width: 900px) {
+    font-size: 2.8rem;
+  }
+  @media(min-width: 1280px) {
+    font-size: 3.6rem;
+  }
   @media(min-width: 1440px) {
     font-size: 4.6rem;
   }
