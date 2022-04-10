@@ -1,9 +1,9 @@
 import LogoImage from "../../../public/svg/Logo.svg";
 import Link from "next/link";
 
-export default function Logo({ className }) {
+export default function NavbarLogo({ className }) {
   return (
-    <Link href="/">
+    <Link href="/" passHref>
       <a className={className}>
         <LogoImage />
       </a>

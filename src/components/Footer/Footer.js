@@ -1,4 +1,4 @@
-import Logo from "../UI/Logo";
+import Logo from "../Navbar/NavbarLogo";
 import NavbarLink from "../Navbar/NavbarLink";
 
 export default function Footer() {

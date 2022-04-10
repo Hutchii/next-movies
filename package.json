@@ -21,7 +21,8 @@
     "react-infinite-scroller": "^1.2.5",
     "react-markdown": "^8.0.1",
     "react-scroll": "^1.8.6",
-    "react-spring": "^9.4.4"
+    "react-spring": "^9.4.4",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "eslint": "8.9.0",

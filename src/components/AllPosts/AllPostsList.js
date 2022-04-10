@@ -27,7 +27,7 @@ export default function AllPostsList({
         return (
           <Link key={movie.id} href={`/${fetchLink}/${movie.attributes.slug}`}>
             <a className="posts-cards--link posts-real">
-              <div className="posts-cards--post">
+              <div className="posts-cards--post card">
                 <AllPostsImage
                   image={movie.attributes.image.data.attributes.url}
                 />

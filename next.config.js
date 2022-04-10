@@ -6,6 +6,9 @@ const nextConfig = {
       layoutRaw: true,
     },
   },
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig;

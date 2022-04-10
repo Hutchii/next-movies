@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --white: #ffffff;
   --darkwhite: #f6f6f6;
   --black: #161616;
@@ -53,7 +53,7 @@ img {
   padding: 0 3.2rem 0;
   max-width: 178.4rem;
   margin: 0 auto;
-}
+} */
 .heading--30 {
   font-size: 2.8rem;
 }
@@ -80,8 +80,14 @@ img {
 .text--14 {
   font-size: 1.4rem;
 }
+.text--15 {
+  font-size: 1.5rem;
+}
 .text--16 {
   font-size: 1.6rem;
+}
+.text--italic {
+  font-style: italic;
 }
 .color--gold {
   color: var(--gold);
@@ -110,6 +116,12 @@ img {
 .center {
   display: flex;
   justify-content: center;
+}
+.header--title {
+  text-align: center;
+  font-family: var(--inter);
+  font-weight: 500;
+  text-transform: uppercase;
 }
 .button {
   border: none;
@@ -254,7 +266,7 @@ nav a:hover {
   gap: 2rem;
   justify-content: space-between;
   margin: 0.5rem 0 2rem 0;
-  font-weight: 600;
+  font-weight: 500;
 }
 .title-home--slide-text h1 {
   margin-bottom: 0.6rem;
@@ -278,12 +290,12 @@ nav a:hover {
   text-transform: uppercase;
   font-family: var(--inter);
   margin: 8rem 0 2.8rem 0;
-  font-weight: 600;
+  font-weight: 500;
 }
 .title-home--text p {
   font-family: var(--inter);
   text-transform: uppercase;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
   font-weight: 600;
 }
 .title-home--aside {
@@ -326,6 +338,26 @@ nav a:hover {
   gap: 2.4rem;
 }
 
+/* SPECIAL POSTS */
+.card {
+  background-color: #fff;
+  width: calc(100% + 6.4rem);
+  margin-left: -3.2rem;
+  padding-bottom: 3rem;
+}
+.margin--small {
+  margin-top: 8rem;
+}
+.special-post--text {
+  text-align: center;
+  margin-top: 1rem;
+}
+.special-post--info {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: var(--inter);
+}
 /* POSTS */
 .posts-filters {
   display: flex;
@@ -352,12 +384,12 @@ nav a:hover {
   display: block;
   margin-top: 6rem;
 }
-.posts-cards--post {
+/* .posts-cards--post {
   background-color: #fff;
   width: calc(100% + 6.4rem);
   margin-left: -3.2rem;
   padding-bottom: 3rem;
-}
+} */
 .posts-cards--post h1 {
   margin-top: 1rem;
   margin-bottom: 0.6rem;
@@ -773,7 +805,7 @@ footer {
   }
   .title-home--slide {
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
   .title-home--slide-image,
   .title-slug--image {
@@ -785,6 +817,7 @@ footer {
     pointer-events: none;
   }
   .title-home--slide-wrapper {
+    overflow: hidden;
     pointer-events: none;
     position: relative;
     opacity: 0;
@@ -912,8 +945,7 @@ footer {
   .director-text {
     padding: 8rem 4.2rem;
   }
-  .posts-cards--post {
-    background-color: #fff;
+  .card {
     width: calc(100% + 8.4rem);
     margin-left: -4.2rem;
   }
@@ -994,8 +1026,7 @@ footer {
     flex: 1 1 50%;
     background-color: var(--black);
   }
-  .posts-cards--post {
-    background-color: #fff;
+  .card {
     width: 100%;
     margin-left: 0;
   }
@@ -1067,9 +1098,7 @@ footer {
   .title-home--more button {
     margin-top: 2rem;
   }
-  .heading--20 {
-    font-size: 1.6rem;
-  }
+
   .text--12 {
     font-size: 1.1rem;
   }
@@ -1081,9 +1110,7 @@ footer {
   }
 }
 @media (min-width: 1280px) {
-  .heading--20 {
-    font-size: 1.8rem;
-  }
+
   .text--12 {
     font-size: 1.2rem;
   }
@@ -1167,7 +1194,7 @@ footer {
     font-size: 6.4rem;
   }
   .margin--top {
-    margin-top: 16rem;
+    margin-top: 20rem;
   }
   .posts-cards {
     grid-template-columns: repeat(auto-fill, minmax(45rem, 1fr));
