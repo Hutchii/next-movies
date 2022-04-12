@@ -15,7 +15,7 @@ export default function Director() {
   });
   const directorData = data?.directors.data[0].attributes;
   return (
-    <StyledDirector>
+    <StyledDirector className="margin--top">
       {!loading && !error && (
         <>
           <DirectorImage imageUrl={directorData.image.data.attributes?.url} />
@@ -34,13 +34,9 @@ export default function Director() {
 
 const StyledDirector = styled.section`
   background-color: var(--black);
-  margin-top: 10rem;
   @media (min-width: 900px) {
     background: none;
     display: flex;
-  }
-  @media (min-width: 1600px) {
-    margin-top: 15rem;
   }
 `;
 const StyledContent = styled.div`
@@ -49,9 +45,9 @@ const StyledContent = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 4rem 3rem;
+  padding: 5rem 3rem;
   gap: 2.4rem;
-  @media (min-width: 768px) {
+  @media (min-width: 600px) {
     padding: 8rem 4.2rem;
   }
   @media (min-width: 900px) {
@@ -60,7 +56,7 @@ const StyledContent = styled.div`
     background-color: var(--black);
   }
   @media (min-width: 1600px) {
-    gap: 3.6rem;
+    gap: 3.2rem;
   }
 `;
 const StyledTitle = styled.p`
@@ -82,7 +78,7 @@ const StyledHeading = styled.h1`
   @media (min-width: 768px) {
     font-size: 4.6rem;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 900px) {
     font-size: 3.6rem;
   }
   @media (min-width: 1280px) {

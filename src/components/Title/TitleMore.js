@@ -87,7 +87,7 @@ const StyledMore = styled.div`
 const StyledMoreLink = styled.a`
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 2.4rem;
   & + & {
     margin-top: 2.4rem;
   }
@@ -130,7 +130,7 @@ const StyledMoreText = styled.p`
 `;
 const StyledMoreHeading = styled.h2`
   color: var(--black);
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-family: var(--le);
   font-weight: 300;
   transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);

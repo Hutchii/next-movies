@@ -65,6 +65,9 @@ img {
 .hamburger-react {
   z-index: 200;
 }
+.margin--top {
+  margin-top: 10rem;
+}
 
 @media (min-width: 768px) {
 .hamburger-react {
@@ -87,6 +90,9 @@ img {
     max-width: 163.2rem;
   }
 }
-
-
+@media (min-width: 1600px) {
+  .margin--top {
+    margin-top: 15rem;
+  }
+}
 `;

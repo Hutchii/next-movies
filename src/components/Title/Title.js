@@ -156,10 +156,11 @@ const StyledPaginationDot = styled.div`
   color: ${({ active }) => (active ? "var(--white)" : "var(--grey)")};
   transition: color 350ms cubic-bezier(0.2, 0, 0.2, 1);
   cursor: pointer;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   margin-bottom: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
   @media (min-width: 768px) {
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.6rem;
   }
 `;
 const progressAnimation = keyframes`
@@ -243,13 +244,13 @@ const StyledContentHeading = styled.h1`
   font-family: var(--le);
   font-weight: 300;
   margin-bottom: 1.5rem;
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   color: var(--black);
   @media (min-width: 768px) {
     font-size: 3.2rem;
   }
   @media (min-width: 1280px) {
-    font-size: 4.2rem;
+    font-size: 3.6rem;
     margin-bottom: 2rem;
   }
 `;
@@ -259,7 +260,4 @@ const StyledContentText = styled.p`
   font-weight: 300;
   letter-spacing: 0.2px;
   line-height: 1.4;
-  @media (min-width: 1280px) {
-    font-size: 2rem;
-  }
 `;
