@@ -3,7 +3,7 @@ import { dateConverter } from "../../libs/dateConverter";
 import styled, { css } from "styled-components";
 import Link from "next/link";
 
-export default function ArticlesHorizontal({ data, dir, mode }) {
+export default function ArticlesPost({ data, dir, mode }) {
   return (
     <Link href={data.slug} passHref>
       <StyledCard dir={dir} mode={mode}>

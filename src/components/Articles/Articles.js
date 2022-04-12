@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ARTICLES } from "../../libs/apolloQueries";
 import { useQuery } from "@apollo/client";
-import ArticlesHorizontal from "./ArticlesHorizontal";
+import ArticlesPost from "./ArticlesPost";
 
 export default function Articles() {
   const { loading, error, data } = useQuery(ARTICLES);
@@ -18,12 +18,12 @@ export default function Articles() {
         </StyledTitle>
         {!loading && !error && (
           <>
-            <ArticlesHorizontal data={articlesData} mode="horizontal" />
+            <ArticlesPost data={articlesData} mode="horizontal" />
             <StyledVerticalFlex>
-              <ArticlesHorizontal data={articlesData2} />
-              <ArticlesHorizontal data={articlesData3} />
+              <ArticlesPost data={articlesData2} />
+              <ArticlesPost data={articlesData3} />
             </StyledVerticalFlex>
-            <ArticlesHorizontal
+            <ArticlesPost
               data={articlesData4}
               mode="horizontal"
               dir="true"
