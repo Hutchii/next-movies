@@ -1,26 +1,33 @@
 import ArticlesImage from "./ArticlesImage";
 import { dateConverter } from "../../libs/dateConverter";
 import styled, { css } from "styled-components";
+import Link from "next/link";
 
 export default function ArticlesHorizontal({ data, dir, mode }) {
   return (
-    <StyledCard dir={dir} mode={mode}>
-      <ArticlesImage imageUrl={data.image.data.attributes?.url} />
-      <StyledContent className="spacer">
-        <StyledContentAuthor mode={mode}>By Sebastian Blaik</StyledContentAuthor>
-        <StyledContentHeading>{data.title}</StyledContentHeading>
-        <StyledContentText>{data.description}</StyledContentText>
-        <StyledContentDate>{dateConverter(data.createdAt)}</StyledContentDate>
-      </StyledContent>
-    </StyledCard>
+    <Link href={data.slug} passHref>
+      <StyledCard dir={dir} mode={mode}>
+        <ArticlesImage imageUrl={data.image.data.attributes?.url} />
+        <StyledContent className="spacer">
+          <StyledContentAuthor mode={mode}>
+            By Sebastian Blaik
+          </StyledContentAuthor>
+          <StyledContentHeading>{data.title}</StyledContentHeading>
+          <StyledContentText>{data.description}</StyledContentText>
+          <StyledContentDate>{dateConverter(data.createdAt)}</StyledContentDate>
+        </StyledContent>
+      </StyledCard>
+    </Link>
   );
 }
 
-const StyledCard = styled.div`
+const StyledCard = styled.a`
+  cursor: pointer;
   background-color: #fff;
   text-align: center;
   padding-bottom: 3rem;
   margin-top: 7rem;
+  display: block;
   ${({ mode }) => {
     switch (mode) {
       case "horizontal":
@@ -44,10 +51,22 @@ const StyledCard = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        `
+        `;
     }
   }}
-  @media(min-width: 1280px) {
+  @media (min-width: 768px) {
+    img {
+      transition: all 0.5s cubic-bezier(0.2, 0, 0.2, 1);
+    }
+    &:hover img {
+      transform: scale(1.04);
+      filter: brightness(90%);
+    }
+    &:hover h1 {
+      color: var(--gold);
+    }
+  }
+  @media (min-width: 1280px) {
     margin-top: 10rem;
   }
 `;
@@ -87,6 +106,7 @@ const StyledContentHeading = styled.h1`
   margin-bottom: 1.5rem;
   font-size: 2.6rem;
   color: var(--black);
+  transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
   @media (min-width: 768px) {
     font-size: 3.2rem;
   }

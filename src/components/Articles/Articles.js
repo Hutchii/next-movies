@@ -60,13 +60,13 @@ const StyledVerticalFlex = styled.div`
     display: grid;
     grid-gap: 4rem;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 0.6fr));
-    > div:last-of-type {
+    > a:first-of-type {
       margin-top: 10rem;
     }
   }
   @media (min-width: 1280px) {
     grid-gap: 6rem;
-    > div:last-of-type {
+    > a:first-of-type {
       margin-top: 15rem;
     }
   }
