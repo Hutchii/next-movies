@@ -4,10 +4,10 @@ import {
   DIRECTOR,
   MOVIES_FILTERS_PAGINATION,
 } from "../../../libs/apolloQueries";
-import TitleHome from "../../../components/Sections/TitleHome";
-import Director from "../../../components/Sections/Director";
+import Title from "../../../components/Title/Title";
+import Director from "../../../components/Director/Director";
 import AllPostsPagination from "../../../components/AllPosts/AllPostsPagination";
-import TitleHomeMore from "../../../components/Sections/TitleHomeMore";
+import TitleMore from "../../../components/Title/TitleMore";
 import Error from "next/error";
 import Head from "next/head";
 
@@ -18,17 +18,17 @@ export default function SSRPagination({ featuredMovies, director, errorCode }) {
       <Head>
         <title>Server Side Rendering - Pagination</title>
       </Head>
-      <TitleHome
+      <Title
         featuredMoviesData={featuredMovies.slice(0, 4)}
         fetchLink="ssr/pagination"
       >
-        <TitleHomeMore
+        <TitleMore
           moreMoviesData={featuredMovies.slice(4)}
           fetchLink="ssr/pagination"
         />
-      </TitleHome>
+      </Title>
       <Director directorData={director} />
-      <AllPostsPagination />
+      {/* <AllPostsPagination /> */}
     </>
   );
 }

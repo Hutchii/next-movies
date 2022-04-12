@@ -4,10 +4,10 @@ import {
   DIRECTOR,
   MOVIES_FILTERS,
 } from "../../../libs/apolloQueries";
-import TitleHome from "../../../components/Sections/TitleHome";
-import Director from "../../../components/Sections/Director";
+import Title from "../../../components/Title/Title";
+import Director from "../../../components/Director/Director";
 import AllPostsInfiniteScrolling from "../../../components/AllPosts/AllPostsInfiniteScrolling";
-import TitleHomeMore from "../../../components/Sections/TitleHomeMore";
+import TitleMore from "../../../components/Title/TitleMore";
 import Error from "next/error";
 import Head from "next/head";
 
@@ -22,17 +22,17 @@ export default function SSRInfiniteScrolling({
       <Head>
         <title>Server Side Rendering - Infinite Scrolling</title>
       </Head>
-      <TitleHome
+      <Title
         featuredMoviesData={featuredMovies.slice(0, 4)}
         fetchLink="ssr/infinite-scrolling"
       >
-        <TitleHomeMore
+        <TitleMore
           moreMoviesData={featuredMovies.slice(4)}
           fetchLink="ssr/infinite-scrolling"
         />
-      </TitleHome>
+      </Title>
       <Director directorData={director} />
-      <AllPostsInfiniteScrolling />
+      {/* <AllPostsInfiniteScrolling /> */}
     </>
   );
 }
