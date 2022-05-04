@@ -28,6 +28,7 @@ const Button = styled.button`
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   padding: 1rem 2rem;
   font-weight: 600;
+  display: inline-block;
   &:disabled {
     opacity: 0.25;
     pointer-events: none;

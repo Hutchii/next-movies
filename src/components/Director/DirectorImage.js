@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export default function DirectorImage({ imageUrl }) {
   return (
-    <StyledImage>
+    <ImageWrapperStyled>
       <Image
         src={imageUrlBuilder(imageUrl)}
         alt="Director"
@@ -14,11 +14,11 @@ export default function DirectorImage({ imageUrl }) {
         layout="responsive"
         objectFit="cover"
       />
-    </StyledImage>
+    </ImageWrapperStyled>
   );
 }
 
-const StyledImage = styled.div`
+const ImageWrapperStyled = styled.div`
   @media (min-width: 900px) {
     flex: 1 1 50%;
   }

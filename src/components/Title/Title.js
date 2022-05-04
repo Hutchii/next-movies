@@ -1,5 +1,5 @@
 import { dateConverter } from "../../libs/dateConverter";
-import ButtonArrow from "../UI/SliderButton";
+import ButtonSlider from "../UI/ButtonSlider";
 import { useState, useEffect } from "react";
 import { directorsFormatter } from "../../libs/directorsFormatter";
 import styled, { keyframes, css } from "styled-components";
@@ -7,7 +7,7 @@ import TitleImage from "./TitleImage";
 
 const timer = 15000;
 
-export default function Title({ featuredMoviesData, children, fetchLink }) {
+export default function Title({ featuredMoviesData, children }) {
   const [whichSlide, setWhichSlide] = useState(0);
   const maxSlides = featuredMoviesData.length - 1;
 
@@ -19,72 +19,67 @@ export default function Title({ featuredMoviesData, children, fetchLink }) {
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
     if (featuredMoviesData.length < 2 || mq.matches) return;
-    const interval = setInterval(() => {
-      nextSlide();
-    }, timer);
+    const interval = setInterval(() => nextSlide(), timer);
     return () => clearInterval(interval);
   }, [whichSlide]);
 
   return (
     <main className="spacer">
-      <StyledWrapper>
-        <StyledSlider>
+      <WrapperStyled>
+        <SliderStyled>
           {featuredMoviesData.map((movie, i) => {
+            const isActive = i === whichSlide;
             return (
-              <StyledSlide key={movie.id} active={i === whichSlide}>
-                <StyledImageWrapper active={i === whichSlide}>
+              <SlideStyled key={movie.id} active={isActive}>
+                <ImageWrapperStyled active={isActive}>
                   <TitleImage
                     imageUrl={movie.attributes.image.data.attributes.url}
-                    link={`/${fetchLink}/${movie.attributes.slug}`}
+                    link={`/${movie.attributes.slug}`}
                     index={i}
                   />
-                  <StyledPagination>
+                  <PaginationStyled>
                     {featuredMoviesData.map((dot, i) => {
                       return (
                         <div key={dot.id}>
-                          <StyledPaginationDot
+                          <PaginationDotStyled
                             active={i === whichSlide}
                             onClick={() => setWhichSlide(i)}
                           >
                             {i + 1}
-                          </StyledPaginationDot>
-                          <StyledPaginationProgress active={i === whichSlide} />
+                          </PaginationDotStyled>
+                          <PaginationProgressStyled active={i === whichSlide} />
                         </div>
                       );
                     })}
-                  </StyledPagination>
-                  <ButtonArrow onClickHandler={prevSlide} prev />
-                  <ButtonArrow onClickHandler={nextSlide} />
-                </StyledImageWrapper>
-                <StyledContent active={i === whichSlide}>
-                  <StyledContentInfo>
-                    <StyledContentDate>
+                  </PaginationStyled>
+                  <ButtonSlider onClickHandler={prevSlide} prev />
+                  <ButtonSlider onClickHandler={nextSlide} />
+                </ImageWrapperStyled>
+                <ContentStyled active={isActive}>
+                  <ContentInfoStyled>
+                    <DateStyled>
                       {dateConverter(movie.attributes.createdAt)}
-                    </StyledContentDate>
-                    <StyledContentDirector>
+                    </DateStyled>
+                    <DirectorStyled>
                       {`By ${directorsFormatter(
                         movie.attributes.directors.data
                       )}`}
-                    </StyledContentDirector>
-                  </StyledContentInfo>
-                  <StyledContentHeading>
-                    {movie.attributes.title}
-                  </StyledContentHeading>
-                  <StyledContentText>
-                    {movie.attributes.description}
-                  </StyledContentText>
-                </StyledContent>
-              </StyledSlide>
+                    </DirectorStyled>
+                  </ContentInfoStyled>
+                  <HeadingStyled>{movie.attributes.title}</HeadingStyled>
+                  <TextStyled>{movie.attributes.description}</TextStyled>
+                </ContentStyled>
+              </SlideStyled>
             );
           })}
-        </StyledSlider>
+        </SliderStyled>
         {children}
-      </StyledWrapper>
+      </WrapperStyled>
     </main>
   );
 }
 
-const StyledWrapper = styled.div`
+const WrapperStyled = styled.div`
   margin-top: 3.5rem;
   @media (min-width: 768px) {
     margin-top: 5rem;
@@ -101,7 +96,7 @@ const StyledWrapper = styled.div`
     gap: 8rem;
   }
 `;
-const StyledSlider = styled.div`
+const SliderStyled = styled.div`
   @media (min-width: 768px) {
     display: grid;
     grid-template: 1fr / 1fr;
@@ -111,7 +106,7 @@ const StyledSlider = styled.div`
     flex: 1 1 70%;
   }
 `;
-const StyledSlide = styled.div`
+const SlideStyled = styled.div`
   & + & {
     margin-top: 7rem;
   }
@@ -125,7 +120,7 @@ const StyledSlide = styled.div`
     }
   }
 `;
-const StyledImageWrapper = styled.div`
+const ImageWrapperStyled = styled.div`
   @media (min-width: 768px) {
     overflow: hidden;
     position: relative;
@@ -138,7 +133,7 @@ const StyledImageWrapper = styled.div`
     }
   }
 `;
-const StyledPagination = styled.div`
+const PaginationStyled = styled.div`
   display: none;
   @media (min-width: 768px) {
     position: absolute;
@@ -151,7 +146,7 @@ const StyledPagination = styled.div`
     width: 100%;
   }
 `;
-const StyledPaginationDot = styled.div`
+const PaginationDotStyled = styled.p`
   font-family: var(--inter);
   color: ${({ active }) => (active ? "var(--white)" : "var(--grey)")};
   transition: color 350ms cubic-bezier(0.2, 0, 0.2, 1);
@@ -171,7 +166,7 @@ const progressAnimation = keyframes`
     transform: translateX(0);
   }
 `;
-const StyledPaginationProgress = styled.div`
+const PaginationProgressStyled = styled.div`
   display: none;
   @media (min-width: 768px) {
     display: unset;
@@ -200,7 +195,7 @@ const contentAnimation = keyframes`
     transform: translateX(0);
   }
 `;
-const StyledContent = styled.div`
+const ContentStyled = styled.div`
   margin-top: 1.5rem;
   @media (min-width: 768px) {
     margin-top: 2rem;
@@ -214,7 +209,7 @@ const StyledContent = styled.div`
         : "unset"};
   }
 `;
-const StyledContentInfo = styled.div`
+const ContentInfoStyled = styled.div`
   font-family: var(--inter);
   display: flex;
   gap: 2rem;
@@ -224,7 +219,7 @@ const StyledContentInfo = styled.div`
   white-space: nowrap;
   letter-spacing: 0.2px;
 `;
-const StyledContentDate = styled.p`
+const DateStyled = styled.p`
   font-size: 1.2rem;
   color: var(--grey);
   text-transform: uppercase;
@@ -232,7 +227,7 @@ const StyledContentDate = styled.p`
     font-size: 1.3rem;
   }
 `;
-const StyledContentDirector = styled.p`
+const DirectorStyled = styled.p`
   font-size: 1.2rem;
   color: var(--gold);
   text-align: right;
@@ -240,7 +235,7 @@ const StyledContentDirector = styled.p`
     font-size: 1.3rem;
   }
 `;
-const StyledContentHeading = styled.h1`
+const HeadingStyled = styled.h1`
   font-family: var(--le);
   font-weight: 300;
   margin-bottom: 1.5rem;
@@ -254,7 +249,7 @@ const StyledContentHeading = styled.h1`
     margin-bottom: 2rem;
   }
 `;
-const StyledContentText = styled.p`
+const TextStyled = styled.p`
   font-family: var(--le);
   font-size: 1.8rem;
   font-weight: 300;

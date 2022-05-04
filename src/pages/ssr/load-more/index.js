@@ -26,7 +26,7 @@ export default function SSRLoadMore({ featuredMovies, errorCode }) {
         />
       </Title>
       <Director />
-      <Articles/>
+      <Articles />
       {/* <SpecialPosts data={featuredMovies.slice(0, 4)} />
       <AllPosts /> */}
     </>

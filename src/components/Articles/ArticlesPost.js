@@ -4,30 +4,30 @@ import styled, { css } from "styled-components";
 import Link from "next/link";
 
 export default function ArticlesPost({ data, dir, mode }) {
+  if (!data) return;
   return (
     <Link href={data.slug} passHref>
-      <StyledCard dir={dir} mode={mode}>
+      <CardStyled dir={dir} mode={mode}>
         <ArticlesImage imageUrl={data.image.data.attributes?.url} />
-        <StyledContent className="spacer">
-          <StyledContentAuthor mode={mode}>
-            By Sebastian Blaik
-          </StyledContentAuthor>
-          <StyledContentHeading>{data.title}</StyledContentHeading>
-          <StyledContentText>{data.description}</StyledContentText>
-          <StyledContentDate>{dateConverter(data.createdAt)}</StyledContentDate>
-        </StyledContent>
-      </StyledCard>
+        <ContentStyled className="spacer">
+          <AuthorStyled mode={mode}>By Andrew Kowalski</AuthorStyled>
+          <HeadingStyled>{data.title}</HeadingStyled>
+          <TextStyled>{data.description}</TextStyled>
+          <DateStyled>{dateConverter(data.createdAt)}</DateStyled>
+        </ContentStyled>
+      </CardStyled>
     </Link>
   );
 }
 
-const StyledCard = styled.a`
+const CardStyled = styled.a`
   cursor: pointer;
   background-color: #fff;
   text-align: center;
   padding-bottom: 3rem;
   margin-top: 7rem;
   display: block;
+
   ${({ mode }) => {
     switch (mode) {
       case "horizontal":
@@ -70,7 +70,7 @@ const StyledCard = styled.a`
     margin-top: 10rem;
   }
 `;
-const StyledContent = styled.div`
+const ContentStyled = styled.div`
   @media (min-width: 1280px) {
     flex: 1 1 50%;
     display: flex;
@@ -78,7 +78,7 @@ const StyledContent = styled.div`
     justify-content: center;
   }
 `;
-const StyledContentDate = styled.p`
+const DateStyled = styled.p`
   font-family: var(--inter);
   font-size: 1.2rem;
   color: var(--grey);
@@ -89,7 +89,7 @@ const StyledContentDate = styled.p`
     font-size: 1.3rem;
   }
 `;
-const StyledContentAuthor = styled.p`
+const AuthorStyled = styled.p`
   font-family: var(--inter);
   font-size: 1.2rem;
   color: var(--gold);
@@ -100,7 +100,7 @@ const StyledContentAuthor = styled.p`
     margin: ${({ mode }) => (mode ? "0 0 2rem 0" : "3rem 0 2rem 0")};
   }
 `;
-const StyledContentHeading = styled.h1`
+const HeadingStyled = styled.h1`
   font-family: var(--le);
   font-weight: 300;
   margin-bottom: 1.5rem;
@@ -114,7 +114,7 @@ const StyledContentHeading = styled.h1`
     margin-bottom: 2rem;
   }
 `;
-const StyledContentText = styled.p`
+const TextStyled = styled.p`
   font-family: var(--le);
   font-size: 1.6rem;
   font-weight: 300;

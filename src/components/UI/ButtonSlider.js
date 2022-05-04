@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function SliderButton({ prev, onClickHandler }) {
+export default function ButtonSlider({ prev, onClickHandler }) {
   return <Arrow prev={prev} onClick={onClickHandler} />;
 }
 

@@ -1,54 +1,45 @@
 import { dateConverter } from "../../libs/dateConverter";
 import Button from "../UI/Button";
 import Link from "next/link";
-import { Link as ScrollLink } from "react-scroll";
 import styled from "styled-components";
 import TitleMoreImage from "./TitleMoreImage";
 
-export default function TitleMore({ moreMoviesData, fetchLink }) {
+export default function TitleMore({ moreMoviesData }) {
   return (
-    <StyledWrapper>
-      <StyledTitle>
-        More in <StyledTitleItalic>movies reporter</StyledTitleItalic>
-      </StyledTitle>
-      <StyledMore>
+    <WrapperStyled>
+      <TitleStyled>
+        More <StyledTitleItalic>movies</StyledTitleItalic>
+      </TitleStyled>
+      <ContainerStyled>
         {moreMoviesData.map((movie) => {
           return (
-            <Link
-              key={movie.id}
-              href={`/${fetchLink}/${movie.attributes.slug}`}
-              passHref
-            >
-              <StyledMoreLink>
+            <Link key={movie.id} href={`/${movie.attributes.slug}`} passHref>
+              <LinkStyled>
                 <TitleMoreImage
                   imageUrl={movie.attributes.image.data.attributes.url}
                 />
-                <StyledMoreContent>
-                  <StyledMoreText>
+                <ContentStyled>
+                  <DateStyled>
                     {dateConverter(movie.attributes.createdAt)}
-                  </StyledMoreText>
-                  <StyledMoreHeading>
-                    {movie.attributes.title}
-                  </StyledMoreHeading>
-                </StyledMoreContent>
-              </StyledMoreLink>
+                  </DateStyled>
+                  <HeadingStyled>{movie.attributes.title}</HeadingStyled>
+                </ContentStyled>
+              </LinkStyled>
             </Link>
           );
         })}
-        <ScrollLink to="posts" smooth={true} offset={-50}>
-          <Button buttonName="view all" />
-        </ScrollLink>
-      </StyledMore>
-    </StyledWrapper>
+        <Button buttonName="view all" buttonHref="/" />
+      </ContainerStyled>
+    </WrapperStyled>
   );
 }
 
-const StyledWrapper = styled.div`
+const WrapperStyled = styled.div`
   @media (min-width: 1024px) {
     flex: 1 1 30%;
   }
 `;
-const StyledTitle = styled.h2`
+const TitleStyled = styled.h2`
   font-size: 1.5rem;
   text-transform: uppercase;
   font-family: var(--inter);
@@ -64,8 +55,8 @@ const StyledTitleItalic = styled.span`
   font-style: italic;
   font-weight: 500;
 `;
-const StyledMore = styled.div`
-  button {
+const ContainerStyled = styled.div`
+  a {
     margin-top: 2rem;
   }
   @media (min-width: 768px) {
@@ -73,18 +64,18 @@ const StyledMore = styled.div`
     flex-wrap: wrap;
     column-gap: 4rem;
     row-gap: 2.4rem;
-    button {
+    a {
       margin-top: 0rem;
     }
   }
   @media (min-width: 1024px) {
     display: block;
-    button {
+    a {
       margin-top: 2.6rem;
     }
   }
 `;
-const StyledMoreLink = styled.a`
+const LinkStyled = styled.a`
   display: flex;
   align-items: center;
   gap: 2.4rem;
@@ -93,9 +84,6 @@ const StyledMoreLink = styled.a`
   }
   @media (min-width: 768px) {
     flex: 1 1 45%;
-    /* > img {
-      transition: all 600ms cubic-bezier(0.1, 0, 0.1, 1);
-    } */
     img {
       transition: all 0.5s cubic-bezier(0.2, 0, 0.2, 1);
     }
@@ -116,10 +104,10 @@ const StyledMoreLink = styled.a`
     }
   }
 `;
-const StyledMoreContent = styled.div`
+const ContentStyled = styled.div`
   flex: 1 1 60%;
 `;
-const StyledMoreText = styled.p`
+const DateStyled = styled.p`
   font-size: 1.1rem;
   font-family: var(--inter);
   text-transform: uppercase;
@@ -128,7 +116,7 @@ const StyledMoreText = styled.p`
   color: var(--grey);
   letter-spacing: 0.2px;
 `;
-const StyledMoreHeading = styled.h2`
+const HeadingStyled = styled.h2`
   color: var(--black);
   font-size: 1.8rem;
   font-family: var(--le);

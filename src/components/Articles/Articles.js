@@ -5,42 +5,70 @@ import ArticlesPost from "./ArticlesPost";
 
 export default function Articles() {
   const { loading, error, data } = useQuery(ARTICLES);
-  const articlesData = data?.articles.data[0].attributes;
-  const articlesData2 = data?.articles.data[1].attributes;
-  const articlesData3 = data?.articles.data[2].attributes;
-  const articlesData4 = data?.articles.data[3].attributes;
+  const articlesData = data?.articles.data;
+
+  const sortArticles = (articlesData) => {
+    const sortedArticles = [];
+    let articleHorizontal = 0;
+    articlesData.forEach((el, i) => {
+      if (i === articleHorizontal) {
+        articleHorizontal += 3;
+        sortedArticles.push(el);
+      } else {
+        Array.isArray(sortedArticles.at(-1))
+          ? sortedArticles.at(-1).push(el)
+          : sortedArticles.push([el]);
+      }
+    });
+    return sortedArticles;
+  };
   return (
     <section className="spacer">
-      <StyledArticles className="margin--top">
-        <StyledTitle>
-          Most viewed articles in{" "}
-          <StyledTitleItalic>movies reporter</StyledTitleItalic>
-        </StyledTitle>
+      <WrapperStyled className="margin--top">
+        <TitleStyled>
+          Most viewed
+          <StyledTitleItalic> articles</StyledTitleItalic>
+        </TitleStyled>
         {!loading && !error && (
           <>
-            <ArticlesPost data={articlesData} mode="horizontal" />
-            <StyledVerticalFlex>
-              <ArticlesPost data={articlesData2} />
-              <ArticlesPost data={articlesData3} />
-            </StyledVerticalFlex>
-            <ArticlesPost
-              data={articlesData4}
-              mode="horizontal"
-              dir="true"
-            />
+            {sortArticles(articlesData).map((article, i) => {
+              if (!Array.isArray(article)) {
+                return (
+                  <ArticlesPost
+                    key={article?.attributes.title}
+                    data={article?.attributes}
+                    mode="horizontal"
+                  />
+                );
+              } else {
+                console.log(article.length === 1);
+                return (
+                  <VerticalWrapperStyled key={i} single={article.length === 1}>
+                    {article.map((oneArticle) => {
+                      return (
+                        <ArticlesPost
+                          key={oneArticle?.attributes.title}
+                          data={oneArticle?.attributes}
+                        />
+                      );
+                    })}
+                  </VerticalWrapperStyled>
+                );
+              }
+            })}
           </>
         )}
-      </StyledArticles>
+      </WrapperStyled>
     </section>
   );
 }
 
-const StyledArticles = styled.div`
+const WrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-const StyledTitle = styled.h2`
+const TitleStyled = styled.h2`
   font-size: 1.5rem;
   text-transform: uppercase;
   font-family: var(--inter);
@@ -53,11 +81,16 @@ const StyledTitleItalic = styled.span`
   font-style: italic;
   font-weight: 500;
 `;
-const StyledVerticalFlex = styled.div`
+const VerticalWrapperStyled = styled.div`
   width: calc(100% + 6.4rem);
+  @media (min-width: 768px) {
+    max-width: 750px;
+    width: unset;
+  }
   @media (min-width: 900px) {
     width: unset;
-    display: grid;
+    max-width: ${({ single }) => (single ? "750px" : "unset")};
+    display: ${({ single }) => (single ? "block" : "grid")};
     grid-gap: 4rem;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 0.6fr));
     > a:first-of-type {

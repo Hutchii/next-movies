@@ -6,8 +6,8 @@ import styled from "styled-components";
 export default function TitleImage({ imageUrl, link, index }) {
   return (
     <Link href={link} passHref>
-      <SlideLink>
-        <SlideImage>
+      <LinkSlide>
+        <ImageWrapperSlide>
           <Image
             src={imageUrlBuilder(imageUrl)}
             alt="Movie"
@@ -17,13 +17,13 @@ export default function TitleImage({ imageUrl, link, index }) {
             unoptimized
             layout="responsive"
           />
-        </SlideImage>
-      </SlideLink>
+        </ImageWrapperSlide>
+      </LinkSlide>
     </Link>
   );
 }
 
-const SlideLink = styled.a`
+const LinkSlide = styled.a`
   @media (min-width: 768px) {
     img {
       transition: all 0.5s cubic-bezier(0.2, 0, 0.2, 1);
@@ -34,7 +34,7 @@ const SlideLink = styled.a`
     }
   }
 `;
-const SlideImage = styled.div`
+const ImageWrapperSlide = styled.div`
   width: calc(100% + 6.4rem);
   margin-left: -3.2rem;
   cursor: pointer;

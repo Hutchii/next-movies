@@ -15,31 +15,31 @@ export default function Director() {
   });
   const directorData = data?.directors.data[0].attributes;
   return (
-    <StyledDirector className="margin--top">
+    <WrapperStyled className="margin--top">
       {!loading && !error && (
         <>
           <DirectorImage imageUrl={directorData.image.data.attributes?.url} />
-          <StyledContent>
-            <StyledTitle>
+          <ContentStyled>
+            <TitleStyled>
               Discover <StyledTitleItalic>movies from</StyledTitleItalic>
-            </StyledTitle>
+            </TitleStyled>
             <StyledHeading>{directorData.director}</StyledHeading>
             <Button buttonHref="/" buttonName="see all" mode="light" />
-          </StyledContent>
+          </ContentStyled>
         </>
       )}
-    </StyledDirector>
+    </WrapperStyled>
   );
 }
 
-const StyledDirector = styled.section`
+const WrapperStyled = styled.section`
   background-color: var(--black);
   @media (min-width: 900px) {
     background: none;
     display: flex;
   }
 `;
-const StyledContent = styled.div`
+const ContentStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,7 +59,7 @@ const StyledContent = styled.div`
     gap: 3.2rem;
   }
 `;
-const StyledTitle = styled.p`
+const TitleStyled = styled.p`
   font-family: var(--inter);
   font-weight: 500;
   text-transform: uppercase;
