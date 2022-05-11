@@ -27,7 +27,6 @@ const CardStyled = styled.a`
   padding-bottom: 3rem;
   margin-top: 7rem;
   display: block;
-
   ${({ mode }) => {
     switch (mode) {
       case "horizontal":
@@ -39,7 +38,9 @@ const CardStyled = styled.a`
           }
           @media (min-width: 1280px) {
             display: flex;
-            flex-direction: ${({ dir }) => (dir ? "row-reverse" : "unset")};
+            &:nth-of-type(even) {
+              flex-direction: row-reverse;
+            }
             justify-content: space-between;
             max-width: unset;
             padding-bottom: 0;

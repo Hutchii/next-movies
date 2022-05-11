@@ -24,6 +24,7 @@ function createApolloClient() {
         Query: {
           fields: {
             movies: relayStylePagination(),
+            articles: relayStylePagination(),
           },
         },
       },
@@ -41,7 +42,6 @@ export function initializeApollo(initialState = null) {
   if (initialState) {
     //Get existing cache, loaded during client side data fetching
     const existingCache = _apolloClient.extract();
-    // console.log("existingcache", existingCache);
     //Merge the existing cache into data passed from getStaticProps/getServerSideProps
     const data = merge(initialState, existingCache, {
       //Combine arrays using object equality (like in sets)

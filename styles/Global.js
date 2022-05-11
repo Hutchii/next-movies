@@ -8,6 +8,7 @@ export const GlobalStyles = createGlobalStyle`
   --lightgrey: #e8e8e8;
   --black: #161616;
   --gold: #cf9500;
+  --red: #DD0035;
   --inter: "Inter", sans-serif;
   --freight: "freight-text-pro", serif;
   --cormorant: 'Cormorant Infant', serif;

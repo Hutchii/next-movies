@@ -1,17 +1,24 @@
 import styled, { css } from "styled-components";
 import Link from "next/link";
 
-export default function UIButton({ buttonName, mode, buttonHref }) {
+export default function UIButton({
+  buttonName,
+  mode,
+  buttonHref,
+  onClickHandler,
+}) {
   return (
     <>
       {buttonHref ? (
         <Link href={buttonHref} passHref>
-          <Button mode={mode} as="a">
+          <Button mode={mode} as="a" type="button">
             {buttonName}
           </Button>
         </Link>
       ) : (
-        <Button mode={mode}>{buttonName}</Button>
+        <Button onClick={onClickHandler} mode={mode} type="button">
+          {buttonName}
+        </Button>
       )}
     </>
   );

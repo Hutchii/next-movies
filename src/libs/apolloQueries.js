@@ -108,8 +108,8 @@ export const DIRECTOR = gql`
 `;
 
 export const ARTICLES = gql`
-  query Articles {
-    articles {
+  query Articles($start: Int!, $limit: Int!) {
+    articles(pagination: { start: $start, limit: $limit }) {
       data {
         id
         attributes {
@@ -124,6 +124,11 @@ export const ARTICLES = gql`
               }
             }
           }
+        }
+      }
+      meta {
+        pagination {
+          total
         }
       }
     }

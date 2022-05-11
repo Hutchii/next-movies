@@ -2,10 +2,17 @@ import styled from "styled-components";
 import { ARTICLES } from "../../libs/apolloQueries";
 import { useQuery } from "@apollo/client";
 import ArticlesPost from "./ArticlesPost";
+import Button from "../UI/Button";
 
 export default function Articles() {
-  const { loading, error, data } = useQuery(ARTICLES);
+  const { loading, error, data, fetchMore, refetch } = useQuery(ARTICLES, {
+    variables: {
+      start: 0,
+      limit: 4,
+    },
+  });
   const articlesData = data?.articles.data;
+  const dataLength = articlesData?.length;
 
   const sortArticles = (articlesData) => {
     const sortedArticles = [];
@@ -22,16 +29,18 @@ export default function Articles() {
     });
     return sortedArticles;
   };
+
+  const finalData = !loading && sortArticles(articlesData);
   return (
     <section className="spacer">
       <WrapperStyled className="margin--top">
         <TitleStyled>
           Most viewed
-          <StyledTitleItalic> articles</StyledTitleItalic>
+          <TitleItalicStyled> articles</TitleItalicStyled>
         </TitleStyled>
         {!loading && !error && (
           <>
-            {sortArticles(articlesData).map((article, i) => {
+            {finalData.map((article, i) => {
               if (!Array.isArray(article)) {
                 return (
                   <ArticlesPost
@@ -41,7 +50,6 @@ export default function Articles() {
                   />
                 );
               } else {
-                console.log(article.length === 1);
                 return (
                   <VerticalWrapperStyled key={i} single={article.length === 1}>
                     {article.map((oneArticle) => {
@@ -58,6 +66,16 @@ export default function Articles() {
             })}
           </>
         )}
+        <Button
+          buttonName="Load more"
+          onClickHandler={() => {
+            fetchMore({
+              variables: {
+                limit: dataLength + 4,
+              },
+            });
+          }}
+        />
       </WrapperStyled>
     </section>
   );
@@ -67,6 +85,9 @@ const WrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  button {
+    margin-top: 3.2rem;
+  }
 `;
 const TitleStyled = styled.h2`
   font-size: 1.5rem;
@@ -76,7 +97,7 @@ const TitleStyled = styled.h2`
   color: var(--black);
   text-align: center;
 `;
-const StyledTitleItalic = styled.span`
+const TitleItalicStyled = styled.span`
   color: var(--gold);
   font-style: italic;
   font-weight: 500;
