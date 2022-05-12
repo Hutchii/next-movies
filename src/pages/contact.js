@@ -1,11 +1,19 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import useForm from "../hooks/useForm";
 import { form } from "../utils/formConfig";
 import Buttton from "../components/UI/Button";
+import { useState } from "react";
 
 export default function Contact() {
   const { renderFormInputs, formData } = useForm(form);
-  const { isValid, formValues } = formData();
+  // async function handleOnSubmit(e) {
+  //   e.preventDefault();
+  //   fetch("api/sendMail", {
+  //     method: "post",
+  //     body: JSON.stringify(formValues),
+  //   });
+  // }
+  const [isSending, setIsSending] = useState(null);
   return (
     <main className="spacer">
       <WrapperStyled className="spacer">
@@ -13,11 +21,26 @@ export default function Contact() {
         <TitleStyled>
           FILL IN THE <TitleItalicStyled>FORM</TitleItalicStyled>
         </TitleStyled>
-        <FormStyled>
+        <FormStyled active={isSending}>
           {renderFormInputs()}
-          <Buttton mode="active" buttonName="Send message" />
+          <Buttton
+            mode="active"
+            // buttonName="Send message"
+            onClickHandler={formData}
+          >
+            <span>Send Message</span>
+            <SpinnerStyled active={isSending}>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </SpinnerStyled>
+          </Buttton>
         </FormStyled>
       </WrapperStyled>
+      <button onClick={() => setIsSending((prevValue) => !prevValue)}>
+        CLICK ME
+      </button>
     </main>
   );
 }
@@ -67,5 +90,71 @@ const FormStyled = styled.form`
   }
   > div:nth-of-type(3) {
     flex: 1 1 100%;
+  }
+  button {
+    width: 200px;
+    height: 42px;
+    position: relative;
+  }
+  button > span {
+    transition: opacity 0.2s ease;
+    opacity: ${({ active }) => (active ? "0" : "1")};
+  }
+`;
+const spinnerAnimation1 = keyframes`
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+const spinnerAnimation2 = keyframes`
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+`;
+const spinnerAnimation3 = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+`;
+const SpinnerStyled = styled.div`
+  /* display: inline-block; */
+  /* width: 200px;
+  height: 42px; */
+  transition: opacity 0.2s ease;
+  opacity: ${({ active }) => (active ? "1" : "0")};
+  div {
+    position: absolute;
+    top: 34%;
+    left: 34%;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--darkwhite);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  div:nth-child(1) {
+    margin-left: 8px;
+    animation: ${spinnerAnimation1} 0.6s infinite;
+  }
+  div:nth-child(2) {
+    margin-left: 8px;
+    animation: ${spinnerAnimation2} 0.6s infinite;
+  }
+  div:nth-child(3) {
+    margin-left: 32px;
+    animation: ${spinnerAnimation2} 0.6s infinite;
+  }
+  div:nth-child(4) {
+    margin-left: 56px;
+    animation: ${spinnerAnimation3} 0.6s infinite;
   }
 `;

@@ -11,7 +11,8 @@ export const form = {
       "Address email:",
       "email",
       "email",
-      "Enter your email address"
+      "Enter your email address",
+      "Write poprawny email"
     ),
     validationRules: [minLengthRule("email", 3)],
   },
@@ -20,18 +21,27 @@ export const form = {
       "Full name:",
       "fullName",
       "text",
-      "Enter your full name"
+      "Enter your full name",
+      "Write poprawny email"
     ),
     validationRules: [minLengthRule("fullName", 3)],
   },
   message: {
-    ...createFormTextarea("Message:", "message", "text", "Enter your message"),
+    ...createFormTextarea(
+      "Message:",
+      "message",
+      "text",
+      "Enter your message",
+      "Write poprawny email"
+    ),
     validationRules: [minLengthRule("message", 3)],
   },
   consent: {
     ...createFormCheckbox(
       "By sending this form you accepting our terms of use!",
-      "consent"
+      "consent",
+      "Write poprawny email",
+      // "optional"
     ),
     validationRules: [checkBoxChecked("message", 3)],
     renderType: "checkbox",

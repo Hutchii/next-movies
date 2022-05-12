@@ -7,17 +7,11 @@ export function createFormInput(
   name,
   type,
   placeholder,
+  errorMessage,
   defaultValue = ""
 ) {
   return {
-    renderInput: (
-      onChangeHandler,
-      onBlurHandler,
-      value,
-      error,
-      isTouched,
-      valid
-    ) => {
+    renderInput: (onChangeHandler, onBlurHandler, value, isTouched, valid) => {
       return (
         <Input
           key={label}
@@ -27,7 +21,7 @@ export function createFormInput(
           value={value}
           onChangeHandler={onChangeHandler}
           onBlurHandler={onBlurHandler}
-          errorMessage={error}
+          errorMessage={errorMessage}
           isTouched={isTouched}
           isValid={valid}
           placeholder={placeholder}
@@ -36,7 +30,6 @@ export function createFormInput(
     },
     value: defaultValue,
     valid: false,
-    errorMessage: "",
     isTouched: false,
   };
 }
@@ -46,17 +39,11 @@ export function createFormTextarea(
   name,
   type,
   placeholder,
+  errorMessage,
   defaultValue = ""
 ) {
   return {
-    renderInput: (
-      onChangeHandler,
-      onBlurHandler,
-      value,
-      error,
-      isTouched,
-      valid
-    ) => {
+    renderInput: (onChangeHandler, onBlurHandler, value, isTouched, valid) => {
       return (
         <Textarea
           key={label}
@@ -66,7 +53,7 @@ export function createFormTextarea(
           value={value}
           onChangeHandler={onChangeHandler}
           onBlurHandler={onBlurHandler}
-          errorMessage={error}
+          errorMessage={errorMessage}
           isTouched={isTouched}
           isValid={valid}
           placeholder={placeholder}
@@ -75,7 +62,6 @@ export function createFormTextarea(
     },
     value: defaultValue,
     valid: false,
-    errorMessage: "",
     isTouched: false,
   };
 }
@@ -83,11 +69,12 @@ export function createFormTextarea(
 export function createFormCheckbox(
   label,
   name,
+  errorMessage,
   optional = false,
   defaultValue = false
 ) {
   return {
-    renderInput: (onChangeHandler, value, error, isTouched, valid) => {
+    renderInput: (onChangeHandler, value, isTouched, valid) => {
       return (
         <Checkbox
           key={label}
@@ -98,13 +85,12 @@ export function createFormCheckbox(
           isValid={valid}
           isTouched={isTouched}
           optional={optional}
-          errorMessage={error}
+          errorMessage={errorMessage}
         />
       );
     },
     value: defaultValue,
     valid: false,
-    errorMessage: "",
     isTouched: false,
     optional,
   };

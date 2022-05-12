@@ -10,7 +10,6 @@ export default function Checkbox({
   optional,
   errorMessage,
 }) {
-  console.log(errorMessage)
   return (
     <CheckBox>
       <LabelField>

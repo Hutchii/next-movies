@@ -2,22 +2,16 @@ import { useState, useCallback } from "react";
 
 function useForm(formObj) {
   const [form, setForm] = useState(formObj);
+  const [isSending, setIsSending] = useState(false);
 
   function renderFormInputs() {
     return Object.values(form).map((r) => {
       if (r.renderType === "checkbox")
-        return r.renderInput(
-          onInputChange,
-          r.value,
-          r.errorMessage,
-          r.isTouched,
-          r.valid
-        );
+        return r.renderInput(onInputChange, r.value, r.isTouched, r.valid);
       return r.renderInput(
         onInputChange,
         onBlurChange,
         r.value,
-        r.errorMessage,
         r.isTouched,
         r.valid
       );
@@ -26,10 +20,7 @@ function useForm(formObj) {
   const isInputFieldValid = useCallback(
     (el) => {
       for (const rule of el.validationRules) {
-        if (!rule.validate(el.value, form)) {
-          el.errorMessage = rule.message;
-          return false;
-        }
+        if (!rule.validate(el.value, form)) return false;
       }
       return true;
     },
@@ -64,18 +55,49 @@ function useForm(formObj) {
     [form, isInputFieldValid]
   );
 
-  const formData = useCallback(() => {
-    let isValid = true;
-    let formValues = {};
-    for (const [key, value] of Object.entries(form)) {
-      formValues = { ...formValues, [key]: value.value };
-      if (value.optional) continue;
-      if (!value.valid) isValid = false;
-    }
-    return { isValid, formValues };
-  }, [form]);
-
+  const formData = useCallback(
+    async (e) => {
+      e.preventDefault();
+      let isValid = true;
+      let formValues = {};
+      for (const [key, value] of Object.entries(form)) {
+        if (value.optional) continue;
+        if (!value.valid) {
+          value.isTouched = true;
+          isValid = false;
+          setForm({ ...form, [key]: value });
+        }
+        formValues = { ...formValues, [key]: value.value };
+      }
+      if (isValid) {
+        setIsSending(true);
+        try {
+          const res = await fetch("api/sendMail", {
+            method: "post",
+            body: JSON.stringify(formValues),
+          });
+          console.log("cxzzcxzx");
+          console.log(res.status);
+          setIsSending(false);
+        } catch (error) {
+          console.log(error);
+          console.log("ERROR");
+        }
+      }
+    },
+    [form]
+  );
+  console.log(isSending);
   return { renderFormInputs, formData };
 }
 
 export default useForm;
+
+// const isValidInput = isInputFieldValid(value);
+// if (value.optional) continue;
+// if (isValidInput && !value.valid) {
+//   value.valid = true;
+// }
+// if (!isValidInput) {
+//   isValid = false;
+// }
