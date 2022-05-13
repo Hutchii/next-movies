@@ -3,6 +3,7 @@ import { useState, useCallback } from "react";
 function useForm(formObj) {
   const [form, setForm] = useState(formObj);
   const [isSending, setIsSending] = useState(false);
+  const [sendingStatus, setSendingStatus] = useState("");
 
   function renderFormInputs() {
     return Object.values(form).map((r) => {
@@ -58,6 +59,7 @@ function useForm(formObj) {
   const formData = useCallback(
     async (e) => {
       e.preventDefault();
+      setSendingStatus("");
       let isValid = true;
       let formValues = {};
       for (const [key, value] of Object.entries(form)) {
@@ -76,19 +78,17 @@ function useForm(formObj) {
             method: "post",
             body: JSON.stringify(formValues),
           });
-          console.log("cxzzcxzx");
-          console.log(res.status);
           setIsSending(false);
+          if (res.status !== 200) throw new Error("błą");
+          setSendingStatus("success");
         } catch (error) {
-          console.log(error);
-          console.log("ERROR");
+          setSendingStatus("error");
         }
       }
     },
     [form]
   );
-  console.log(isSending);
-  return { renderFormInputs, formData };
+  return { renderFormInputs, formData, isSending, sendingStatus };
 }
 
 export default useForm;

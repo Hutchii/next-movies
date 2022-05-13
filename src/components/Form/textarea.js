@@ -32,33 +32,45 @@ export default function Input({
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.8rem;
   font-family: var(--inter);
 `;
 const LabelField = styled.label`
-  /* display: block; */
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   color: var(--black);
   font-weight: 500;
+  @media (min-width: 480px) {
+    font-size: 1.7rem;
+  }
 `;
 const InputField = styled.textarea`
   font-family: var(--inter);
   resize: none;
   border: none;
   border: 1px solid var(--black);
-  font-size: 2rem;
+  font-size: 1.8rem;
   outline: none;
   color: var(--darknavy);
-  padding: 1rem 1.4rem;
+  padding: 0.8rem 1.2rem;
   font-weight: 500;
   height: 20rem;
   ::placeholder {
-    color: #CCCCCC;
+    font-size: 1.6rem;
+    color: #cccccc;
+  }
+  @media (min-width: 480px) {
+    font-size: 2rem;
+    font-size: 1.8rem;
+    padding: 1rem 1.4rem;
   }
 `;
 const ErrorMessage = styled.span`
   color: var(--red);
-  font-size: 1.6rem;
-  font-weight: 500;
-  min-height: 2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  min-height: 1.8rem;
+  @media (min-width: 480px) {
+    font-size: 1.5rem;
+    min-height: 2rem;
+  }
 `;

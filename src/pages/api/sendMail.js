@@ -17,15 +17,10 @@ export default async function sendMail(req, res) {
     html: message.replace(/\r\n/g, "<br>"),
   };
 
-  if (!message) {
-    try {
-      await mail.send(data);
-      res.status(200).json({ message: `Email has been sent` });
-      console.log(first);
-    } catch (error) {
-      res.status(500).json({ error: "Error sending email" });
-    }
-  } else {
-    res.status(500).json({ error: "failed to load data" });
+  try {
+    await mail.send(data);
+    res.status(200).json({ message: `Email has been sent` });
+  } catch (error) {
+    res.status(500).json({ error: "Error sending email" });
   }
 }

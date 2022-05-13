@@ -12,7 +12,7 @@ export const form = {
       "email",
       "email",
       "Enter your email address",
-      "Write poprawny email"
+      "Please enter a valid email address!"
     ),
     validationRules: [minLengthRule("email", 3)],
   },
@@ -22,7 +22,7 @@ export const form = {
       "fullName",
       "text",
       "Enter your full name",
-      "Write poprawny email"
+      "Please enter your full name!"
     ),
     validationRules: [minLengthRule("fullName", 3)],
   },
@@ -32,7 +32,7 @@ export const form = {
       "message",
       "text",
       "Enter your message",
-      "Write poprawny email"
+      "Message field can not be empty!"
     ),
     validationRules: [minLengthRule("message", 3)],
   },
@@ -40,7 +40,7 @@ export const form = {
     ...createFormCheckbox(
       "By sending this form you accepting our terms of use!",
       "consent",
-      "Write poprawny email",
+      "Accepting terms of use is required!",
       // "optional"
     ),
     validationRules: [checkBoxChecked("message", 3)],

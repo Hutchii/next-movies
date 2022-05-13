@@ -85,6 +85,11 @@ const ErrorMessage = styled.span`
   color: var(--red);
   font-size: 1.4rem;
   font-weight: 600;
-  min-height: 2rem;
+  min-height: 1.8rem;
   margin-top: 0.6rem;
+  @media (min-width: 480px) {
+  font-size: 1.5rem;
+  min-height: 2rem;
+}
 `;
+
