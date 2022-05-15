@@ -12,6 +12,7 @@ export default function Input({
   isTouched,
   isValid,
 }) {
+  const showError = isTouched && !isValid;
   return (
     <InputBox>
       <LabelField>{label}</LabelField>
@@ -22,17 +23,16 @@ export default function Input({
         onChange={onChangeHandler}
         onBlur={onBlurHandler}
         value={value}
+        showError={showError}
       />
-      <ErrorMessage>
-        {errorMessage && isTouched && !isValid ? errorMessage : ""}
-      </ErrorMessage>
+      <ErrorMessage>{showError ? errorMessage : ""}</ErrorMessage>
     </InputBox>
   );
 }
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.6rem;
   font-family: var(--inter);
 `;
 const LabelField = styled.label`
@@ -46,8 +46,8 @@ const LabelField = styled.label`
 const InputField = styled.textarea`
   font-family: var(--inter);
   resize: none;
-  border: none;
-  border: 1px solid var(--black);
+  border: ${({ showError }) =>
+    showError ? "1px solid var(--red)" : "1px solid var(--black)"};
   font-size: 1.8rem;
   outline: none;
   color: var(--darknavy);
@@ -67,7 +67,7 @@ const InputField = styled.textarea`
 const ErrorMessage = styled.span`
   color: var(--red);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
   min-height: 1.8rem;
   @media (min-width: 480px) {
     font-size: 1.5rem;

@@ -39,7 +39,7 @@ const spinnerAnimation3 = keyframes`
   }
 `;
 const TextStyled = styled.span`
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1);
   opacity: ${({ active }) => (active ? "0" : "1")};
 `;
 const SpinnerStyled = styled.div`

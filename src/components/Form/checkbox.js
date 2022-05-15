@@ -10,6 +10,7 @@ export default function Checkbox({
   optional,
   errorMessage,
 }) {
+  const showError = isTouched && !isValid && !optional;
   return (
     <CheckBox>
       <LabelField>
@@ -19,11 +20,12 @@ export default function Checkbox({
           name={name}
           value={value}
           onChange={onChangeHandler}
+          showError={showError}
         />
-        <Span />
+        <Span showError={showError} />
       </LabelField>
       <ErrorMessage>
-        {isTouched && !isValid && !optional ? errorMessage : ""}
+        {showError ? errorMessage : ""}
       </ErrorMessage>
     </CheckBox>
   );
@@ -42,10 +44,7 @@ const LabelField = styled.label`
   display: block;
   position: relative;
   cursor: pointer;
-  padding-left: 2.4rem;
-  &:hover span {
-    background-color: rgba(225, 227, 234, 0.9);
-  }
+  padding-left: 2.2rem;
 `;
 const InputField = styled.input`
   position: absolute;
@@ -64,7 +63,7 @@ const Span = styled.span`
   left: 0;
   height: 1.65rem;
   width: 1.65rem;
-  background-color: var(--lightgrey);
+  background-color: ${({showError}) => showError ? "#CCBABA" : "#CCCCCC"};
   border-radius: 2px;
   transition: background-color 0.25s cubic-bezier(0.2, 0, 0.2, 1);
   &:after {
@@ -84,12 +83,11 @@ const ErrorMessage = styled.span`
   flex: 1 1 100%;
   color: var(--red);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
   min-height: 1.8rem;
   margin-top: 0.6rem;
   @media (min-width: 480px) {
-  font-size: 1.5rem;
-  min-height: 2rem;
-}
+    font-size: 1.5rem;
+    min-height: 2rem;
+  }
 `;
-

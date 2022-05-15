@@ -5,7 +5,7 @@ import Buttton from "../components/UI/Button";
 import Spinner from "../components/UI/Spinner";
 import Overlay from "../components/Form/overlay";
 export default function Contact() {
-  const { renderFormInputs, formData, isSending, sendingStatus } =
+  const { renderFormInputs, onSubmit, isSending, sendingStatus } =
     useForm(form);
 
   return (
@@ -18,7 +18,7 @@ export default function Contact() {
         </TitleStyled>
         <FormStyled>
           {renderFormInputs()}
-          <Buttton mode="active" onClickHandler={formData}>
+          <Buttton mode="active" onClickHandler={onSubmit}>
             <Spinner isSending={isSending} />
           </Buttton>
         </FormStyled>

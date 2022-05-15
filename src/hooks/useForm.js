@@ -55,7 +55,7 @@ function useForm(formObj) {
     [form, isInputFieldValid]
   );
 
-  const formData = useCallback(
+  const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       setSendingStatus("");
@@ -79,7 +79,8 @@ function useForm(formObj) {
             body: JSON.stringify(formValues),
           });
           setIsSending(false);
-          if (res.status !== 200) throw new Error("błą");
+          console.log(res.message)
+          if (res.status !== 200) throw new Error("Błąd");
           setSendingStatus("success");
         } catch (error) {
           setSendingStatus("error");
@@ -88,7 +89,7 @@ function useForm(formObj) {
     },
     [form]
   );
-  return { renderFormInputs, formData, isSending, sendingStatus };
+  return { renderFormInputs, onSubmit, isSending, sendingStatus };
 }
 
 export default useForm;
@@ -101,3 +102,4 @@ export default useForm;
 // if (!isValidInput) {
 //   isValid = false;
 // }
+
