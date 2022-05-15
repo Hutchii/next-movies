@@ -3,7 +3,6 @@ import Success from "../../../public/svg/Success.svg";
 import Error from "../../../public/svg/Error.svg";
 
 export default function Overlay({ sendingStatus }) {
-  console.log(sendingStatus)
   return (
     <OverlayStyled status={sendingStatus}>
       {sendingStatus === "success" && <Success />}

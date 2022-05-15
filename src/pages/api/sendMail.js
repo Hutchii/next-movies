@@ -3,7 +3,6 @@ mail.setApiKey(process.env.SENDGRID_API);
 
 export default async function sendMail(req, res) {
   const body = JSON.parse(req.body);
-  console.log(body);
   const message = `
     FullName: ${body.fullName}\r\n
     Email: ${body.email}\r\n

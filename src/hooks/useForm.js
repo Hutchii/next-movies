@@ -21,7 +21,6 @@ function useForm(formObj) {
   }
   const isInputFieldValid = useCallback((field) => {
     if (!field.validationRule.validate(field.value)) {
-      console.log(field.errorMessage);
       field.errorMessage = field.validationRule.message;
       return false;
     }
