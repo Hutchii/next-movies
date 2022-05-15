@@ -8,25 +8,25 @@ function useForm(formObj) {
   function renderFormInputs() {
     return Object.values(form).map((r) => {
       if (r.renderType === "checkbox")
-        return r.renderInput(onInputChange, r.value, r.isTouched, r.valid);
+        return r.renderInput(onInputChange, r.value, r.isTouched, r.valid, r.errorMessage);
       return r.renderInput(
         onInputChange,
         onBlurChange,
         r.value,
         r.isTouched,
-        r.valid
+        r.valid,
+        r.errorMessage
       );
     });
   }
-  const isInputFieldValid = useCallback(
-    (el) => {
-      for (const rule of el.validationRules) {
-        if (!rule.validate(el.value, form)) return false;
-      }
-      return true;
-    },
-    [form]
-  );
+  const isInputFieldValid = useCallback((field) => {
+    if (!field.validationRule.validate(field.value)) {
+      console.log(field.errorMessage);
+      field.errorMessage = field.validationRule.message;
+      return false;
+    }
+    return true;
+  }, []);
 
   const onBlurChange = useCallback(
     (e) => {
@@ -65,6 +65,7 @@ function useForm(formObj) {
       for (const [key, value] of Object.entries(form)) {
         if (value.optional) continue;
         if (!value.valid) {
+          value.errorMessage = value.validationRule.message;
           value.isTouched = true;
           isValid = false;
           setForm({ ...form, [key]: value });

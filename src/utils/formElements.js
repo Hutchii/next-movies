@@ -7,11 +7,17 @@ export function createFormInput(
   name,
   type,
   placeholder,
-  errorMessage,
   defaultValue = ""
 ) {
   return {
-    renderInput: (onChangeHandler, onBlurHandler, value, isTouched, valid) => {
+    renderInput: (
+      onChangeHandler,
+      onBlurHandler,
+      value,
+      isTouched,
+      valid,
+      errorMessage
+    ) => {
       return (
         <Input
           key={label}
@@ -31,6 +37,7 @@ export function createFormInput(
     value: defaultValue,
     valid: false,
     isTouched: false,
+    errorMessage: "",
   };
 }
 
@@ -39,11 +46,17 @@ export function createFormTextarea(
   name,
   type,
   placeholder,
-  errorMessage,
   defaultValue = ""
 ) {
   return {
-    renderInput: (onChangeHandler, onBlurHandler, value, isTouched, valid) => {
+    renderInput: (
+      onChangeHandler,
+      onBlurHandler,
+      value,
+      isTouched,
+      valid,
+      errorMessage
+    ) => {
       return (
         <Textarea
           key={label}
@@ -63,18 +76,18 @@ export function createFormTextarea(
     value: defaultValue,
     valid: false,
     isTouched: false,
+    errorMessage: "",
   };
 }
 
 export function createFormCheckbox(
   label,
   name,
-  errorMessage,
   optional = false,
   defaultValue = false
 ) {
   return {
-    renderInput: (onChangeHandler, value, isTouched, valid) => {
+    renderInput: (onChangeHandler, value, isTouched, valid, errorMessage) => {
       return (
         <Checkbox
           key={label}
@@ -93,5 +106,6 @@ export function createFormCheckbox(
     valid: false,
     isTouched: false,
     optional,
+    errorMessage: "",
   };
 }

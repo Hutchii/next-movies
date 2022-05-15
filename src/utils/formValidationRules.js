@@ -1,46 +1,27 @@
-function createValidationRule(ruleName, errorMessage, validateFunc) {
+function createValidationRule(errorMessage, validateFunc) {
   return {
-    name: ruleName,
     message: errorMessage,
     validate: validateFunc,
   };
 }
 
-export function requiredRule(inputName) {
-  return createValidationRule(
-    "required",
-    `${inputName} required`,
-    (inputValue, formObj) => inputValue.length !== 0
+export function emailValidation() {
+  return createValidationRule(`Please enter a valid email address!`, (inputValue) =>
+    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g.test(
+      inputValue
+    )
   );
 }
-
-export function minLengthRule(inputName, minCharacters) {
-  return createValidationRule(
-    "minLength",
-    `${inputName} should contain atleast ${minCharacters} characters`,
-    (inputValue, formObj) => inputValue.length >= minCharacters
+export function nameValidation() {
+  return createValidationRule(`Message`, (inputValue) =>
+    /[a-zA-Z]{3,}(?: [a-zA-Z]+){0,2}/g.test(inputValue)
   );
 }
-
-export function maxLengthRule(inputName, maxCharacters) {
-  return createValidationRule(
-    "minLength",
-    `${inputName} cannot contain more than ${maxCharacters} characters`,
-    (inputValue, formObj) => inputValue.length <= maxCharacters
+export function messageValidation() {
+  return createValidationRule(`Message`, (inputValue) =>
+    /[a-zA-Z]{3,}/g.test(inputValue)
   );
 }
-
-export function passwordMatchRule() {
-  return createValidationRule(
-    "passwordMatch",
-    `passwords do not match`,
-    (inputValue, formObj) => inputValue === formObj.password.value
-  );
-}
-export function checkBoxChecked(inputName) {
-  return createValidationRule(
-    "checkBoxChecked",
-    `${inputName} must be checked`,
-    (inputValue) => inputValue
-  );
+export function checkBoxValidation() {
+  return createValidationRule(`Message`, (inputValue) => inputValue);
 }

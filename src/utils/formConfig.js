@@ -1,4 +1,9 @@
-import { minLengthRule, checkBoxChecked } from "./formValidationRules";
+import {
+  emailValidation,
+  nameValidation,
+  messageValidation,
+  checkBoxValidation,
+} from "./formValidationRules";
 import {
   createFormInput,
   createFormTextarea,
@@ -12,9 +17,8 @@ export const form = {
       "email",
       "email",
       "Enter your email address",
-      "Please enter a valid email address!"
     ),
-    validationRules: [minLengthRule("email", 3)],
+    validationRule: emailValidation(),
   },
   fullName: {
     ...createFormInput(
@@ -22,9 +26,8 @@ export const form = {
       "fullName",
       "text",
       "Enter your full name",
-      "Please enter your full name!"
     ),
-    validationRules: [minLengthRule("fullName", 3)],
+    validationRule: nameValidation(),
   },
   message: {
     ...createFormTextarea(
@@ -32,18 +35,16 @@ export const form = {
       "message",
       "text",
       "Enter your message",
-      "Message field can not be empty!"
     ),
-    validationRules: [minLengthRule("message", 3)],
+    validationRule: messageValidation(),
   },
   consent: {
     ...createFormCheckbox(
       "By sending this form you accepting our terms of use!",
       "consent",
-      "Accepting terms of use is required!",
       // "optional"
     ),
-    validationRules: [checkBoxChecked("message", 3)],
+    validationRule: checkBoxValidation(),
     renderType: "checkbox",
   },
 };
