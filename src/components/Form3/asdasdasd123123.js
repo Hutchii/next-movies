@@ -1,32 +1,42 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 export default function Input({
   name,
+  type,
   label,
   placeholder,
-  type,
-  onChangeHandler,
-  onBlurHandler,
-  value,
-  isTouched,
-  error,
+  validate,
   wasSubmitted,
 }) {
-  const showError = (isTouched || wasSubmitted) && error;
-  console.log(wasSubmitted)
+  const [value, setValue] = useState("");
+  const [touched, setTouched] = useState(false);
+  const errorMessage = validate(value, label);
+  const showErrorMessage = (wasSubmitted || touched) && errorMessage;
+
+  // const reset = () => {
+  //   if (wasSubmitted) {
+  //     setTouched(false);
+  //     setValue("");
+  //   }
+  // };
+
+  // reset();
+
   return (
     <InputBox>
-      <LabelField>{label}</LabelField>
+      <LabelField htmlFor={name}>{label}:</LabelField>
       <InputField
-        type={type}
+        id={name}
         name={name}
-        placeholder={placeholder}
-        onChange={onChangeHandler}
-        onBlur={onBlurHandler}
+        type={type}
+        onChange={(event) => setValue(event.target.value)}
         value={value}
-        showError={showError}
+        onBlur={() => setTouched(true)}
+        placeholder={placeholder}
+        showError={showErrorMessage}
       />
-      <ErrorMessage>{showError ? error : ""}</ErrorMessage>
+      {<ErrorMessage>{showErrorMessage ? errorMessage : ""}</ErrorMessage>}
     </InputBox>
   );
 }

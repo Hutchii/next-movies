@@ -1,6 +1,7 @@
 import Input from "../components/Form/input";
 import Textarea from "../components/Form/textarea";
 import Checkbox from "../components/Form/checkbox";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export function createFormInput(
   label,
@@ -10,14 +11,7 @@ export function createFormInput(
   defaultValue = ""
 ) {
   return {
-    renderInput: (
-      onChangeHandler,
-      onBlurHandler,
-      value,
-      isTouched,
-      valid,
-      errorMessage
-    ) => {
+    renderInput: (onChangeHandler, onBlurHandler, value, isTouched, error, wasSubmitted) => {
       return (
         <Input
           key={label}
@@ -27,17 +21,16 @@ export function createFormInput(
           value={value}
           onChangeHandler={onChangeHandler}
           onBlurHandler={onBlurHandler}
-          errorMessage={errorMessage}
+          error={error}
           isTouched={isTouched}
-          isValid={valid}
           placeholder={placeholder}
+          wasSubmitted={wasSubmitted}
         />
       );
     },
     value: defaultValue,
-    valid: false,
+    error: "This field is required",
     isTouched: false,
-    errorMessage: "",
   };
 }
 
@@ -54,8 +47,8 @@ export function createFormTextarea(
       onBlurHandler,
       value,
       isTouched,
-      valid,
-      errorMessage
+      error,
+      wasSubmitted
     ) => {
       return (
         <Textarea
@@ -66,17 +59,16 @@ export function createFormTextarea(
           value={value}
           onChangeHandler={onChangeHandler}
           onBlurHandler={onBlurHandler}
-          errorMessage={errorMessage}
+          error={error}
           isTouched={isTouched}
-          isValid={valid}
           placeholder={placeholder}
+          wasSubmitted={wasSubmitted}
         />
       );
     },
     value: defaultValue,
-    valid: false,
+    error: "This field is required",
     isTouched: false,
-    errorMessage: "",
   };
 }
 
@@ -87,7 +79,7 @@ export function createFormCheckbox(
   defaultValue = false
 ) {
   return {
-    renderInput: (onChangeHandler, value, isTouched, valid, errorMessage) => {
+    renderInput: (onChangeHandler, value, isTouched, error, wasSubmitted) => {
       return (
         <Checkbox
           key={label}
@@ -95,17 +87,32 @@ export function createFormCheckbox(
           label={label}
           value={value}
           onChangeHandler={onChangeHandler}
-          isValid={valid}
           isTouched={isTouched}
           optional={optional}
-          errorMessage={errorMessage}
+          error={error}
+          wasSubmitted={wasSubmitted}
         />
       );
     },
     value: defaultValue,
-    valid: false,
+    error: "This field is required",
     isTouched: false,
-    optional,
-    errorMessage: "",
+    optional: false,
+  };
+}
+
+export function createReCaptcha(sitekey) {
+  return {
+    renderInput: (ref, onChangeHandler) => {
+      return (
+        <ReCAPTCHA
+          key="captcha"
+          ref={ref}
+          size="invisible"
+          sitekey={sitekey}
+          onChange={onChangeHandler}
+        />
+      );
+    },
   };
 }

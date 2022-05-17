@@ -4,15 +4,15 @@ export default function Input({
   name,
   label,
   placeholder,
-  errorMessage,
   type,
   onChangeHandler,
   onBlurHandler,
   value,
   isTouched,
-  isValid,
+  error,
+  wasSubmitted
 }) {
-  const showError = isTouched && !isValid;
+  const showError = (isTouched || wasSubmitted) && error;
   return (
     <InputBox>
       <LabelField>{label}</LabelField>
@@ -25,10 +25,11 @@ export default function Input({
         value={value}
         showError={showError}
       />
-      <ErrorMessage>{showError ? errorMessage : ""}</ErrorMessage>
+      <ErrorMessage>{showError ? error : ""}</ErrorMessage>
     </InputBox>
   );
 }
+
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;

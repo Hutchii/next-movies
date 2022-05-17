@@ -1,32 +1,25 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-export default function Input({
-  name,
-  label,
-  placeholder,
-  type,
-  onChangeHandler,
-  onBlurHandler,
-  value,
-  isTouched,
-  error,
-  wasSubmitted,
-}) {
-  const showError = (isTouched || wasSubmitted) && error;
-  console.log(wasSubmitted)
+export default function TextArea({ name, label, placeholder, validate, wasSubmitted }) {
+  const [value, setValue] = useState("");
+  const [touched, setTouched] = useState(false);
+  const errorMessage = validate(value, label);
+  const showErrorMessage = (wasSubmitted || touched) && errorMessage;
+
   return (
     <InputBox>
-      <LabelField>{label}</LabelField>
+      <LabelField htmlFor={name}>{label}:</LabelField>
       <InputField
-        type={type}
+        id={name}
         name={name}
+        onChange={(e) => setValue(e.currentTarget.value)}
+        onBlur={() => setTouched(true)}
         placeholder={placeholder}
-        onChange={onChangeHandler}
-        onBlur={onBlurHandler}
-        value={value}
-        showError={showError}
+        aria-required="true"
+        showError={showErrorMessage}
       />
-      <ErrorMessage>{showError ? error : ""}</ErrorMessage>
+      {<ErrorMessage>{showErrorMessage ? errorMessage : ""}</ErrorMessage>}
     </InputBox>
   );
 }
@@ -45,8 +38,9 @@ const LabelField = styled.label`
     font-size: 1.7rem;
   }
 `;
-const InputField = styled.input`
-  border: none;
+const InputField = styled.textarea`
+  font-family: var(--inter);
+  resize: none;
   border: ${({ showError }) =>
     showError ? "1px solid var(--red)" : "1px solid var(--black)"};
   font-size: 1.8rem;
@@ -54,6 +48,7 @@ const InputField = styled.input`
   color: var(--darknavy);
   padding: 0.8rem 1.2rem;
   font-weight: 500;
+  height: 20rem;
   ::placeholder {
     font-size: 1.6rem;
     color: #cccccc;

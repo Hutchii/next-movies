@@ -6,7 +6,8 @@ export default function UIButton({
   mode,
   buttonHref,
   onClickHandler,
-  children
+  children,
+  type,
 }) {
   return (
     <>
@@ -17,7 +18,11 @@ export default function UIButton({
           </Button>
         </Link>
       ) : (
-        <Button onClick={onClickHandler} mode={mode} type="button">
+        <Button
+          onClick={onClickHandler}
+          mode={mode}
+          type={type ? type : "button"}
+        >
           {buttonName}
           {children}
         </Button>

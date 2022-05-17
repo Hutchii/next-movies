@@ -1,30 +1,30 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-export default function Checkbox({
-  name,
-  label,
-  onChangeHandler,
-  value,
-  isTouched,
-  optional,
-  error,
-  wasSubmitted,
-}) {
-  const showError = (isTouched || wasSubmitted) && !optional && error;
+export default function CheckBoxField({ name, label, validate, wasSubmitted }) {
+  const [value, setValue] = useState("");
+  const [touched, setTouched] = useState(false);
+  const errorMessage = validate(value, label);
+  const showErrorMessage = (wasSubmitted || touched) && errorMessage;
+
   return (
     <CheckBox>
-      <LabelField>
+      <LabelField htmlFor={name}>
         {label}
         <InputField
-          type="checkbox"
+          id={name}
           name={name}
-          checked={value}
-          onChange={onChangeHandler}
-          showError={showError}
+          type="checkbox"
+          onChange={() => {
+            setTouched(true);
+            setValue((prevValue) => !prevValue);
+          }}
+          aria-required="true"
+          showError={showErrorMessage}
         />
-        <Span showError={showError} />
+        <Span showError={showErrorMessage} />
       </LabelField>
-      <ErrorMessage>{showError ? error : ""}</ErrorMessage>
+      {<ErrorMessage>{showErrorMessage ? errorMessage : ""}</ErrorMessage>}
     </CheckBox>
   );
 }
