@@ -34,7 +34,7 @@ export default function Contact() {
   //   }
   // };
   return (
-    <main className="spacer">
+    <main className="spacer center">
       <WrapperStyled className="spacer">
         <Overlay sendingStatus={sendingStatus} />
         <HeadingStyled>Contact us</HeadingStyled>
@@ -65,17 +65,12 @@ export default function Contact() {
 
 const WrapperStyled = styled.div`
   width: calc(100% + 6.4rem);
-  margin-left: -3.2rem !important;
+  margin-left: -3.2rem;
   background-color: var(--white);
-  margin-top: 3.5rem;
   position: relative;
   @media (min-width: 768px) {
-    margin-top: 5rem;
     width: unset;
-    margin-left: 0 !important;
-  }
-  @media (min-width: 1280px) {
-    margin-top: 8rem;
+    margin-left: 0;
   }
 `;
 const HeadingStyled = styled.h1`

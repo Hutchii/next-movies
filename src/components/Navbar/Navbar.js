@@ -34,7 +34,12 @@ export default function Navbar() {
               linkHref="/"
               onClickHandler={setHamburgerOpenHandler}
             />
-            <NavbarDropdown
+            <NavbarLink
+              linkName="Contact"
+              linkHref="/contact"
+              onClickHandler={setHamburgerOpenHandler}
+            />
+            {/* <NavbarDropdown
               dropdownName="SSR"
               dropdownLinks={[
                 { name: "Load More", link: "/ssr/load-more" },
@@ -50,7 +55,7 @@ export default function Navbar() {
                 { name: "Pagination", link: "/ssg/pagination" },
               ]}
               onClickHandler={setHamburgerOpenHandler}
-            />
+            /> */}
           </List>
         </Nav>
       </Header>
@@ -76,6 +81,13 @@ const Overlay = styled.div`
 const Header = styled.header`
   position: relative;
   z-index: 200;
+  margin: 0 auto 3.5rem;
+  @media (min-width: 1280px) {
+    margin: 0 auto 6rem;
+  }
+  @media (min-width: 1440px) {
+    margin: 0 auto 8rem;
+  }
 `;
 const Nav = styled.nav`
   height: 8rem;

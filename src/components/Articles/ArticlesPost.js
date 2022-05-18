@@ -3,15 +3,15 @@ import { dateConverter } from "../../libs/dateConverter";
 import styled, { css } from "styled-components";
 import Link from "next/link";
 
-export default function ArticlesPost({ data, dir, mode }) {
+export default function ArticlesPost({ data, mode }) {
   if (!data) return;
   return (
     <Link href={data.slug} passHref>
-      <CardStyled dir={dir} mode={mode}>
+      <CardStyled mode={mode}>
         <ArticlesImage imageUrl={data.image.data.attributes?.url} />
-        <ContentStyled className="spacer">
-          <AuthorStyled mode={mode}>By Andrew Kowalski</AuthorStyled>
-          <HeadingStyled>{data.title}</HeadingStyled>
+        <ContentStyled>
+          <AuthorStyled>By Andrew Kowalski</AuthorStyled>
+          <HeadingStyled mode={mode}>{data.title}</HeadingStyled>
           <TextStyled>{data.description}</TextStyled>
           <DateStyled>{dateConverter(data.createdAt)}</DateStyled>
         </ContentStyled>
@@ -52,6 +52,9 @@ const CardStyled = styled.a`
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        @media(min-width: 1440px) {
+          max-width: 150rem;
+        }
         `;
     }
   }}
@@ -72,6 +75,10 @@ const CardStyled = styled.a`
   }
 `;
 const ContentStyled = styled.div`
+  padding: 0 3.2rem 0;
+  @media (min-width: 768px) {
+    padding: 0 4.2rem 0;
+  }
   @media (min-width: 1280px) {
     flex: 1 1 50%;
     display: flex;
@@ -105,14 +112,18 @@ const HeadingStyled = styled.h1`
   font-family: var(--le);
   font-weight: 300;
   margin-bottom: 1.5rem;
-  font-size: 2.6rem;
+  font-size: 2.4rem;
   color: var(--black);
   transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
   @media (min-width: 768px) {
-    font-size: 3.2rem;
+    font-size: 3rem;
+  }
+  @media (min-width: 900px) {
+    font-size: ${({ mode }) => (mode ? "3rem" : "2.4rem")};
   }
   @media (min-width: 1280px) {
     margin-bottom: 2rem;
+    font-size: 3rem;
   }
 `;
 const TextStyled = styled.p`

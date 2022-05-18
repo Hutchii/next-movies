@@ -48,7 +48,7 @@ export const form = {
   },
   consent: {
     ...createFormCheckbox(
-      "By sending this form you accepting our terms of use!",
+      "Accept terms of use.",
       "consent",
       "You have to accept terms of use!"
     ),

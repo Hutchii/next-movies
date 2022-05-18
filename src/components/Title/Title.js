@@ -24,7 +24,7 @@ export default function Title({ featuredMoviesData, children }) {
   }, [whichSlide]);
 
   return (
-    <main className="spacer">
+    <main className="spacer center">
       <WrapperStyled>
         <SliderStyled>
           {featuredMoviesData.map((movie, i) => {
@@ -80,17 +80,9 @@ export default function Title({ featuredMoviesData, children }) {
 }
 
 const WrapperStyled = styled.div`
-  margin-top: 3.5rem;
-  @media (min-width: 768px) {
-    margin-top: 5rem;
-  }
   @media (min-width: 1024px) {
     display: flex;
     gap: 5rem;
-  }
-  @media (min-width: 1280px) {
-    gap: 6rem;
-    margin-top: 8rem;
   }
   @media (min-width: 1440px) {
     gap: 8rem;
@@ -239,13 +231,13 @@ const HeadingStyled = styled.h1`
   font-family: var(--le);
   font-weight: 300;
   margin-bottom: 1.5rem;
-  font-size: 2.6rem;
+  font-size: 2.4rem;
   color: var(--black);
   @media (min-width: 768px) {
-    font-size: 3.2rem;
+    font-size: 3rem;
   }
   @media (min-width: 1280px) {
-    font-size: 3.6rem;
+    font-size: 3.2rem;
     margin-bottom: 2rem;
   }
 `;

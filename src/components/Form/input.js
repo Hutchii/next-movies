@@ -42,9 +42,6 @@ const LabelField = styled.label`
   font-size: 1.6rem;
   color: var(--black);
   font-weight: 500;
-  @media (min-width: 480px) {
-    font-size: 1.7rem;
-  }
 `;
 const InputField = styled.input`
   border: none;
@@ -56,6 +53,10 @@ const InputField = styled.input`
   color: var(--black);
   padding: 0.8rem 1.2rem;
   font-weight: 500;
+  transition: border 0.35s cubic-bezier(0.1, 1, 0.2, 1);
+  &:focus {
+    border: 1px solid var(--gold);
+  }
   ::placeholder {
     font-size: 1.6rem;
     color: #cccccc;

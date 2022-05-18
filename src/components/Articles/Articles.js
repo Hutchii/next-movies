@@ -32,7 +32,7 @@ export default function Articles() {
 
   const finalData = !loading && sortArticles(articlesData);
   return (
-    <section className="spacer">
+    <section className="spacer center">
       <WrapperStyled className="margin--top">
         <TitleStyled>
           Most viewed
@@ -105,12 +105,11 @@ const TitleItalicStyled = styled.span`
 const VerticalWrapperStyled = styled.div`
   width: calc(100% + 6.4rem);
   @media (min-width: 768px) {
-    max-width: 750px;
+    max-width: 75rem;
     width: unset;
   }
   @media (min-width: 900px) {
-    width: unset;
-    max-width: ${({ single }) => (single ? "750px" : "unset")};
+    max-width: ${({ single }) => (single ? "75rem" : "unset")};
     display: ${({ single }) => (single ? "block" : "grid")};
     grid-gap: 4rem;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 0.6fr));

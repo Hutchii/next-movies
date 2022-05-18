@@ -21,7 +21,6 @@ export const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  pointer-events: ;
 }
 
 body {
@@ -60,7 +59,9 @@ img {
 } */
 .spacer {
   padding: 0 3.2rem 0;
-  max-width: 178.4rem;
+  /* max-width: 178.4rem; */
+}
+.center {
   margin: 0 auto;
 }
 /* 3rd party */
@@ -77,19 +78,12 @@ img {
   }
 .spacer {
   padding: 0 4.2rem 0;
-  max-width: 180.4rem;
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 1360px) {
 .spacer {
-  padding: 0 4.6rem 0;
-  max-width: 181.2rem;
-  }
-}
-@media (min-width: 1440px) {
-  .spacer {
-    padding: 0 5rem 0;
-    max-width: 163.2rem;
+  padding: 0 5.2rem 0;
+  max-width: 160.4rem;
   }
 }
 @media (min-width: 1600px) {
