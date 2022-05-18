@@ -109,13 +109,19 @@ const FormStyled = styled.form`
   column-gap: 3.6rem;
   row-gap: 1.2rem;
   padding-bottom: 3.6rem;
-  > div {
+  > div:first-of-type {
+    position: absolute;
+  }
+  > div:nth-of-type(2) {
     flex: 1 1 45%;
   }
   > div:nth-of-type(3) {
-    flex: 1 1 100%;
+    flex: 1 1 45%;
   }
   > div:nth-of-type(4) {
+    flex: 1 1 100%;
+  }
+  > div:nth-of-type(5) {
     flex: 1 1 100%;
   }
   button {
@@ -128,7 +134,7 @@ const FormStyled = styled.form`
     row-gap: 1.8rem;
   }
   @media (min-width: 900px) {
-    > div:nth-of-type(4) {
+    > div:nth-of-type(5) {
       flex: 1 1 45%;
     }
   }

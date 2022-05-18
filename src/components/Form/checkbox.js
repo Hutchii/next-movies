@@ -10,7 +10,7 @@ export default function Checkbox({
   error,
   wasSubmitted,
 }) {
-  const showError = (isTouched || wasSubmitted) && !optional && error;
+  const showError = (isTouched || wasSubmitted === "submitted") && !optional && error;
   return (
     <CheckBox>
       <LabelField>

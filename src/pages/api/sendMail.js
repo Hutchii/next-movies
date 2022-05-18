@@ -2,41 +2,60 @@ import {
   emailValidation,
   nameValidation,
   messageValidation,
-  checkBoxValidation,
+  checkboxValidation,
 } from "../../utils/formValidationRules";
 
 const mail = require("@sendgrid/mail");
 mail.setApiKey(process.env.SENDGRID_API);
 
 export default async function sendMail(req, res) {
-  const body = JSON.parse(req.body);
-  console.log(body)
-  const message = `
-    FullName: ${body.fullName}\r\n
-    Email: ${body.email}\r\n
-    Message: ${body.message}
+  const { body, method } = req;
+  const { email, fullName, message, consent, captcha } = JSON.parse(body);
+  const emailMessage = `
+    FullName: ${fullName}\r\n
+    Email: ${email}\r\n
+    Message: ${message}
   `;
   const data = {
     to: "ihctuh@gmail.com",
     from: "form@beadvme.com",
     subject: "New web form message!",
-    text: message,
-    html: message.replace(/\r\n/g, "<br>"),
+    text: emailMessage,
+    html: emailMessage.replace(/\r\n/g, "<br>"),
   };
-  // if (
-  //   emailValidation().validate(body.email) &&
-  //   nameValidation().validate(body.fullName) &&
-  //   messageValidation().validate(body.message) &&
-  //   checkBoxValidation().validate(body.consent)
-  // ) {
-  try {
-    await mail.send(data);
-    res.status(200).json({ message: "SUPER" });
-  } catch (error) {
-    res.status(500);
+  if (method === "POST") {
+    if (
+      !captcha ||
+      emailValidation(email) ||
+      nameValidation(fullName) ||
+      messageValidation(message) ||
+      checkboxValidation(consent)
+    ) {
+      return res.status(422).json({
+        message: "Unproccesable request, please provide the required fields",
+      });
+    }
+    try {
+      const response = await fetch(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${captcha}`,
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+          },
+          method: "POST",
+        }
+      );
+      const captchaValidation = await response.json();
+      if (captchaValidation.success) {
+        await mail.send(data);
+        return res.status(200).send("OK");
+      }
+      return res.status(422).json({
+        message: "Unproccesable request, Invalid captcha code",
+      });
+    } catch (error) {
+      return res.status(422).json({ message: "Something went wrong" });
+    }
   }
+  return res.status(404).send("Not found");
 }
-// else {
-//   res.status(500);
-// }
-// }

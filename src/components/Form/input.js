@@ -12,8 +12,7 @@ export default function Input({
   error,
   wasSubmitted,
 }) {
-  const showError = (isTouched || wasSubmitted) && error;
-  console.log(wasSubmitted)
+  const showError = (isTouched || wasSubmitted === "submitted") && error;
   return (
     <InputBox>
       <LabelField>{label}</LabelField>
