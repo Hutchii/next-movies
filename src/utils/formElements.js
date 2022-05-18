@@ -123,7 +123,7 @@ export function createReCaptcha(sitekey) {
           ref={ref}
           size="invisible"
           sitekey={sitekey}
-          onChange={onChangeHandler}
+          // onChange={onChangeHandler}
         />
       );
     },

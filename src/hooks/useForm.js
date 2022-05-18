@@ -8,8 +8,7 @@ function useForm(formObj) {
 
   function renderFormInputs() {
     return Object.values(form).map((r) => {
-      if (r.renderType === "captcha")
-        return r.renderInput(recaptchaRef, onReCAPTCHAChange);
+      if (r.renderType === "captcha") return r.renderInput(recaptchaRef);
       return r.renderInput(
         onInputChange,
         r.value,
@@ -50,50 +49,52 @@ function useForm(formObj) {
     [form]
   );
 
-  const onSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    recaptchaRef.current.execute();
-  }, []);
-
-  const onReCAPTCHAChange = async (captchaCode) => {
-    if (!captchaCode) return;
-    setSendingStatus("submitted");
-    let isValid = true;
-    let formValues = { captcha: captchaCode };
-    for (const [key, value] of Object.entries(form)) {
-      if (value.optional || value.renderType === "captcha") continue;
-      if (value.error) {
-        isValid = false;
-        break;
-      }
-      formValues = { ...formValues, [key]: value.value };
-    }
-    if (isValid) {
-      setIsSending(true);
-      try {
-        const res = await fetch("api/sendMail", {
-          method: "post",
-          body: JSON.stringify(formValues),
-        });
-        setIsSending(false);
-        if (res.status !== 200) throw new Error("Błąd");
-        for (const [key, value] of Object.entries(form)) {
-          if (value.optional || value.renderType === "captcha") continue;
-          value.error = value.defaultError;
-          value.renderType === "checkbox"
-            ? (value.value = false)
-            : (value.value = "");
-          value.isTouched = false;
-          setForm({ ...form, [key]: value });
+  const onSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      setSendingStatus("submitted");
+      let isValid = true;
+      let formValues = {};
+      for (const [key, value] of Object.entries(form)) {
+        if (value.optional || value.renderType === "captcha") continue;
+        if (value.error) {
+          isValid = false;
+          break;
         }
-        setSendingStatus("success");
-      } catch (error) {
-        setSendingStatus("error");
-      } finally {
-        recaptchaRef.current.reset();
+        formValues = { ...formValues, [key]: value.value };
       }
-    }
-  };
+      const captchaCode = await recaptchaRef.current.executeAsync();
+      recaptchaRef.current.reset();
+      if (!captchaCode) {
+        setSendingStatus("error");
+        return;
+      }
+      if (isValid) {
+        setIsSending(true);
+        try {
+          const res = await fetch("api/sendMail", {
+            method: "post",
+            body: JSON.stringify({ ...formValues, captcha: captchaCode }),
+          });
+          setIsSending(false);
+          if (res.status !== 200) throw new Error("Something went wrong");
+          for (const [key, value] of Object.entries(form)) {
+            if (value.optional || value.renderType === "captcha") continue;
+            value.error = value.defaultError;
+            value.renderType === "checkbox"
+              ? (value.value = false)
+              : (value.value = "");
+            value.isTouched = false;
+            setForm({ ...form, [key]: value });
+          }
+          setSendingStatus("success");
+        } catch (error) {
+          setSendingStatus("error");
+        }
+      }
+    },
+    [form]
+  );
 
   return { renderFormInputs, onSubmit, isSending, sendingStatus };
 }
