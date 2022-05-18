@@ -25,7 +25,9 @@ export default function Input({
         value={value}
         showError={showError}
       />
-      <ErrorMessage>{showError ? error : ""}</ErrorMessage>
+      <ErrorMessage showError={showError}>
+        {showError ? error : ""}
+      </ErrorMessage>
     </InputBox>
   );
 }
@@ -46,16 +48,25 @@ const LabelField = styled.label`
 `;
 const InputField = styled.input`
   border: none;
-  border: ${({ showError }) =>
-    showError ? "1px solid var(--red)" : "1px solid var(--black)"};
+  /* border: ${({ showError }) =>
+    showError ? "1px solid var(--red)" : "1px solid var(--black)"}; */
+  border: 1px solid var(--black);
   font-size: 1.8rem;
   outline: none;
-  color: var(--darknavy);
+  color: var(--black);
   padding: 0.8rem 1.2rem;
   font-weight: 500;
   ::placeholder {
     font-size: 1.6rem;
     color: #cccccc;
+  }
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px var(--white) inset;
+    box-shadow: 0 0 0px 1000px var(--white) inset;
+    -webkit-text-fill-color: var(--black);
+  }
+  &:-webkit-autofill:first-line {
+    color: var(--black);
   }
   @media (min-width: 480px) {
     font-size: 2rem;
@@ -64,12 +75,16 @@ const InputField = styled.input`
   }
 `;
 const ErrorMessage = styled.span`
-  color: var(--red);
+  color: #b81b20;
   font-size: 1.4rem;
   font-weight: 500;
   min-height: 1.8rem;
+  background-color: #f4d7d9;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #f28c93;
+  opacity: ${({ showError }) => (showError ? "1" : "0")};
   @media (min-width: 480px) {
-    font-size: 1.5rem;
-    min-height: 2rem;
+    font-size: 1.4rem;
+    min-height: 3rem;
   }
 `;

@@ -39,7 +39,6 @@ function useForm(formObj) {
       } else {
         inputObj.value = value;
       }
-      console.log(inputObj);
       inputObj.error = inputObj.validationRule(
         inputObj.value,
         inputObj.defaultError
@@ -77,7 +76,7 @@ function useForm(formObj) {
           body: JSON.stringify({ ...formValues, captcha: captchaCode }),
         });
         setIsSending(false);
-        if (res.status !== 200) throw new Error("Something went wrong");
+        if (res.status !== 200) throw new Error(res);
         for (const [key, value] of Object.entries(form)) {
           if (value.optional || value.renderType === "captcha") continue;
           value.error = value.defaultError;
@@ -89,6 +88,7 @@ function useForm(formObj) {
         }
         setSendingStatus("success");
       } catch (error) {
+        console.log(error)
         setSendingStatus("error");
       }
     },

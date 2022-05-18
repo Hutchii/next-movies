@@ -24,7 +24,7 @@ export default function Checkbox({
         />
         <Span showError={showError} />
       </LabelField>
-      <ErrorMessage>{showError ? error : ""}</ErrorMessage>
+      <ErrorMessage showError={showError}>{showError ? error : ""}</ErrorMessage>
     </CheckBox>
   );
 }
@@ -61,7 +61,7 @@ const Span = styled.span`
   left: 0;
   height: 1.65rem;
   width: 1.65rem;
-  background-color: ${({ showError }) => (showError ? "#CCBABA" : "#CCCCCC")};
+  background-color: ${({ showError }) => (showError ? "#D1C7C7" : "#CCCCCC")};
   border-radius: 2px;
   transition: background-color 0.25s cubic-bezier(0.2, 0, 0.2, 1);
   &:after {
@@ -78,14 +78,17 @@ const Span = styled.span`
   }
 `;
 const ErrorMessage = styled.span`
-  flex: 1 1 100%;
-  color: var(--red);
+  color: #b81b20;
   font-size: 1.4rem;
   font-weight: 500;
   min-height: 1.8rem;
-  margin-top: 0.6rem;
+  background-color: #f4d7d9;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #f28c93;
+  opacity: ${({ showError }) => (showError ? "1" : "0")};
+  margin-left: 2rem;
   @media (min-width: 480px) {
-    font-size: 1.5rem;
-    min-height: 2rem;
+    font-size: 1.4rem;
+    min-height: 3rem;
   }
 `;

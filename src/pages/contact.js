@@ -11,7 +11,6 @@ export default function Contact() {
   const [wasSubmitted, setWasSubmitted] = useState(false);
   const { renderFormInputs, onSubmit, isSending, sendingStatus } =
     useForm(form);
-  console.log(sendingStatus)
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   const formData = new FormData(e.currentTarget);

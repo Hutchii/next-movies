@@ -22,7 +22,7 @@ export const form = {
       "email",
       "email",
       "Enter your email address",
-      "This field is required!"
+      "Email address is required!"
     ),
     validationRule: emailValidation,
   },
@@ -32,7 +32,7 @@ export const form = {
       "fullName",
       "text",
       "Enter your full name",
-      "This field is required!"
+      "Full name is required!"
     ),
     validationRule: nameValidation,
   },
@@ -42,7 +42,7 @@ export const form = {
       "message",
       "text",
       "Enter your message",
-      "This field is required!"
+      "Message is required!"
     ),
     validationRule: messageValidation,
   },
@@ -50,7 +50,7 @@ export const form = {
     ...createFormCheckbox(
       "By sending this form you accepting our terms of use!",
       "consent",
-      "This field is required!"
+      "You have to accept terms of use!"
     ),
     validationRule: checkboxValidation,
     renderType: "checkbox",
