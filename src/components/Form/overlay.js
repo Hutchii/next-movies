@@ -20,15 +20,19 @@ export default function Overlay({ sendingStatus }) {
 const showMessage = keyframes`
   0% {
     opacity: 0;
+    pointer-events: all;
   }
   30% {
     opacity: 1;
+    pointer-events: all;
   }
   70% {
     opacity: 1;
+    pointer-events: all;
   }
   100% {
     opacity: 0;
+    pointer-events: none;
   }
 `;
 const OverlayStyled = styled.div`
@@ -44,7 +48,6 @@ const OverlayStyled = styled.div`
   z-index: 100;
   background-color: rgba(255, 255, 255, 0.9);
   opacity: 0;
-  pointer-events: none;
   ${({ status }) => {
     switch (status) {
       case "success":
@@ -60,6 +63,7 @@ const OverlayStyled = styled.div`
       default:
         return css`
           animation: unset;
+          pointer-events: none;
         `;
     }
   }}

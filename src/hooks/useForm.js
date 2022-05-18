@@ -63,34 +63,33 @@ function useForm(formObj) {
         }
         formValues = { ...formValues, [key]: value.value };
       }
+      if (!isValid) return;
       const captchaCode = await recaptchaRef.current.executeAsync();
       recaptchaRef.current.reset();
       if (!captchaCode) {
         setSendingStatus("error");
         return;
       }
-      if (isValid) {
-        setIsSending(true);
-        try {
-          const res = await fetch("api/sendMail", {
-            method: "post",
-            body: JSON.stringify({ ...formValues, captcha: captchaCode }),
-          });
-          setIsSending(false);
-          if (res.status !== 200) throw new Error("Something went wrong");
-          for (const [key, value] of Object.entries(form)) {
-            if (value.optional || value.renderType === "captcha") continue;
-            value.error = value.defaultError;
-            value.renderType === "checkbox"
-              ? (value.value = false)
-              : (value.value = "");
-            value.isTouched = false;
-            setForm({ ...form, [key]: value });
-          }
-          setSendingStatus("success");
-        } catch (error) {
-          setSendingStatus("error");
+      setIsSending(true);
+      try {
+        const res = await fetch("api/sendMail", {
+          method: "post",
+          body: JSON.stringify({ ...formValues, captcha: captchaCode }),
+        });
+        setIsSending(false);
+        if (res.status !== 200) throw new Error("Something went wrong");
+        for (const [key, value] of Object.entries(form)) {
+          if (value.optional || value.renderType === "captcha") continue;
+          value.error = value.defaultError;
+          value.renderType === "checkbox"
+            ? (value.value = false)
+            : (value.value = "");
+          value.isTouched = false;
+          setForm({ ...form, [key]: value });
         }
+        setSendingStatus("success");
+      } catch (error) {
+        setSendingStatus("error");
       }
     },
     [form]

@@ -11,7 +11,7 @@ export default function Contact() {
   const [wasSubmitted, setWasSubmitted] = useState(false);
   const { renderFormInputs, onSubmit, isSending, sendingStatus } =
     useForm(form);
-
+  console.log(sendingStatus)
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   const formData = new FormData(e.currentTarget);
@@ -42,7 +42,7 @@ export default function Contact() {
         <TitleStyled>
           FILL IN THE <TitleItalicStyled>FORM</TitleItalicStyled>
         </TitleStyled>
-        <FormStyled>
+        <FormStyled sendingStatus={sendingStatus}>
           {renderFormInputs()}
           <Buttton mode="active" onClickHandler={onSubmit}>
             <Spinner isSending={isSending} />
@@ -66,14 +66,14 @@ export default function Contact() {
 
 const WrapperStyled = styled.div`
   width: calc(100% + 6.4rem);
-  margin-left: -3.2rem;
+  margin-left: -3.2rem !important;
   background-color: var(--white);
   margin-top: 3.5rem;
   position: relative;
   @media (min-width: 768px) {
     margin-top: 5rem;
     width: unset;
-    margin-left: 0;
+    margin-left: 0 !important;
   }
   @media (min-width: 1280px) {
     margin-top: 8rem;
