@@ -7,9 +7,9 @@ import TitleImage from "./TitleImage";
 
 const timer = 15000;
 
-export default function Title({ featuredMoviesData, children }) {
+export default function Title({ data, children }) {
   const [whichSlide, setWhichSlide] = useState(0);
-  const maxSlides = featuredMoviesData.length - 1;
+  const maxSlides = data.length - 1;
 
   const nextSlide = () =>
     setWhichSlide((prevValue) => (prevValue === maxSlides ? 0 : prevValue + 1));
@@ -18,16 +18,16 @@ export default function Title({ featuredMoviesData, children }) {
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
-    if (featuredMoviesData.length < 2 || mq.matches) return;
+    if (data.length < 2 || mq.matches) return;
     const interval = setInterval(() => nextSlide(), timer);
     return () => clearInterval(interval);
-  }, [whichSlide, featuredMoviesData.length]);
+  }, [whichSlide, data.length]);
 
   return (
     <main className="spacer center">
       <WrapperStyled>
         <SliderStyled>
-          {featuredMoviesData.map((movie, i) => {
+          {data.map((movie, i) => {
             const isActive = i === whichSlide;
             return (
               <SlideStyled key={movie.id} active={isActive}>
@@ -38,7 +38,7 @@ export default function Title({ featuredMoviesData, children }) {
                     index={i}
                   />
                   <PaginationStyled>
-                    {featuredMoviesData.map((dot, i) => {
+                    {data.map((dot, i) => {
                       const isActive = i === whichSlide;
                       return (
                         <div key={dot.id}>

@@ -23,7 +23,7 @@ function createApolloClient() {
       typePolicies: {
         Query: {
           fields: {
-            // movies: relayStylePagination(),
+            movies: relayStylePagination(),
             // articles: relayStylePagination(),
           },
         },

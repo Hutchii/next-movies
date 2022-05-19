@@ -9,37 +9,37 @@ import Articles from "../components/Articles/Articles";
 import { apolloError } from "../utils/apolloError";
 
 export default function Home({
-  featuredMovies,
+  moviesData,
   directorData,
   articlesData,
   errorCode,
 }) {
-  if (errorCode || !featuredMovies) return <Error statusCode={errorCode} />;
+  if (errorCode || !moviesData) return <Error statusCode={errorCode} />;
   return (
     <>
       <Head>
         <title>Movies</title>
       </Head>
-      <Title featuredMoviesData={featuredMovies.slice(0, 4)}>
-        <TitleMore moreMoviesData={featuredMovies.slice(4)} />
+      <Title data={moviesData.slice(0, 4)}>
+        <TitleMore data={moviesData.slice(4)} />
       </Title>
       {directorData && <Director data={directorData} />}
-      <Articles data={articlesData} />
+      {articlesData && <Articles data={articlesData} />}
     </>
   );
 }
 
 export async function getStaticProps() {
-  const apolloClientFeatured = initializeApollo();
+  const apolloClient = initializeApollo();
   try {
-    const { data: featuredData } = await apolloClientFeatured.query({
+    const { data } = await apolloClient.query({
       query: FEATURED_MOVIES,
     });
-    return addApolloState(apolloClientFeatured, {
+    return addApolloState(apolloClient, {
       props: {
-        featuredMovies: featuredData.movies.data,
-        directorData: featuredData.directors.data,
-        articlesData: featuredData.articles.data,
+        moviesData: data.movies.data,
+        directorData: data.directors.data,
+        articlesData: data.articles.data,
       },
       revalidate: 60,
     });

@@ -6,7 +6,7 @@ export default function Director({ data }) {
   const directorData = data[0]?.attributes;
 
   return (
-    <WrapperStyled className="margin--top">
+    <WrapperStyled className="mt">
       <>
         <DirectorImage imageUrl={directorData.image.data.attributes?.url} />
         <ContentStyled>
@@ -49,16 +49,12 @@ const ContentStyled = styled.div`
   }
 `;
 const TitleStyled = styled.p`
-  font-family: var(--inter);
-  font-weight: 500;
+  font: 500 1.5rem var(--inter);
   text-transform: uppercase;
-  font-size: 1.5rem;
   color: var(--darkwhite);
 `;
 const StyledHeading = styled.h1`
-  font-family: var(--le);
-  font-size: 3rem;
-  font-weight: 500;
+  font: 500 3rem var(--le);
   color: var(--darkwhite);
   line-height: 1.4;
   @media (min-width: 480px) {

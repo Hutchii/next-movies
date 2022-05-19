@@ -64,7 +64,7 @@ const CardStyled = styled.a`
     }
     &:hover img {
       transform: scale(1.04);
-      filter: brightness(90%);
+      filter: brightness(80%);
     }
     &:hover h1 {
       color: var(--gold);
@@ -107,10 +107,8 @@ const AuthorStyled = styled.p`
   }
 `;
 const HeadingStyled = styled.h1`
-  font-family: var(--le);
-  font-weight: 300;
+  font: 300 2.6rem var(--le);
   margin-bottom: 1.5rem;
-  font-size: 2.6rem;
   color: var(--black);
   transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
   @media (min-width: 768px) {
@@ -125,10 +123,7 @@ const HeadingStyled = styled.h1`
   }
 `;
 const TextStyled = styled.p`
-  font-family: var(--le);
-  font-size: 1.7rem;
-  font-weight: 300;
+  font: 300 1.7rem/1.4 var(--le);
   letter-spacing: 0.2px;
-  line-height: 1.4;
   color: #2b2b2b;
 `;

@@ -26,7 +26,7 @@ export default function Articles({ data }) {
 
   return (
     <section className="spacer center">
-      <WrapperStyled className="margin--top">
+      <WrapperStyled className="mt">
         <TitleStyled>
           Most viewed
           <TitleItalicStyled> articles</TitleItalicStyled>
@@ -74,10 +74,8 @@ const WrapperStyled = styled.div`
   }
 `;
 const TitleStyled = styled.h2`
-  font-size: 1.5rem;
+  font: 600 1.6rem var(--inter);
   text-transform: uppercase;
-  font-family: var(--inter);
-  font-weight: 600;
   color: var(--black);
   text-align: center;
 `;

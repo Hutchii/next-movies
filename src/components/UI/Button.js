@@ -9,6 +9,7 @@ export default function UIButton({
   children,
   type,
   isDisabled,
+  activeGenre,
 }) {
   return (
     <>
@@ -24,6 +25,7 @@ export default function UIButton({
           mode={mode}
           type={type ? type : "button"}
           disabled={isDisabled}
+          active={activeGenre}
         >
           {buttonName}
           {children}
@@ -64,6 +66,17 @@ const Button = styled.button`
           background-color: var(--black);
           color: var(--darkwhite);
           border: 1px solid var(--black);
+        `;
+      case "filter":
+        return css`
+          background-color: ${({ active }) =>
+            active ? "var(--black)" : "transparent"};
+          color: ${({ active }) => (active ? "var(--lightgrey)" : "black")};
+          border: 1px solid var(--black);
+          &:hover {
+            background-color: var(--black);
+            color: var(--darkwhite);
+          }
         `;
       default:
         return css`

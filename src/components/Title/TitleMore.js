@@ -4,14 +4,14 @@ import Link from "next/link";
 import styled from "styled-components";
 import TitleMoreImage from "./TitleMoreImage";
 
-export default function TitleMore({ moreMoviesData }) {
+export default function TitleMore({ data }) {
   return (
     <WrapperStyled>
       <TitleStyled>
         More <StyledTitleItalic>movies</StyledTitleItalic>
       </TitleStyled>
       <ContainerStyled>
-        {moreMoviesData.map((movie) => {
+        {data.map((movie) => {
           return (
             <Link key={movie.id} href={`/${movie.attributes.slug}`} passHref>
               <LinkStyled>

@@ -1,23 +1,30 @@
+import styled from "styled-components";
+import Button from "../UI/Button";
+
 const listedGenres = ["all", "drama", "romance", "war", "thriller"];
 
 export default function AllPostGenres({ onClickHandler, activeGenre }) {
   return (
-    <div className="posts-filters">
+    <FiltersStyled>
       {listedGenres.map((genre, i) => {
         return (
-          <button
-            key={genre + i}
-            className={`button button--dark ${
-              activeGenre === genre ? "button--active" : ""
-            }`}
-            onClick={() => {
+          <Button
+            mode="filter"
+            key={genre}
+            onClickHandler={() => {
               onClickHandler(genre);
             }}
-          >
-            {genre}
-          </button>
+            buttonName={genre}
+            activeGenre={activeGenre === genre}
+          />
         );
       })}
-    </div>
+    </FiltersStyled>
   );
 }
+
+const FiltersStyled = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+`;

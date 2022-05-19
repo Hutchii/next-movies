@@ -35,6 +35,11 @@ export default function Navbar() {
               onClickHandler={setHamburgerOpenHandler}
             />
             <NavbarLink
+              linkName="Movies"
+              linkHref="/movies"
+              onClickHandler={setHamburgerOpenHandler}
+            />
+            <NavbarLink
               linkName="Contact"
               linkHref="/contact"
               onClickHandler={setHamburgerOpenHandler}

@@ -54,12 +54,12 @@ img {
 .center {
   margin: 0 auto;
 }
+.mt {
+  margin-top: 10rem;
+}
 /* 3rd party */
 .hamburger-react {
   z-index: 200;
-}
-.margin--top {
-  margin-top: 10rem;
 }
 
 @media (min-width: 768px) {
@@ -77,7 +77,7 @@ img {
   }
 }
 @media (min-width: 1600px) {
-  .margin--top {
+  .mt {
     margin-top: 15rem;
   }
 }

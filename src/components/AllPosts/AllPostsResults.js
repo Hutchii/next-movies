@@ -1,7 +1,18 @@
+import styled from "styled-components";
+
 export default function AllPostsResults({ moviesDataTotal }) {
   return (
-    <p className="text--14 posts-results">
-      {moviesDataTotal} <span className="color--grey">results</span>
-    </p>
+    <ResultsStyled>
+      {moviesDataTotal} <GreyStyled>results</GreyStyled>
+    </ResultsStyled>
   );
 }
+
+const ResultsStyled = styled.p`
+  font: 600 1.4rem var(--inter);
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+`;
+const GreyStyled = styled.span`
+  color: var(--grey);
+`;

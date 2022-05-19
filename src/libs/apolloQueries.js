@@ -177,20 +177,12 @@ export const ARTICLES = gql`
 `;
 
 export const MOVIES_FILTERS_PAGINATION = gql`
-  query MoviesFilters(
-    $page: Int!
-    $pageSize: Int!
-    $genre: String!
-    $title: String!
-  ) {
+  query MoviesFilters {
     movies(
-      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: {
-        genres: { title: { eq: $genre } }
-        title: { contains: $title }
-      }
-    ) {
+      pagination: { start: 0, limit: 100 }
+      ) 
+      {
       data {
         id
         attributes {
@@ -219,13 +211,6 @@ export const MOVIES_FILTERS_PAGINATION = gql`
               }
             }
           }
-        }
-      }
-      meta {
-        pagination {
-          total
-          page
-          pageSize
         }
       }
     }
