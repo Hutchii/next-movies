@@ -40,11 +40,9 @@ const WrapperStyled = styled.div`
   }
 `;
 const TitleStyled = styled.h2`
-  font-size: 1.5rem;
+  font: 600 1.5rem var(--inter);
   text-transform: uppercase;
-  font-family: var(--inter);
   margin: 8rem 0 2.8rem 0;
-  font-weight: 600;
   color: var(--black);
   @media (min-width: 1024px) {
     margin: 0 0 4rem 0;
@@ -89,7 +87,7 @@ const LinkStyled = styled.a`
     }
     &:hover img {
       transform: scale(1.04);
-      filter: brightness(90%);
+      filter: brightness(80%);
     }
     &:hover h2 {
       color: var(--gold);
@@ -108,18 +106,14 @@ const ContentStyled = styled.div`
   flex: 1 1 60%;
 `;
 const DateStyled = styled.p`
-  font-size: 1.1rem;
-  font-family: var(--inter);
+  font: 600 1.1rem var(--inter);
   text-transform: uppercase;
   margin-bottom: 0.5rem;
-  font-weight: 600;
   color: var(--grey);
-  letter-spacing: 0.2px;
+  letter-spacing: 0.1px;
 `;
 const HeadingStyled = styled.h2`
+  font: 300 1.8rem var(--le);
   color: var(--black);
-  font-size: 1.8rem;
-  font-family: var(--le);
-  font-weight: 300;
   transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
 `;

@@ -30,7 +30,7 @@ const LinkSlide = styled.a`
     }
     &:hover img {
       transform: scale(1.04);
-      filter: brightness(90%);
+      filter: brightness(80%);
     }
   }
 `;

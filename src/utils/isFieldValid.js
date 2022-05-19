@@ -1,5 +1,4 @@
 export function emailValidation(value, label) {
-  console.log(value)
   if (!value) return `${label} is required!`;
   if (
     !/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g.test(

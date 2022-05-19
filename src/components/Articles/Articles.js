@@ -1,18 +1,10 @@
 import styled from "styled-components";
-import { ARTICLES } from "../../libs/apolloQueries";
-import { useQuery } from "@apollo/client";
 import ArticlesPost from "./ArticlesPost";
 import Button from "../UI/Button";
+import { useState } from "react";
 
-export default function Articles() {
-  const { loading, error, data, fetchMore, refetch } = useQuery(ARTICLES, {
-    variables: {
-      start: 0,
-      limit: 4,
-    },
-  });
-  const articlesData = data?.articles.data;
-  const dataLength = articlesData?.length;
+export default function Articles({ data }) {
+  const [limit, setLimit] = useState(3);
 
   const sortArticles = (articlesData) => {
     const sortedArticles = [];
@@ -22,15 +14,16 @@ export default function Articles() {
         articleHorizontal += 3;
         sortedArticles.push(el);
       } else {
-        Array.isArray(sortedArticles.at(-1))
-          ? sortedArticles.at(-1).push(el)
+        Array.isArray(sortedArticles[sortedArticles.length - 1])
+          ? sortedArticles[sortedArticles.length - 1].push(el)
           : sortedArticles.push([el]);
       }
     });
     return sortedArticles;
   };
+  const finalData = sortArticles(data);
+  const dataLength = finalData?.length;
 
-  const finalData = !loading && sortArticles(articlesData);
   return (
     <section className="spacer center">
       <WrapperStyled className="margin--top">
@@ -38,43 +31,34 @@ export default function Articles() {
           Most viewed
           <TitleItalicStyled> articles</TitleItalicStyled>
         </TitleStyled>
-        {!loading && !error && (
-          <>
-            {finalData.map((article, i) => {
-              if (!Array.isArray(article)) {
-                return (
-                  <ArticlesPost
-                    key={article?.attributes.title}
-                    data={article?.attributes}
-                    mode="horizontal"
-                  />
-                );
-              } else {
-                return (
-                  <VerticalWrapperStyled key={i} single={article.length === 1}>
-                    {article.map((oneArticle) => {
-                      return (
-                        <ArticlesPost
-                          key={oneArticle?.attributes.title}
-                          data={oneArticle?.attributes}
-                        />
-                      );
-                    })}
-                  </VerticalWrapperStyled>
-                );
-              }
-            })}
-          </>
-        )}
+        {finalData.slice(0, limit).map((article, i) => {
+          if (!Array.isArray(article)) {
+            return (
+              <ArticlesPost
+                key={article?.attributes.title}
+                data={article?.attributes}
+                mode="horizontal"
+              />
+            );
+          } else {
+            return (
+              <VerticalWrapperStyled key={i} single={article.length === 1}>
+                {article.map((oneArticle) => {
+                  return (
+                    <ArticlesPost
+                      key={oneArticle?.attributes.title}
+                      data={oneArticle?.attributes}
+                    />
+                  );
+                })}
+              </VerticalWrapperStyled>
+            );
+          }
+        })}
         <Button
           buttonName="Load more"
-          onClickHandler={() => {
-            fetchMore({
-              variables: {
-                limit: dataLength + 4,
-              },
-            });
-          }}
+          onClickHandler={() => setLimit((prevValue) => prevValue + 3)}
+          isDisabled={limit >= dataLength}
         />
       </WrapperStyled>
     </section>

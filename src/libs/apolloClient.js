@@ -23,16 +23,13 @@ function createApolloClient() {
       typePolicies: {
         Query: {
           fields: {
-            movies: relayStylePagination(),
-            articles: relayStylePagination(),
+            // movies: relayStylePagination(),
+            // articles: relayStylePagination(),
           },
         },
       },
     }),
-    connectToDevTools: true,
-    //new InMemoryCache({
-
-    //}),
+    // connectToDevTools: true,
   });
 }
 //Initialize Apollo Client, it takes existing apollo cache, and with cache that was passed in as pageProps it merges this two together and sets that as the final cache

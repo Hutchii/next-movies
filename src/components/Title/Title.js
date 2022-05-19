@@ -39,15 +39,16 @@ export default function Title({ featuredMoviesData, children }) {
                   />
                   <PaginationStyled>
                     {featuredMoviesData.map((dot, i) => {
+                      const isActive = i === whichSlide;
                       return (
                         <div key={dot.id}>
                           <PaginationDotStyled
-                            active={i === whichSlide}
+                            active={isActive}
                             onClick={() => setWhichSlide(i)}
                           >
                             {i + 1}
                           </PaginationDotStyled>
-                          <PaginationProgressStyled active={i === whichSlide} />
+                          <PaginationProgressStyled active={isActive} />
                         </div>
                       );
                     })}
@@ -134,19 +135,15 @@ const PaginationStyled = styled.div`
     display: flex;
     justify-content: center;
     gap: 1rem;
-    font-size: 1.4rem;
     width: 100%;
   }
 `;
 const PaginationDotStyled = styled.p`
-  font-family: var(--inter);
-  color: ${({ active }) => (active ? "var(--white)" : "var(--grey)")};
-  transition: color 350ms cubic-bezier(0.2, 0, 0.2, 1);
-  cursor: pointer;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-  margin-bottom: 1.4rem;
-  font-weight: 500;
   @media (min-width: 768px) {
+    font: 600 1.4rem var(--inter);
+    color: ${({ active }) => (active ? "var(--white)" : "var(--grey)")};
+    transition: color 350ms cubic-bezier(0.2, 0, 0.2, 1);
+    cursor: pointer;
     margin-bottom: 1.6rem;
   }
 `;
@@ -159,9 +156,7 @@ const progressAnimation = keyframes`
   }
 `;
 const PaginationProgressStyled = styled.div`
-  display: none;
   @media (min-width: 768px) {
-    display: unset;
     position: absolute;
     width: 100%;
     height: 0.3rem;
@@ -202,38 +197,28 @@ const ContentStyled = styled.div`
   }
 `;
 const ContentInfoStyled = styled.div`
-  font-family: "Inter", sans-serif;
+  font: 600 1.2rem "Inter", sans-serif;
   display: flex;
   gap: 2rem;
   justify-content: space-between;
   margin: 0.5rem 0 2rem 0;
-  font-weight: 700;
   white-space: nowrap;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.1px;
+  @media (min-width: 1280px) {
+    font-size: 1.3rem;
+  }
 `;
 const DateStyled = styled.p`
-  font-family: "Inter", sans-serif;
-  font-size: 1.2rem;
   color: var(--grey);
   text-transform: uppercase;
-  @media (min-width: 1280px) {
-    font-size: 1.3rem;
-  }
 `;
 const DirectorStyled = styled.p`
-  font-family: "Inter", sans-serif;
-  font-size: 1.2rem;
   color: var(--gold);
   text-align: right;
-  @media (min-width: 1280px) {
-    font-size: 1.3rem;
-  }
 `;
 const HeadingStyled = styled.h1`
-  font-family: var(--le);
-  font-weight: 300;
+  font: 300 2.6rem var(--le);
   margin-bottom: 1.5rem;
-  font-size: 2.4rem;
   color: var(--black);
   @media (min-width: 768px) {
     font-size: 3rem;
@@ -244,9 +229,7 @@ const HeadingStyled = styled.h1`
   }
 `;
 const TextStyled = styled.p`
-  font-family: var(--le);
-  font-size: 1.8rem;
-  font-weight: 300;
+  font: 300 1.8rem/1.45 var(--le);
   letter-spacing: 0.2px;
-  line-height: 1.4;
+  color: #2b2b2b;
 `;

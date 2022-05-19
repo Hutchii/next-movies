@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function ArticlesPost({ data, mode }) {
   if (!data) return;
   return (
-    <Link href={data.slug} passHref>
+    <Link href={`/${data.slug}`} passHref>
       <CardStyled mode={mode}>
         <ArticlesImage imageUrl={data.image.data.attributes?.url} />
         <ContentStyled>
@@ -75,6 +75,8 @@ const CardStyled = styled.a`
   }
 `;
 const ContentStyled = styled.div`
+  font-family: var(--inter);
+  font-weight: 600;
   padding: 0 3.2rem 0;
   @media (min-width: 768px) {
     padding: 0 4.2rem 0;
@@ -87,21 +89,17 @@ const ContentStyled = styled.div`
   }
 `;
 const DateStyled = styled.p`
-  font-family: var(--inter);
   font-size: 1.2rem;
   color: var(--grey);
   text-transform: uppercase;
   margin-top: 2rem;
-  font-weight: 600;
   @media (min-width: 1280px) {
     font-size: 1.3rem;
   }
 `;
 const AuthorStyled = styled.p`
-  font-family: var(--inter);
   font-size: 1.2rem;
   color: var(--gold);
-  font-weight: 600;
   margin: 3rem 0 2rem 0;
   @media (min-width: 1280px) {
     font-size: 1.3rem;
@@ -112,14 +110,14 @@ const HeadingStyled = styled.h1`
   font-family: var(--le);
   font-weight: 300;
   margin-bottom: 1.5rem;
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   color: var(--black);
   transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
   @media (min-width: 768px) {
     font-size: 3rem;
   }
   @media (min-width: 900px) {
-    font-size: ${({ mode }) => (mode ? "3rem" : "2.4rem")};
+    font-size: ${({ mode }) => (mode ? "3rem" : "2.6rem")};
   }
   @media (min-width: 1280px) {
     margin-bottom: 2rem;
@@ -128,8 +126,9 @@ const HeadingStyled = styled.h1`
 `;
 const TextStyled = styled.p`
   font-family: var(--le);
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: 300;
   letter-spacing: 0.2px;
   line-height: 1.4;
+  color: #2b2b2b;
 `;

@@ -88,7 +88,6 @@ function useForm(formObj) {
         }
         setSendingStatus("success");
       } catch (error) {
-        console.log(error)
         setSendingStatus("error");
       }
     },

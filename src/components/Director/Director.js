@@ -1,33 +1,22 @@
 import Button from "../UI/Button";
-import { DIRECTOR } from "../../libs/apolloQueries";
-import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import DirectorImage from "./DirectorImage";
 
-export default function Director() {
-  const { loading, error, data } = useQuery(DIRECTOR, {
-    variables: {
-      start: 0,
-      limit: 4,
-      genre: "all",
-      title: "",
-    },
-  });
-  const directorData = data?.directors.data[0].attributes;
+export default function Director({ data }) {
+  const directorData = data[0]?.attributes;
+
   return (
     <WrapperStyled className="margin--top">
-      {!loading && !error && (
-        <>
-          <DirectorImage imageUrl={directorData.image.data.attributes?.url} />
-          <ContentStyled>
-            <TitleStyled>
-              Discover <StyledTitleItalic>movies from</StyledTitleItalic>
-            </TitleStyled>
-            <StyledHeading>{directorData.director}</StyledHeading>
-            <Button buttonHref="/" buttonName="see all" mode="light" />
-          </ContentStyled>
-        </>
-      )}
+      <>
+        <DirectorImage imageUrl={directorData.image.data.attributes?.url} />
+        <ContentStyled>
+          <TitleStyled>
+            Discover <StyledTitleItalic>movies from</StyledTitleItalic>
+          </TitleStyled>
+          <StyledHeading>{directorData.director}</StyledHeading>
+          <Button buttonHref="/" buttonName="see all" mode="light" />
+        </ContentStyled>
+      </>
     </WrapperStyled>
   );
 }

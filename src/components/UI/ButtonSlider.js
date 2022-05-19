@@ -23,12 +23,12 @@ const Arrow = styled.button`
     right: ${({ prev }) => (prev ? "unset" : "0")};
     padding: ${({ prev }) => (prev ? "0 0 0 1rem" : "0 1rem 0 0")};
     &:before {
-      border-color: #fff;
+      border-color: var(--white);
       border-style: solid;
       border-width: 2px 2px 0 0;
       display: block;
-      height: 25px;
-      width: 25px;
+      height: 2.5rem;
+      width: 2.5rem;
       transform: ${({ prev }) => (prev ? "rotate(-135deg)" : "rotate(45deg)")};
     }
   }

@@ -8,6 +8,7 @@ export default function UIButton({
   onClickHandler,
   children,
   type,
+  isDisabled,
 }) {
   return (
     <>
@@ -22,6 +23,7 @@ export default function UIButton({
           onClick={onClickHandler}
           mode={mode}
           type={type ? type : "button"}
+          disabled={isDisabled}
         >
           {buttonName}
           {children}
@@ -34,14 +36,12 @@ export default function UIButton({
 const Button = styled.button`
   border: none;
   outline: none;
-  font-family: var(--inter);
+  font: 600 1.2rem var(--inter);
   text-transform: uppercase;
-  font-size: 1.2rem;
   cursor: pointer;
   position: relative;
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   padding: 1rem 2rem;
-  font-weight: 600;
   display: inline-block;
   &:disabled {
     opacity: 0.25;

@@ -3,12 +3,18 @@ import { FEATURED_MOVIES } from "../libs/apolloQueries";
 import Title from "../components/Title/Title";
 import Director from "../components/Director/Director";
 import TitleMore from "../components/Title/TitleMore";
-import Error from "next/error";
+import Error from "./_error";
 import Head from "next/head";
 import Articles from "../components/Articles/Articles";
+import { apolloError } from "../utils/apolloError";
 
-export default function Home({ featuredMovies, errorCode }) {
-  if (!featuredMovies) return <Error statusCode={errorCode} />;
+export default function Home({
+  featuredMovies,
+  directorData,
+  articlesData,
+  errorCode,
+}) {
+  if (errorCode || !featuredMovies) return <Error statusCode={errorCode} />;
   return (
     <>
       <Head>
@@ -17,17 +23,13 @@ export default function Home({ featuredMovies, errorCode }) {
       <Title featuredMoviesData={featuredMovies.slice(0, 4)}>
         <TitleMore moreMoviesData={featuredMovies.slice(4)} />
       </Title>
-      <Director />
-      <Articles />
+      {directorData && <Director data={directorData} />}
+      <Articles data={articlesData} />
     </>
   );
 }
 
-export async function getServerSideProps({ res }) {
-  // res.setHeader(
-  //   "Cache-Control",
-  //   "public, s-maxage=30, stale-while-revalidate=59"
-  // );
+export async function getStaticProps() {
   const apolloClientFeatured = initializeApollo();
   try {
     const { data: featuredData } = await apolloClientFeatured.query({
@@ -36,15 +38,15 @@ export async function getServerSideProps({ res }) {
     return addApolloState(apolloClientFeatured, {
       props: {
         featuredMovies: featuredData.movies.data,
+        directorData: featuredData.directors.data,
+        articlesData: featuredData.articles.data,
       },
+      revalidate: 60,
     });
   } catch (err) {
     return {
       props: {
-        errorCode:
-          err.graphqlErrors?.length !== 0 || err.networkErrors?.length !== 0
-            ? "500"
-            : "400",
+        errorCode: apolloError(err),
       },
     };
   }

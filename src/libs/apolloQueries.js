@@ -30,6 +30,47 @@ export const FEATURED_MOVIES = gql`
         }
       }
     }
+    directors(
+      pagination: { start: 0, limit: 1 }
+      filters: { is_featured: { eq: true } }
+    ) {
+      data {
+        id
+        attributes {
+          director
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+    articles {
+      data {
+        id
+        attributes {
+          title
+          createdAt
+          description
+          slug
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+      meta {
+        pagination {
+          total
+        }
+      }
+    }
   }
 `;
 
