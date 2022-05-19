@@ -10,10 +10,6 @@ export const GlobalStyles = createGlobalStyle`
   --gold: #cf9500;
   --red: #DD0035;
   --inter: "Inter", sans-serif;
-  --freight: "freight-text-pro", serif;
-  --cormorant: 'Cormorant Infant', serif;
-  --cabin: 'Cabin', sans-serif;
-  --lora: 'Lora', serif;
   --le: "le-monde-livre-std",serif;
 }
 
@@ -27,7 +23,6 @@ body {
   position: relative;
   background-color: var(--darkwhite);
   overflow-x: hidden;
-  font-family: var(--freight);
   color: var(--black);
 }
 
@@ -54,9 +49,6 @@ img {
   content: "";
   position: absolute;
 }
-/* ::selection {
-  background: #cecece;
-} */
 .spacer {
   padding: 0 3.2rem 0;
   /* max-width: 178.4rem; */
