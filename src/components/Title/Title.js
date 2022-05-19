@@ -202,7 +202,7 @@ const ContentStyled = styled.div`
   }
 `;
 const ContentInfoStyled = styled.div`
-  font-family: var(--inter);
+  font-family: "Inter", sans-serif;
   display: flex;
   gap: 2rem;
   justify-content: space-between;
@@ -212,7 +212,7 @@ const ContentInfoStyled = styled.div`
   letter-spacing: 0.2px;
 `;
 const DateStyled = styled.p`
-  font-family: var(--inter);
+  font-family: "Inter", sans-serif;
   font-size: 1.2rem;
   color: var(--grey);
   text-transform: uppercase;
@@ -221,7 +221,7 @@ const DateStyled = styled.p`
   }
 `;
 const DirectorStyled = styled.p`
-  font-family: var(--inter);
+  font-family: "Inter", sans-serif;
   font-size: 1.2rem;
   color: var(--gold);
   text-align: right;

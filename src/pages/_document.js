@@ -21,6 +21,7 @@ export default class MyDocument extends Document {
       </Html>
     );
   }
+
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
