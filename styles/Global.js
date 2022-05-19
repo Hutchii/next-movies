@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
   --gold: #cf9500;
   --red: #DD0035;
   --inter: 'Inter', sans-serif;
-  --le: "le-monde-livre-std",serif;
+  --le: "le-monde-livre-std", serif;
 }
 * {
   box-sizing: border-box;

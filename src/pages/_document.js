@@ -12,7 +12,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=optional"
             rel="stylesheet"
           />
-          {/* <link rel="stylesheet" href="https://use.typekit.net/erq2dah.css" /> */}
+          <link rel="stylesheet" href="https://use.typekit.net/erq2dah.css" />
         </Head>
         <body>
           <Main />
