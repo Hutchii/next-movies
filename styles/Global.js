@@ -9,10 +9,9 @@ export const GlobalStyles = createGlobalStyle`
   --black: #161616;
   --gold: #cf9500;
   --red: #DD0035;
-  --inter: "Inter", sans-serif;
+  --inter: 'Inter', sans-serif;
   --le: "le-monde-livre-std",serif;
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -51,7 +50,6 @@ img {
 }
 .spacer {
   padding: 0 3.2rem 0;
-  /* max-width: 178.4rem; */
 }
 .center {
   margin: 0 auto;

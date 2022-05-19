@@ -21,7 +21,7 @@ export default function Title({ featuredMoviesData, children }) {
     if (featuredMoviesData.length < 2 || mq.matches) return;
     const interval = setInterval(() => nextSlide(), timer);
     return () => clearInterval(interval);
-  }, [whichSlide]);
+  }, [whichSlide, featuredMoviesData.length]);
 
   return (
     <main className="spacer center">
@@ -212,6 +212,7 @@ const ContentInfoStyled = styled.div`
   letter-spacing: 0.2px;
 `;
 const DateStyled = styled.p`
+  font-family: var(--inter);
   font-size: 1.2rem;
   color: var(--grey);
   text-transform: uppercase;
@@ -220,6 +221,7 @@ const DateStyled = styled.p`
   }
 `;
 const DirectorStyled = styled.p`
+  font-family: var(--inter);
   font-size: 1.2rem;
   color: var(--gold);
   text-align: right;
