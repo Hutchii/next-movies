@@ -46,9 +46,8 @@ const LabelField = styled.label`
 const InputField = styled.textarea`
   font-family: inherit;
   resize: none;
-  /* border: ${({ showError }) =>
-    showError ? "1px solid var(--red)" : "1px solid var(--black)"}; */
-  border: 1px solid var(--black);
+  border: ${({ showError }) =>
+    showError ? "1px solid var(--red)" : "1px solid var(--black)"};
   font-size: 1.8rem;
   outline: none;
   color: var(--black);
@@ -70,16 +69,14 @@ const InputField = styled.textarea`
   }
 `;
 const ErrorMessage = styled.span`
-  color: #b81b20;
+  color: var(--red);
   font-size: 1.4rem;
   font-weight: 500;
   min-height: 1.8rem;
-  background-color: #f4d7d9;
-  padding: 0.5rem 1.5rem;
-  border: 1px solid #f28c93;
+  margin-left: 0.1rem;
   opacity: ${({ showError }) => (showError ? "1" : "0")};
   @media (min-width: 480px) {
     font-size: 1.4rem;
-    min-height: 3rem;
+    min-height: 2rem;
   }
 `;

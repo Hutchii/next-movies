@@ -11,28 +11,7 @@ export default function Contact() {
   const [wasSubmitted, setWasSubmitted] = useState(false);
   const { renderFormInputs, onSubmit, isSending, sendingStatus } =
     useForm(form);
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.currentTarget);
-  //   const fieldValues = Object.fromEntries(formData.entries());
-  //   const formIsValid = Object.values(fieldValues).every(
-  //     (value, i) => !formConfig[i].validate(value, "email")
-  //   );
-  //   setWasSubmitted(true);
-  //   if (formIsValid) {
-  //     try {
-  //       await fetch("api/sendMail", {
-  //         method: "post",
-  //         body: JSON.stringify(fieldValues),
-  //       });
-  //       // e.currentTarget.reset();
-  //       setWasSubmitted(false);
-  //       console.log(`Fast Form Submitted`, fieldValues);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // };
+
   return (
     <main className="spacer center">
       <WrapperStyled className="spacer">
@@ -47,17 +26,6 @@ export default function Contact() {
             <Spinner isSending={isSending} />
           </Buttton>
         </FormStyled>
-        {/* <HeadingStyled>Contact us</HeadingStyled>
-        <TitleStyled>
-          FILL IN THE <TitleItalicStyled>FORM</TitleItalicStyled>
-        </TitleStyled>
-        <FormStyled noValidate onSubmit={handleSubmit}>
-          {formConfig.map((field) => {
-            return field.create.renderInput(wasSubmitted, field.validate);
-          })}
-          <Buttton mode="active" type="submit">
-            <Spinner />
-          </Buttton> */}
       </WrapperStyled>
     </main>
   );
@@ -78,7 +46,7 @@ const HeadingStyled = styled.h1`
   color: var(--black);
   font-size: 3.2rem;
   text-align: center;
-  padding-top: 3.6rem;
+  padding-top: 4.6rem;
   font-weight: 300;
 `;
 const TitleStyled = styled.h2`
@@ -102,7 +70,7 @@ const FormStyled = styled.form`
   flex-wrap: wrap;
   column-gap: 3.6rem;
   row-gap: 1.2rem;
-  padding-bottom: 3.6rem;
+  padding-bottom: 5rem;
   > div:first-of-type {
     position: absolute;
   }

@@ -72,7 +72,7 @@ const Span = styled.span`
     opacity: 0;
   }
   &:after {
-    left: 6px;
+    left: 5px;
     top: 2px;
     width: 4px;
     height: 8px;
@@ -82,18 +82,15 @@ const Span = styled.span`
   }
 `;
 const ErrorMessage = styled.span`
-  align-self: flex-start;
-  color: #b81b20;
+  color: var(--red);
   font-size: 1.4rem;
   font-weight: 500;
   min-height: 1.8rem;
-  background-color: #f4d7d9;
-  padding: 0.5rem 1.5rem;
-  border: 1px solid #f28c93;
   opacity: ${({ showError }) => (showError ? "1" : "0")};
   margin-top: 1rem;
+  margin: 0.8rem 0 0 0.1rem;
   @media (min-width: 480px) {
     font-size: 1.4rem;
-    min-height: 3rem;
+    min-height: 2rem;
   }
 `;
