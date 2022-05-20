@@ -7,23 +7,22 @@ import Markdown from "../components/Sections/Markdown";
 import { directorsFormatter } from "../libs/directorsFormatter";
 import Share from "../components/Sections/Share";
 import Error from "next/error";
+import styled from "styled-components";
 
 export default function SlugLoadMore({ data, errorCode }) {
   // if (!data) return <Error statusCode={errorCode} />;
   const slugData = data.movies.data[0].attributes;
   return (
-    <article className="spacer">
-      <div className="title-slug margin--header">
-        <div className="title-slug--info">
-          <h1 className="heading--64">{slugData.title}</h1>
-          <p className="text--14 color--gold font--inter">{`By ${directorsFormatter(
+    <article className="spacer center">
+      <WrapperStyled>
+        <ContentStyled>
+          <TitleStyled>{slugData.title}</TitleStyled>
+          <DirectorStyled>{`By ${directorsFormatter(
             slugData.directors.data
-          )}`}</p>
-          <p className="text--14 color--grey font--inter">
-            {dateConverter(slugData.createdAt)}
-          </p>
-        </div>
-        <div className="title-slug--image">
+          )}`}</DirectorStyled>
+          <DateStyled>{dateConverter(slugData.createdAt)}</DateStyled>
+        </ContentStyled>
+        <ImageStyled>
           <Image
             src={imageUrlBuilder(slugData.image.data.attributes.url)}
             alt="Movie"
@@ -32,10 +31,10 @@ export default function SlugLoadMore({ data, errorCode }) {
             priority
             unoptimized
           />
-        </div>
+        </ImageStyled>
         <Markdown content={slugData.content} />
-        <Share />
-      </div>
+        {/* <Share /> */}
+      </WrapperStyled>
     </article>
   );
 }
@@ -65,7 +64,7 @@ export async function getStaticProps({ params, preview }) {
     const { error, data } = await apolloClientSlugData.query({
       query: SLUG_DATA,
       variables: { slug: slug, publicationState: publicationState },
-      revalidate: 10,
+      revalidate: 60,
     });
     if (data.movies.data.length === 0 || error) {
       return { notFound: true };
@@ -79,3 +78,42 @@ export async function getStaticProps({ params, preview }) {
     return { notFound: true };
   }
 }
+
+const WrapperStyled = styled.div`
+  margin: 0 auto;
+  max-width: 90rem;
+`;
+const ContentStyled = styled.div`
+  text-align: center;
+  margin-bottom: 3rem;
+`;
+const TitleStyled = styled.h1`
+  font: 500 4.2rem var(--le);
+  color: var(--black);
+  margin-bottom: 1.5rem;
+  @media (min-width: 768px) {
+    font-size: 6.4rem;
+  }
+  p:last-of-type {
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+  }
+`;
+const DirectorStyled = styled.p`
+  color: var(--gold);
+  font: 600 1.4rem var(--inter);
+`;
+const DateStyled = styled.p`
+  color: var(--grey);
+  text-transform: uppercase;
+  margin-top: 0.8rem;
+  font: 600 1.4rem var(--inter);
+`;
+const ImageStyled = styled.div`
+  width: calc(100% + 6.4rem);
+  margin-left: -3.2rem;
+  @media (min-width: 768px) {
+    width: unset;
+    margin-left: 0;
+  }
+`;

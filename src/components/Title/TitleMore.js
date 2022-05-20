@@ -28,7 +28,7 @@ export default function TitleMore({ data }) {
             </Link>
           );
         })}
-        <Button buttonName="view all" buttonHref="/" />
+        <Button buttonName="view all movies" buttonHref="/movies" />
       </ContainerStyled>
     </WrapperStyled>
   );

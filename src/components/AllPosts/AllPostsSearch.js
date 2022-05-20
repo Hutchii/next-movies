@@ -41,14 +41,12 @@ const InputStyled = styled.input`
   color: var(--darkwhite);
   border: none;
   outline: none;
-  font-family: var(--inter);
+  font: 600 1.3rem var(--inter);
   width: 100%;
-  font-weight: 600;
   ::placeholder {
+    font: 600 1.3rem var(--inter);
     color: var(--darkwhite);
-    font-family: var(--inter);
     text-transform: uppercase;
-    font-weight: 600;
   }
   @media (min-width: 480px) {
     width: 28rem;

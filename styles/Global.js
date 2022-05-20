@@ -61,6 +61,42 @@ img {
 .hamburger-react {
   z-index: 200;
 }
+.title-slug--markdown {
+  margin-top: 2.4rem;
+  align-self: flex-start;
+}
+.title-slug--markdown p,
+.title-slug--markdown li {
+  margin-bottom: 2.4rem;
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+.title-slug--markdown li {
+  margin-left: 2rem;
+}
+.title-slug--markdown p:first-of-type:first-letter {
+  font-size: 2.8rem;
+  font-weight: 600;
+}
+.title-slug--markdown h2 {
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.title-slug--markdown a {
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.title-slug--markdown a:hover {
+  color: var(--gold);
+}
+.title-slug--markdown ul {
+  list-style: unset;
+}
+
 
 @media (min-width: 768px) {
 .hamburger-react {
@@ -68,6 +104,15 @@ img {
   }
 .spacer {
   padding: 0 4.2rem 0;
+  }
+}
+@media (min-width: 1024px) {
+  .title-slug--markdown p,
+  .title-slug--markdown li {
+    font-size: 2rem;
+  }
+  .title-slug--markdown h2 {
+    font-size: 3.2rem;
   }
 }
 @media (min-width: 1360px) {
