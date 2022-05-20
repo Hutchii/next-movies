@@ -10,7 +10,7 @@ export default function TitleMoreImage({ imageUrl }) {
         width={170}
         height={100}
         priority
-        unoptimized
+        quality={90}
       />
     </div>
   );

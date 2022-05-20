@@ -3,6 +3,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ["movies.luckyseven.li"],
+  },
   // optimizeFonts: false,
 };
 

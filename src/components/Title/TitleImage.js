@@ -14,8 +14,8 @@ export default function TitleImage({ imageUrl, link, index }) {
             width={1024}
             height={600}
             priority={index === 0}
-            unoptimized
             layout="responsive"
+            quality={95}
           />
         </ImageWrapperSlide>
       </LinkSlide>
