@@ -9,8 +9,6 @@ export default function AllPostsList({
   moviesData,
   activeGenre,
   activeSearch,
-  error,
-  fetchLink,
 }) {
   const dataLength = moviesData?.length === 0;
   if (activeGenre === "all" && !activeSearch && dataLength)
@@ -21,16 +19,11 @@ export default function AllPostsList({
     );
   if (activeSearch && dataLength)
     return <Message message="No results found." />;
-  if (error) return <Message message="Error occured. Try again." />;
   return (
     <WrapperStyled>
       {moviesData?.map((movie) => {
         return (
-          <Link
-            key={movie.id}
-            href={`/${fetchLink}/${movie.attributes.slug}`}
-            passHref
-          >
+          <Link key={movie.id} href={`/${movie.attributes.slug}`} passHref>
             <LinkStyled>
               <CardStyled>
                 <AllPostsImage

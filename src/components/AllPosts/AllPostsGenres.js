@@ -6,7 +6,7 @@ const listedGenres = ["all", "drama", "romance", "war", "thriller"];
 export default function AllPostGenres({ onClickHandler, activeGenre }) {
   return (
     <FiltersStyled>
-      {listedGenres.map((genre, i) => {
+      {listedGenres.map((genre) => {
         return (
           <Button
             mode="filter"
@@ -15,7 +15,7 @@ export default function AllPostGenres({ onClickHandler, activeGenre }) {
               onClickHandler(genre);
             }}
             buttonName={genre}
-            activeGenre={activeGenre === genre}
+            active={activeGenre === genre}
           />
         );
       })}

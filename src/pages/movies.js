@@ -6,13 +6,13 @@ import Error from "./_error";
 import { apolloError } from "../utils/apolloError";
 
 export default function SSRLoadMore({ moviesData, errorCode }) {
-  // if (errorCode || !moviesData) return <Error statusCode={errorCode} />;
+  if (errorCode || !moviesData) return <Error statusCode={errorCode} />;
   return (
     <>
       <Head>
         <title>Movies</title>
       </Head>
-      <AllPosts data={moviesData} />
+      {moviesData && <AllPosts data={moviesData} />}
     </>
   );
 }

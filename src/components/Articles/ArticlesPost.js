@@ -8,7 +8,7 @@ export default function ArticlesPost({ data, mode }) {
   return (
     <Link href={`/${data.slug}`} passHref>
       <CardStyled mode={mode}>
-        <ArticlesImage imageUrl={data.image.data.attributes?.url} />
+        <ArticlesImage imageUrl={data.image.data?.attributes?.url} />
         <ContentStyled>
           <AuthorStyled>By Andrew Kowalski</AuthorStyled>
           <HeadingStyled mode={mode}>{data.title}</HeadingStyled>

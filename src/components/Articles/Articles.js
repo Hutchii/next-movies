@@ -70,7 +70,7 @@ const WrapperStyled = styled.div`
   flex-direction: column;
   align-items: center;
   button {
-    margin-top: 3.2rem;
+    margin-top: 5rem;
   }
 `;
 const TitleStyled = styled.h2`

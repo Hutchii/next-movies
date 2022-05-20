@@ -1,7 +1,19 @@
+import styled from "styled-components";
+
 export default function Message({ message }) {
   return (
-    <div className="message">
+    <ErrorMessage>
       <p>{message}</p>
-    </div>
+    </ErrorMessage>
   );
 }
+
+const ErrorMessage = styled.div`
+    width: 100%;
+  min-height: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.6rem;
+  text-align: center;
+`

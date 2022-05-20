@@ -9,7 +9,7 @@ export default function UIButton({
   children,
   type,
   isDisabled,
-  activeGenre,
+  active,
 }) {
   return (
     <>
@@ -25,7 +25,7 @@ export default function UIButton({
           mode={mode}
           type={type ? type : "button"}
           disabled={isDisabled}
-          active={activeGenre}
+          active={active}
         >
           {buttonName}
           {children}
@@ -76,6 +76,17 @@ const Button = styled.button`
           &:hover {
             background-color: var(--black);
             color: var(--darkwhite);
+          }
+        `;
+      case "pagination":
+        return css`
+          background-color: transparent;
+          color: var(--black);
+          border: 1px solid var(--black);
+          padding: 0.4rem 0.4rem;
+          &:hover {
+            background-color: var(--black);
+            fill: var(--darkwhite);
           }
         `;
       default:

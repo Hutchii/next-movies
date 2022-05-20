@@ -1,7 +1,8 @@
 import { usePagination, DOTS } from "../../libs/pagination";
 import ArrowPagination from "../../../public/svg/ArrowPagination.svg";
-import AllPostsButton from "./AllPostsButton";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+import ButtonPagination from "../UI/ButtonPagination";
 
 export default function AllPostsPaginationUI({
   totalCount,
@@ -28,40 +29,54 @@ export default function AllPostsPaginationUI({
   }
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <div className="posts-pagination posts-cards--button center">
-      <button
-        disabled={currentPage === 1}
-        className="posts-pagination--previous"
-        onClick={() => fetchMore(-1)}
+    <WrapperStyled>
+      <ButtonPagination
+        mode="arrow"
+        onClickHandler={() => fetchMore(-1)}
+        isDisabled={currentPage === 1}
       >
         <ArrowPagination />
-      </button>
+      </ButtonPagination>
       {paginationRange.map((pageNumber, i) => {
         if (pageNumber === DOTS) {
           return (
-            <div className="posts-pagination--dots" key={pageNumber + i}>
+            <Dots key={pageNumber + i}>
               &#8230;
-            </div>
+            </Dots>
           );
         }
         return (
-          <AllPostsButton
-            onClickHandler={() => fetchMore(undefined, pageNumber)}
-            className={`posts-pagination--numbers ${
-              pageNumber === currentPage ? "button--light" : ""
-            }`}
+          <ButtonPagination
             key={pageNumber}
-            page={pageNumber}
-          />
+            onClickHandler={() => fetchMore(undefined, pageNumber)}
+            buttonName={pageNumber}
+            active={pageNumber === currentPage}
+          ></ButtonPagination>
         );
       })}
-      <button
-        disabled={currentPage === lastPage}
-        className="posts-pagination--next"
-        onClick={() => fetchMore(+1)}
+      <ButtonPagination
+        mode="arrow"
+        onClickHandler={() => fetchMore(+1)}
+        isDisabled={currentPage === lastPage}
+        next
       >
         <ArrowPagination />
-      </button>
-    </div>
+      </ButtonPagination>
+    </WrapperStyled>
   );
 }
+
+const WrapperStyled = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-top: 5rem;
+  justify-content: center;
+`;
+const Dots = styled.div`
+  font: 600 1.2rem var(--inter);
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
