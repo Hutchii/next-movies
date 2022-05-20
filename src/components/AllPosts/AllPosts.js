@@ -25,7 +25,7 @@ export default function AllPosts({ data }) {
       );
     if (searchQuery !== "")
       results = results.filter((el) =>
-        el.attributes.title.includes(searchQuery)
+        el.attributes.title.toLowerCase().includes(searchQuery)
       );
     return results;
   }, [searchQuery, genreQuery, data]);
