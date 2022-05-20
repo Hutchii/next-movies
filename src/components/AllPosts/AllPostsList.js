@@ -23,7 +23,11 @@ export default function AllPostsList({
     <WrapperStyled>
       {moviesData?.map((movie) => {
         return (
-          <Link key={movie.id} href={`/${movie.attributes.slug}`} passHref>
+          <Link
+            key={movie.id}
+            href={`/movies/${movie.attributes.slug}`}
+            passHref
+          >
             <LinkStyled>
               <CardStyled>
                 <AllPostsImage
@@ -67,6 +71,18 @@ const LinkStyled = styled.a`
     display: block;
     margin-top: 6rem;
   }
+  @media (min-width: 768px) {
+    img {
+      transition: all 0.5s cubic-bezier(0.2, 0, 0.2, 1);
+    }
+    &:hover img {
+      transform: scale(1.04);
+      filter: brightness(80%);
+    }
+    &:hover h1 {
+      color: var(--gold);
+    }
+  }
   @media (min-width: 900px) {
     & + & {
       margin-top: 0;
@@ -109,6 +125,7 @@ const TextContent = styled.div``;
 const HeadingStyled = styled.h1`
   font: 300 2.6rem var(--le);
   margin: 1.5rem 0 1.5rem 0;
+  transition: color 0.5s cubic-bezier(0.2, 0, 0.2, 1);
 `;
 const TextStyled = styled.p`
   font: 300 1.8rem/1.4 var(--le);

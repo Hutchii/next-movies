@@ -238,7 +238,6 @@ export const SLUG_DATA = gql`
       data {
         id
         attributes {
-          slug
           title
           content
           createdAt

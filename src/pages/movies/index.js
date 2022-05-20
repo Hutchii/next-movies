@@ -1,9 +1,9 @@
-import { initializeApollo, addApolloState } from "../libs/apolloClient";
-import { MOVIES_FILTERS_PAGINATION } from "../libs/apolloQueries";
-import AllPosts from "../components/AllPosts/AllPosts";
+import { initializeApollo, addApolloState } from "../../libs/apolloClient";
+import { MOVIES_FILTERS_PAGINATION } from "../../libs/apolloQueries";
+import AllPosts from "../../components/AllPosts/AllPosts";
 import Head from "next/head";
-import Error from "./_error";
-import { apolloError } from "../utils/apolloError";
+import Error from "../_error";
+import { apolloError } from "../../utils/apolloError";
 
 export default function SSRLoadMore({ moviesData, errorCode }) {
   if (errorCode || !moviesData) return <Error statusCode={errorCode} />;
