@@ -18,9 +18,9 @@ export default function MoviesSearch({ refHandler, onChangeHandler }) {
         two: e.code,
         three: e.keyCode,
       });
-      // if (e.code === "Enter" || e.code === "Search") {
-      //   refHandler.current.blur();
-      // }
+      if (e.code === "Enter" || e.keyCode === 13) {
+        refHandler.current.blur();
+      }
     };
     refHandler.current.addEventListener("keyup", (e) => {
       eventAction(e);
