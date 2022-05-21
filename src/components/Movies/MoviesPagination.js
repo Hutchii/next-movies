@@ -9,6 +9,7 @@ export default function MoviesPagination({
   currentPage,
   pageSize,
   fetchMore,
+  pageQuery,
 }) {
   const [mediaQuery, setMediaQuery] = useState(true);
   let siblingCount = mediaQuery ? 1 : 0;
@@ -16,6 +17,9 @@ export default function MoviesPagination({
     const mq = window.matchMedia("(max-width: 480px)");
     if (mq.matches) setMediaQuery(false);
   }, []);
+  useEffect(() => {
+    if (pageQuery) window.scrollTo(0, 0);
+  }, [pageQuery]);
 
   const paginationRange = usePagination({
     currentPage,
@@ -39,11 +43,7 @@ export default function MoviesPagination({
       </ButtonPagination>
       {paginationRange.map((pageNumber, i) => {
         if (pageNumber === DOTS) {
-          return (
-            <Dots key={pageNumber + i}>
-              &#8230;
-            </Dots>
-          );
+          return <Dots key={pageNumber + i}>&#8230;</Dots>;
         }
         return (
           <ButtonPagination

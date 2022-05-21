@@ -5,15 +5,17 @@ import { useEffect } from "react";
 
 export default function MoviesSearch({ refHandler, onChangeHandler }) {
   const { query } = useRouter();
+  
   useEffect(() => {
-    const eventAction = (e) => {
-      if (e.code === "Enter" || e.keyCode === 13) {
-        refHandler.current.blur();
-      }
-    };
-    refHandler.current.addEventListener("keyup", (e) => {
-      eventAction(e);
-    });
+    const mq = window.matchMedia("(max-width: 480px)");
+    if (mq.matches) {
+      const eventAction = (e) => {
+        if (e.code === "Enter" || e.keyCode === 13) refHandler.current.blur();
+      };
+      refHandler.current.addEventListener("keyup", (e) => {
+        eventAction(e);
+      });
+    }
     return refHandler.current.removeEventListener("keyup", (e) => {
       eventAction(e);
     });

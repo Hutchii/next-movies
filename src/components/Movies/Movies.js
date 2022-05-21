@@ -79,6 +79,7 @@ export default function AllPosts({ data }) {
         activeSearch={searchQuery}
       />
       <MoviesPagination
+        pageQuery={query.page}
         morePostsAmount={6}
         pageSize={6}
         currentPage={pageQuery}
