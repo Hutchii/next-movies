@@ -20,7 +20,7 @@ const prev = async (req, res) => {
     return res.status(401).json({ message: "Invalid slug" });
   }
   res.setPreviewData({});
-  res.redirect(`/${type}/${post.movies.data[0].attributes.slug}`);
+  res.redirect(`/${type}/${post[type].data[0].attributes.slug}`);
 };
 
 export default prev;
