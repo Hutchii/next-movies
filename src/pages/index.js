@@ -19,6 +19,10 @@ export default function Home({
     <>
       <Head>
         <title>Movies - Blog</title>
+        <meta
+          name="description"
+          content="Movies - Blog."
+        />
       </Head>
       <Title data={moviesData.slice(0, 4)}>
         <TitleMore data={moviesData.slice(4)} />

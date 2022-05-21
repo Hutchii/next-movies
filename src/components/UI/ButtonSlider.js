@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
 export default function ButtonSlider({ prev, onClickHandler }) {
-  return <Arrow prev={prev} onClick={onClickHandler} />;
+  return (
+    <Arrow
+      prev={prev}
+      onClick={onClickHandler}
+      aria-label={prev ? "Previous slide" : "Next slide"}
+    />
+  );
 }
 
 const Arrow = styled.button`

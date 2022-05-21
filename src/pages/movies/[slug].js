@@ -17,6 +17,10 @@ export default function Post({ data, errorCode }) {
     <>
       <Head>
         <title>{`Movies - ${slugData.title}`}</title>
+        <meta
+          name="description"
+          content="Movie."
+        />
       </Head>
       <article className="spacer center">
         <WrapperStyled>

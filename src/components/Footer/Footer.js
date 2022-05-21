@@ -1,5 +1,5 @@
-import Logo from "../../../public/svg/Logo.svg";
 import NavbarLink from "../Navbar/NavbarLink";
+import NavbarLogo from "../Navbar/NavbarLogo";
 import styled from "styled-components";
 
 export default function Footer() {
@@ -30,14 +30,16 @@ const FooterStyled = styled.footer`
 `;
 const WrapperStyled = styled.div``;
 const UpperStyled = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+const Logo = styled(NavbarLogo)`
   svg {
     width: 6.4rem;
     height: 6.4rem;
     fill: var(--lightgrey);
-  }
-  @media (min-width: 768px) {
-    display: flex;
-    justify-content: space-between;
   }
 `;
 const LinksStyled = styled.ul`

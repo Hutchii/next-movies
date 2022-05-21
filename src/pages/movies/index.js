@@ -11,6 +11,10 @@ export default function MoviesBlog({ moviesData, errorCode }) {
     <>
       <Head>
         <title>All Movies</title>
+        <meta
+          name="description"
+          content="All movies."
+        />
       </Head>
       {moviesData && <Movies data={moviesData} />}
     </>
