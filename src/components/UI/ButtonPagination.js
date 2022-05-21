@@ -7,7 +7,7 @@ export default function ButtonPagination({
   active,
   buttonName,
   children,
-  next
+  next,
 }) {
   return (
     <Button
@@ -31,7 +31,6 @@ const Button = styled.button`
   cursor: pointer;
   position: relative;
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  /* padding: 1rem 2rem; */
   width: 4rem;
   height: 4rem;
   display: inline-block;
@@ -42,8 +41,8 @@ const Button = styled.button`
           background-color: transparent;
           fill: var(--black);
           border: 1px solid var(--black);
-          transform: ${({next}) => next ? "rotate(180deg)" : "unset"};
-          margin: ${({next}) => next ? "0 0 0 0.8rem" : "0 0.8rem 0 0"};
+          transform: ${({ next }) => (next ? "rotate(180deg)" : "unset")};
+          margin: ${({ next }) => (next ? "0 0 0 0.8rem" : "0 0.8rem 0 0")};
           &:hover {
             background-color: var(--black);
             fill: var(--darkwhite);
@@ -52,9 +51,9 @@ const Button = styled.button`
             margin-top: 0.3rem;
           }
           &:disabled {
-    opacity: 0.25;
-    pointer-events: none;
-  }
+            opacity: 0.25;
+            pointer-events: none;
+          }
         `;
       default:
         return css`

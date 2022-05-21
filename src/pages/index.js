@@ -1,5 +1,5 @@
 import { initializeApollo, addApolloState } from "../utils/apolloClient";
-import { FEATURED_MOVIES } from "../utils/apolloQueries";
+import { HOME } from "../utils/apolloQueries";
 import Title from "../components/Title/Title";
 import Director from "../components/Director/Director";
 import TitleMore from "../components/Title/TitleMore";
@@ -37,7 +37,7 @@ export async function getStaticProps() {
   const apolloClient = initializeApollo();
   try {
     const { data } = await apolloClient.query({
-      query: FEATURED_MOVIES,
+      query: HOME,
     });
     return addApolloState(apolloClient, {
       props: {

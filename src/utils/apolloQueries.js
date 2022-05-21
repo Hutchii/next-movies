@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const FEATURED_MOVIES = gql`
+export const HOME = gql`
   query FeaturedMovies {
     movies(
       pagination: { start: 0, limit: 8 }
@@ -74,109 +74,8 @@ export const FEATURED_MOVIES = gql`
   }
 `;
 
-export const MOVIES_FILTERS = gql`
-  query MoviesFilters(
-    $start: Int!
-    $limit: Int!
-    $genre: String!
-    $title: String!
-  ) {
-    movies(
-      pagination: { start: $start, limit: $limit }
-      sort: "createdAt:desc"
-      filters: {
-        genres: { title: { eq: $genre } }
-        title: { contains: $title }
-      }
-    ) {
-      data {
-        id
-        attributes {
-          title
-          description
-          createdAt
-          slug
-          image {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-          directors {
-            data {
-              attributes {
-                director
-              }
-            }
-          }
-          genres {
-            data {
-              attributes {
-                title
-              }
-            }
-          }
-        }
-      }
-      meta {
-        pagination {
-          total
-        }
-      }
-    }
-  }
-`;
 
-export const DIRECTOR = gql`
-  query Director {
-    directors(filters: { is_featured: { eq: true } }) {
-      data {
-        id
-        attributes {
-          director
-          image {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const ARTICLES = gql`
-  query Articles($start: Int!, $limit: Int!) {
-    articles(pagination: { start: $start, limit: $limit }) {
-      data {
-        id
-        attributes {
-          title
-          createdAt
-          description
-          slug
-          image {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-        }
-      }
-      meta {
-        pagination {
-          total
-        }
-      }
-    }
-  }
-`;
-
-export const MOVIES_FILTERS_PAGINATION = gql`
+export const MOVIES = gql`
   query MoviesFilters {
     movies(
       sort: "createdAt:desc"
@@ -217,7 +116,7 @@ export const MOVIES_FILTERS_PAGINATION = gql`
   }
 `;
 
-export const SLUG = gql`
+export const MOVIES_SLUG = gql`
   query Slug {
     movies {
       data {
@@ -229,7 +128,7 @@ export const SLUG = gql`
   }
 `;
 
-export const SLUG_DATA = gql`
+export const MOVIES_ALL = gql`
   query SlugData($slug: String!, $publicationState: PublicationState!) {
     movies(
       filters: { slug: { eq: $slug } }
@@ -269,9 +168,59 @@ export const SLUG_DATA = gql`
   }
 `;
 
-export const PREVIEW = gql`
+export const MOVIES_PREVIEW = gql`
   query SlugData($slug: String!) {
     movies(filters: { slug: { eq: $slug } }, publicationState: PREVIEW) {
+      data {
+        attributes {
+          slug
+        }
+      }
+    }
+  }
+`;
+
+export const ARTICLES_SLUG = gql`
+  query ArticlesSlug {
+    articles {
+      data {
+        attributes {
+          slug
+        }
+      }
+    }
+  }
+`;
+
+export const ARTICLES_ALL = gql`
+  query ArticlesAll($slug: String!, $publicationState: PublicationState!) {
+    articles(
+      filters: { slug: { eq: $slug } }
+      publicationState: $publicationState
+    ) {
+      data {
+        id
+        attributes {
+          title
+          content
+          createdAt
+          slug
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const ARTICLES_PREVIEW = gql`
+  query SlugData($slug: String!) {
+    articles(filters: { slug: { eq: $slug } }, publicationState: PREVIEW) {
       data {
         attributes {
           slug

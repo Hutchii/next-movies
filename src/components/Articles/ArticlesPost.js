@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function ArticlesPost({ data, mode }) {
   if (!data) return;
   return (
-    <Link href={`/${data.slug}`} passHref>
+    <Link href={`/articles/${data.slug}`} passHref>
       <CardStyled mode={mode}>
         <ArticlesImage imageUrl={data.image.data?.attributes?.url} />
         <ContentStyled>

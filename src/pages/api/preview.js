@@ -1,36 +1,53 @@
 import { initializeApollo } from "../../utils/apolloClient";
-import { PREVIEW } from "../../utils/apolloQueries";
+import { MOVIES_PREVIEW, ARTICLES_PREVIEW } from "../../utils/apolloQueries";
 
 const prev = async (req, res) => {
   if (req.query.secret !== ("tajne" || !req.query.slug)) {
     return res.status(401).json({ message: `Invalid token ${req.query.slug}` });
   }
-
+  const slug = req.query.slug;
   async function getPostBySlug(slug) {
-    const apolloClientPreview = initializeApollo();
-    const { data } = await apolloClientPreview.query({
-      query: PREVIEW,
+    const apolloClient = initializeApollo();
+    const { data } = await apolloClient.query({
+      query: MOVIES_PREVIEW,
       variables: { slug: slug },
     });
     return data;
   }
-  // Fetch the headless CMS to check if the provided `slug` exists
-  // getPostBySlug would implement the required fetching logic to the headless CMS
-  const post = await getPostBySlug(req.query.slug);
-
-  // If the slug doesn't exist prevent preview mode from being enabled
-  if (!post) {
-    return res.status(401).json({ message: "Invalid slug", post });
+  const post = await getPostBySlug(slug);
+  if (!post || post.movies.data.length === 0) {
+    return res.status(401).json({ message: "Invalid slug" });
   }
   res.setPreviewData({});
-  // Enable Preview Mode by setting the cookies
-  // res.setPreviewData({});
-
-  // Redirect to the path from the fetched post
-  // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  // res.writeHead(307, { Location: `/blog/${post.slug}` })
-  // res.end();
-  res.redirect(`/ssr/load-more/${post.movies.data[0].attributes.slug}`);
+  res.redirect(`/movies/${post.movies.data[0].attributes.slug}`);
 };
 
 export default prev;
+
+// import { initializeApollo } from "../../utils/apolloClient";
+// import { MOVIES_PREVIEW, ARTICLES_PREVIEW } from "../../utils/apolloQueries";
+
+// const prev = async (req, res) => {
+//   if (req.query.secret !== ("tajne" || !req.query.slug)) {
+//     return res.status(401).json({ message: `Invalid token ${req.query.slug}` });
+//   }
+//   const [path, slug] = req.query.slug.split("/");
+//   async function getPostBySlug(slug) {
+//     const apolloClient = initializeApollo();
+//     const { data } = await apolloClient.query({
+//       query: path === "movies" ? MOVIES_PREVIEW : ARTICLES_PREVIEW,
+//       variables: { slug: slug },
+//     });
+//     console.log("DATA", data);
+//     return data;
+//   }
+//   console.log(req);
+//   const post = await getPostBySlug(slug);
+//   if (!post || post.movies.data.length === 0) {
+//     return res.status(401).json({ message: "Invalid slug" });
+//   }
+//   res.setPreviewData({});
+//   res.redirect(`/movies/${post.movies.data[0].attributes.slug}`);
+// };
+
+// export default prev;

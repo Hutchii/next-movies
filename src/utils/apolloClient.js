@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
-import { relayStylePagination } from "@apollo/client/utilities";
+// import { relayStylePagination } from "@apollo/client/utilities";
 import merge from "deepmerge";
 import isEqual from "lodash/isEqual";
 
@@ -18,12 +18,12 @@ function createApolloClient() {
       uri: process.env.NEXT_PUBLIC_API,
       // credentials: "same-origin",
     }),
-    //typePolicies for cursor pagination:
+    //typePolicies for pagination:
     cache: new InMemoryCache({
       typePolicies: {
         Query: {
           fields: {
-            movies: relayStylePagination(),
+            // movies: relayStylePagination(),
             // articles: relayStylePagination(),
           },
         },
@@ -58,7 +58,6 @@ export function initializeApollo(initialState = null) {
   if (!apolloClient) apolloClient = _apolloClient;
   return _apolloClient;
 }
-
 //Takes Apollo Client and calls cache.extract to pull out the cache and adds it to pageProps to the current pages being rendered
 export function addApolloState(client, pageProps) {
   if (pageProps?.props) {
@@ -66,7 +65,6 @@ export function addApolloState(client, pageProps) {
   }
   return pageProps;
 }
-
 //Pulls out the Apollo cache data stored in pageProps and uses that to initialize Apollo
 export function useApollo(pageProps) {
   const state = pageProps[APOLLO_STATE_PROP_NAME];

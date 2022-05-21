@@ -1,5 +1,5 @@
 import { initializeApollo, addApolloState } from "../../utils/apolloClient";
-import { MOVIES_FILTERS_PAGINATION } from "../../utils/apolloQueries";
+import { MOVIES } from "../../utils/apolloQueries";
 import Movies from "../../components/Movies/Movies";
 import Head from "next/head";
 import Error from "../_error";
@@ -11,10 +11,7 @@ export default function MoviesBlog({ moviesData, errorCode }) {
     <>
       <Head>
         <title>All Movies</title>
-        <meta
-          name="description"
-          content="All movies."
-        />
+        <meta name="description" content="All movies." />
       </Head>
       {moviesData && <Movies data={moviesData} />}
     </>
@@ -25,7 +22,7 @@ export async function getStaticProps() {
   const apolloClient = initializeApollo();
   try {
     const { data } = await apolloClient.query({
-      query: MOVIES_FILTERS_PAGINATION,
+      query: MOVIES,
     });
     return addApolloState(apolloClient, {
       props: {

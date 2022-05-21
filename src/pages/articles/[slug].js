@@ -1,9 +1,8 @@
 import Head from "next/head";
 import { initializeApollo } from "../../utils/apolloClient";
-import { MOVIES_SLUG, MOVIES_ALL } from "../../utils/apolloQueries";
+import { ARTICLES_SLUG, ARTICLES_ALL } from "../../utils/apolloQueries";
 import { dateConverter } from "../../utils/dateConverter";
 import Markdown from "../../components/Post/Markdown";
-import { directorsFormatter } from "../../utils/directorsFormatter";
 import Share from "../../components/Post/Share";
 import Error from "../_error";
 import styled from "styled-components";
@@ -12,7 +11,7 @@ import PostImage from "../../components/Post/PostImage";
 
 export default function Post({ data, errorCode }) {
   if (!data || errorCode) return <Error statusCode={errorCode} />;
-  const slugData = data.movies.data[0].attributes;
+  const slugData = data.articles.data[0].attributes;
   return (
     <>
       <Head>
@@ -23,9 +22,7 @@ export default function Post({ data, errorCode }) {
         <WrapperStyled>
           <ContentStyled>
             <TitleStyled>{slugData.title}</TitleStyled>
-            <DirectorStyled>{`By ${directorsFormatter(
-              slugData.directors.data
-            )}`}</DirectorStyled>
+            <DirectorStyled>Sebastian Fajny</DirectorStyled>
             <DateStyled>{dateConverter(slugData.createdAt)}</DateStyled>
           </ContentStyled>
           <PostImage image={slugData.image.data.attributes.url} />
@@ -41,9 +38,9 @@ export async function getStaticPaths() {
   const apolloClientSlug = initializeApollo();
 
   const { data } = await apolloClientSlug.query({
-    query: MOVIES_SLUG,
+    query: ARTICLES_SLUG,
   });
-  const paths = data.movies.data.map(({ attributes }) => {
+  const paths = data.articles.data.map(({ attributes }) => {
     return {
       params: {
         slug: attributes.slug,
@@ -59,14 +56,14 @@ export async function getStaticProps({ params, preview }) {
 
   try {
     const { data } = await apolloClientSlugData.query({
-      query: MOVIES_ALL,
+      query: ARTICLES_ALL,
       variables: {
         slug: params.slug,
         publicationState: publicationState,
       },
       revalidate: 60,
     });
-    if (data.movies.data.length === 0) {
+    if (data.articles.data.length === 0) {
       return {
         props: {
           errorCode: "404",
