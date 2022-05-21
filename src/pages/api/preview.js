@@ -1,6 +1,5 @@
-import { gql } from "@apollo/client";
-import { initializeApollo } from "../../libs/apolloClient";
-import { PREVIEW } from "../../libs/apolloQueries";
+import { initializeApollo } from "../../utils/apolloClient";
+import { PREVIEW } from "../../utils/apolloQueries";
 
 const prev = async (req, res) => {
   if (req.query.secret !== ("tajne" || !req.query.slug)) {
