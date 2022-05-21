@@ -6,10 +6,11 @@ const prev = async (req, res) => {
     return res.status(401).json({ message: `Invalid token ${req.query.slug}` });
   }
   const slug = req.query.slug;
+  const type = req.query.type;
   async function getPostBySlug(slug) {
     const apolloClient = initializeApollo();
     const { data } = await apolloClient.query({
-      query: MOVIES_PREVIEW,
+      query: type === "movies" ? MOVIES_PREVIEW : ARTICLES_PREVIEW,
       variables: { slug: slug },
     });
     return data;
@@ -19,7 +20,7 @@ const prev = async (req, res) => {
     return res.status(401).json({ message: "Invalid slug" });
   }
   res.setPreviewData({});
-  res.redirect(`/movies/${post.movies.data[0].attributes.slug}`);
+  res.redirect(`/${type}/${post.movies.data[0].attributes.slug}`);
 };
 
 export default prev;
