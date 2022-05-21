@@ -2,7 +2,7 @@ import { initializeApollo } from "../../utils/apolloClient";
 import { MOVIES_PREVIEW, ARTICLES_PREVIEW } from "../../utils/apolloQueries";
 
 const prev = async (req, res) => {
-  if (req.query.secret !== ("tajne" || !req.query.slug)) {
+  if (req.query.secret !== (process.env.PREVIEW || !req.query.slug)) {
     return res.status(401).json({ message: `Invalid token ${req.query.slug}` });
   }
   const slug = req.query.slug;
