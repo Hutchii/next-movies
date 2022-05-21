@@ -1,17 +1,18 @@
 import Search from "../../../public/svg/Search.svg";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function MoviesSearch({ refHandler, onChangeHandler }) {
   const { query } = useRouter();
-
+  const [test, setTest] = useState("NO CODE");
   useEffect(() => {
     const eventAction = (e) => {
       console.log(e);
-      if (e.code === "Enter" || e.code === "Search") {
-        refHandler.current.blur();
-      }
+      setTest(e.code);
+      // if (e.code === "Enter" || e.code === "Search") {
+      //   refHandler.current.blur();
+      // }
     };
     refHandler.current.addEventListener("keyup", (e) => {
       eventAction(e);
@@ -32,6 +33,7 @@ export default function MoviesSearch({ refHandler, onChangeHandler }) {
         onChange={onChangeHandler}
       />
       <Search />
+      <p>{test}</p>
     </SearchStyled>
   );
 }
