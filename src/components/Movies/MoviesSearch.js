@@ -9,11 +9,7 @@ export default function MoviesSearch({ refHandler, onChangeHandler }) {
   useEffect(() => {
     const eventAction = (e) => {
       console.log(e);
-      if (
-        e.code === "Enter" ||
-        e.code === "KEYCODE_SEARCH" ||
-        e.code === "SEARCH"
-      ) {
+      if (e.code === "Enter" || e.code === "Search") {
         refHandler.current.blur();
       }
     };
