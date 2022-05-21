@@ -16,7 +16,7 @@ const prev = async (req, res) => {
     return data;
   }
   const post = await getPostBySlug(slug);
-  if (!post || post.movies.data.length === 0) {
+  if (!post || post[type].data.length === 0) {
     return res.status(401).json({ message: "Invalid slug" });
   }
   res.setPreviewData({});
