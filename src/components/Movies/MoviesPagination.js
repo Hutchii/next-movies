@@ -51,7 +51,7 @@ export default function MoviesPagination({
             onClickHandler={() => fetchMore(undefined, pageNumber)}
             buttonName={pageNumber}
             active={pageNumber === currentPage}
-          ></ButtonPagination>
+          />
         );
       })}
       <ButtonPagination

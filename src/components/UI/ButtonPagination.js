@@ -43,6 +43,7 @@ const Button = styled.button`
           fill: var(--black);
           border: 1px solid var(--black);
           transform: ${({next}) => next ? "rotate(180deg)" : "unset"};
+          margin: ${({next}) => next ? "0 0 0 0.8rem" : "0 0.8rem 0 0"};
           &:hover {
             background-color: var(--black);
             fill: var(--darkwhite);
