@@ -5,11 +5,19 @@ import { useEffect, useState } from "react";
 
 export default function MoviesSearch({ refHandler, onChangeHandler }) {
   const { query } = useRouter();
-  const [test, setTest] = useState("NO CODE");
+  const [test, setTest] = useState({
+    one: "key",
+    two: "code",
+    three: "keyCode",
+  });
   useEffect(() => {
     const eventAction = (e) => {
       console.log(e);
-      setTest(e.code);
+      setTest({
+        one: e.key,
+        two: e.code,
+        three: e.keyCode,
+      });
       // if (e.code === "Enter" || e.code === "Search") {
       //   refHandler.current.blur();
       // }
@@ -23,18 +31,22 @@ export default function MoviesSearch({ refHandler, onChangeHandler }) {
   }, [refHandler]);
 
   return (
-    <SearchStyled>
-      <InputStyled
-        ref={refHandler}
-        type="search"
-        placeholder={`search ${
-          query.genre && query.genre !== "all" ? `in #${query.genre}` : ""
-        }`}
-        onChange={onChangeHandler}
-      />
-      <Search />
-      <p>{test}</p>
-    </SearchStyled>
+    <>
+      <SearchStyled>
+        <InputStyled
+          ref={refHandler}
+          type="search"
+          placeholder={`search ${
+            query.genre && query.genre !== "all" ? `in #${query.genre}` : ""
+          }`}
+          onChange={onChangeHandler}
+        />
+        <Search />
+      </SearchStyled>
+      <p>{test.one}</p>
+      <p>{test.two}</p>
+      <p>{test.three}</p>
+    </>
   );
 }
 
