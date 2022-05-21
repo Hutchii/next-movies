@@ -1,5 +1,5 @@
-import { initializeApollo, addApolloState } from "../libs/apolloClient";
-import { FEATURED_MOVIES } from "../libs/apolloQueries";
+import { initializeApollo, addApolloState } from "../utils/apolloClient";
+import { FEATURED_MOVIES } from "../utils/apolloQueries";
 import Title from "../components/Title/Title";
 import Director from "../components/Director/Director";
 import TitleMore from "../components/Title/TitleMore";
@@ -18,7 +18,7 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>Movies</title>
+        <title>Movies - Blog</title>
       </Head>
       <Title data={moviesData.slice(0, 4)}>
         <TitleMore data={moviesData.slice(4)} />

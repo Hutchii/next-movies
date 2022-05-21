@@ -46,8 +46,7 @@ const Button = styled.button`
   padding: 1rem 2rem;
   display: inline-block;
   &:disabled {
-    opacity: 0.25;
-    pointer-events: none;
+    display: none;
   }
   ${({ mode }) => {
     switch (mode) {
@@ -56,9 +55,11 @@ const Button = styled.button`
           background-color: transparent;
           color: var(--darkwhite);
           border: 1px solid var(--darkwhite);
-          &:hover {
-            background-color: var(--darkwhite);
-            color: var(--black);
+          @media (min-width: 480px) {
+            &:hover {
+              background-color: var(--darkwhite);
+              color: var(--black);
+            }
           }
         `;
       case "active":
@@ -73,20 +74,11 @@ const Button = styled.button`
             active ? "var(--black)" : "transparent"};
           color: ${({ active }) => (active ? "var(--lightgrey)" : "black")};
           border: 1px solid var(--black);
-          &:hover {
-            background-color: var(--black);
-            color: var(--darkwhite);
-          }
-        `;
-      case "pagination":
-        return css`
-          background-color: transparent;
-          color: var(--black);
-          border: 1px solid var(--black);
-          padding: 0.4rem 0.4rem;
-          &:hover {
-            background-color: var(--black);
-            fill: var(--darkwhite);
+          @media (min-width: 480px) {
+            &:hover {
+              background-color: var(--black);
+              color: var(--darkwhite);
+            }
           }
         `;
       default:
@@ -94,9 +86,11 @@ const Button = styled.button`
           background-color: transparent;
           color: var(--black);
           border: 1px solid var(--black);
-          &:hover {
-            background-color: var(--black);
-            color: var(--darkwhite);
+          @media (min-width: 480px) {
+            &:hover {
+              background-color: var(--black);
+              color: var(--darkwhite);
+            }
           }
         `;
     }

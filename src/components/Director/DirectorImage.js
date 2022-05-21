@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { imageUrlBuilder } from "../../libs/imageUrlBuilder";
+import { imageUrlBuilder } from "../../utils/imageUrlBuilder";
 import styled from "styled-components";
 
 export default function DirectorImage({ imageUrl }) {
@@ -10,7 +10,7 @@ export default function DirectorImage({ imageUrl }) {
         alt="Director"
         width={960}
         height={540}
-        unoptimized
+        quality={90}
         layout="responsive"
         objectFit="cover"
       />

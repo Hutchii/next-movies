@@ -57,6 +57,9 @@ img {
 .mt {
   margin-top: 10rem;
 }
+.mtb {
+  margin-top: 15rem;
+}
 /* 3rd party */
 .hamburger-react {
   z-index: 200;
@@ -96,7 +99,9 @@ img {
 .title-slug--markdown ul {
   list-style: unset;
 }
-
+.overflow-hidden {
+  overflow-y: hidden;
+}
 
 @media (min-width: 768px) {
 .hamburger-react {
@@ -119,6 +124,9 @@ img {
 .spacer {
   padding: 0 5.2rem 0;
   max-width: 160.4rem;
+  }
+  .mtb {
+  margin-top: 25rem;
   }
 }
 @media (min-width: 1600px) {

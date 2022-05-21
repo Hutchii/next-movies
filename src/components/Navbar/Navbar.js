@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import NavbarLink from "./NavbarLink";
 import Hamburger from "hamburger-react";
 import NavbarLogo from "./NavbarLogo";
-import NavbarDropdown from "./NavbarDropdown";
 import styled, { keyframes, css } from "styled-components";
 
 export default function Navbar() {
@@ -12,9 +11,8 @@ export default function Navbar() {
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
     if (mq.matches) {
-      if (hamburgerOpen)
-        document.body.classList.add("navbar-overlay--overflow");
-      else document.body.classList.remove("navbar-overlay--overflow");
+      if (hamburgerOpen) document.body.classList.add("overflow-hidden");
+      else document.body.classList.remove("overflow-hidden");
     }
   }, [hamburgerOpen]);
   return (
@@ -33,11 +31,14 @@ export default function Navbar() {
               linkName="Home"
               linkHref="/"
               onClickHandler={setHamburgerOpenHandler}
+              footerLink={false}
             />
             <NavbarLink
               linkName="Movies"
               linkHref="/movies"
               onClickHandler={setHamburgerOpenHandler}
+              footerLink={false}
+
             />
             <NavbarLink
               linkName="Contact"
@@ -146,6 +147,9 @@ const List = styled.ul`
         `
       : "unset"};
   pointer-events: ${({ active }) => (active ? "unset" : "none")};
+  li{
+    margin-top: 2.4rem;
+  }
   @media (min-width: 768px) {
     position: unset;
     top: unset;
@@ -159,5 +163,8 @@ const List = styled.ul`
     > li + li {
       margin-left: 4.6rem;
     }
+    li{
+    margin-top: 0rem;
+  }
   }
 `;

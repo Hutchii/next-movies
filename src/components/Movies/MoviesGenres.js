@@ -3,7 +3,7 @@ import Button from "../UI/Button";
 
 const listedGenres = ["all", "drama", "romance", "war", "thriller"];
 
-export default function AllPostGenres({ onClickHandler, activeGenre }) {
+export default function MoviesGenres({ onClickHandler, activeGenre }) {
   return (
     <FiltersStyled>
       {listedGenres.map((genre) => {

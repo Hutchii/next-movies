@@ -1,10 +1,10 @@
-import AllPostGenres from "./AllPostsGenres";
+import MoviesGenres from "./MoviesGenres";
 import { useRef, useMemo } from "react";
 import { debounce } from "lodash";
-import AllPostsList from "./AllPostsList";
-import AllPostsSearch from "./AllPostsSearch";
-import AllPostsPaginationUI from "./AllPostsPaginationUI";
-import AllPostsResults from "./AllPostsResults";
+import MoviesList from "./MoviesList";
+import MoviesSearch from "./MoviesSearch";
+import MoviesPagination from "./MoviesPagination";
+import MoviesResults from "./MoviesResults";
 import Router, { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -52,7 +52,7 @@ export default function AllPosts({ data }) {
   return (
     <main className="spacer center">
       <FiltersStyled>
-        <AllPostGenres
+        <MoviesGenres
           onClickHandler={(currentGenre) => {
             searchInput.current.value = "";
             Router.push(
@@ -67,18 +67,18 @@ export default function AllPosts({ data }) {
           }}
           activeGenre={genreQuery}
         />
-        <AllPostsSearch
+        <MoviesSearch
           refHandler={searchInput}
           onChangeHandler={debouncedSearchHandler}
         />
       </FiltersStyled>
-      <AllPostsResults moviesDataTotal={filterDataLength} />
-      <AllPostsList
+      <MoviesResults moviesDataTotal={filterDataLength} />
+      <MoviesList
         moviesData={filterData.slice(pageQuery * 6 - 6, pageQuery * 6)}
         activeGenre={genreQuery}
         activeSearch={searchQuery}
       />
-      <AllPostsPaginationUI
+      <MoviesPagination
         morePostsAmount={6}
         pageSize={6}
         currentPage={pageQuery}

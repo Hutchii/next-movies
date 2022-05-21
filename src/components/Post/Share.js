@@ -1,7 +1,7 @@
 import Facebook from "../../../public/svg/Facebook.svg";
 import Twitter from "../../../public/svg/Twitter.svg";
 import Instagram from "../../../public/svg/Instagram.svg";
-import ShareLink from "../Sections/ShareLink";
+import ShareLink from "./ShareLink";
 
 export default function Share() {
   return (

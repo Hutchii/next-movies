@@ -1,4 +1,4 @@
-import { dateConverter } from "../../libs/dateConverter";
+import { dateConverter } from "../../utils/dateConverter";
 import Button from "../UI/Button";
 import Link from "next/link";
 import styled from "styled-components";
@@ -13,7 +13,7 @@ export default function TitleMore({ data }) {
       <ContainerStyled>
         {data.map((movie) => {
           return (
-            <Link key={movie.id} href={`/${movie.attributes.slug}`} passHref>
+            <Link key={movie.id} href={`/movies/${movie.attributes.slug}`} passHref>
               <LinkStyled>
                 <TitleMoreImage
                   imageUrl={movie.attributes.image.data.attributes.url}
@@ -115,5 +115,5 @@ const DateStyled = styled.p`
 const HeadingStyled = styled.h2`
   font: 300 1.8rem var(--le);
   color: var(--black);
-  transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
+  transition: color 0.4s cubic-bezier(0.2, 0, 0.2, 1);
 `;

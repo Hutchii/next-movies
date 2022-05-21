@@ -2,7 +2,7 @@ import Search from "../../../public/svg/Search.svg";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
-export default function AllPostsSearch({ refHandler, onChangeHandler }) {
+export default function MoviesSearch({ refHandler, onChangeHandler }) {
   const { query } = useRouter();
 
   return (

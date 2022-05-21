@@ -1,7 +1,7 @@
-import { dateConverter } from "../../libs/dateConverter";
+import { dateConverter } from "../../utils/dateConverter";
 import ButtonSlider from "../UI/ButtonSlider";
 import { useState, useEffect } from "react";
-import { directorsFormatter } from "../../libs/directorsFormatter";
+import { directorsFormatter } from "../../utils/directorsFormatter";
 import styled, { keyframes, css } from "styled-components";
 import TitleImage from "./TitleImage";
 
@@ -34,7 +34,7 @@ export default function Title({ data, children }) {
                 <ImageWrapperStyled active={isActive}>
                   <TitleImage
                     imageUrl={movie.attributes.image.data.attributes.url}
-                    link={`/${movie.attributes.slug}`}
+                    link={`/movies/${movie.attributes.slug}`}
                     index={i}
                   />
                   <PaginationStyled>

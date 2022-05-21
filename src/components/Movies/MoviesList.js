@@ -1,15 +1,11 @@
 import Link from "next/link";
-import { dateConverter } from "../../libs/dateConverter";
+import { dateConverter } from "../../utils/dateConverter";
 import Message from "../UI/Message";
-import { directorsFormatter } from "../../libs/directorsFormatter";
-import AllPostsImage from "./AllPostsImage";
+import { directorsFormatter } from "../../utils/directorsFormatter";
+import MoviesImage from "./MoviesImage";
 import styled from "styled-components";
 
-export default function AllPostsList({
-  moviesData,
-  activeGenre,
-  activeSearch,
-}) {
+export default function MoviesList({ moviesData, activeGenre, activeSearch }) {
   const dataLength = moviesData?.length === 0;
   if (activeGenre === "all" && !activeSearch && dataLength)
     return <Message message="Unfortunately there are no movies." />;
@@ -21,7 +17,7 @@ export default function AllPostsList({
     return <Message message="No results found." />;
   return (
     <WrapperStyled>
-      {moviesData?.map((movie) => {
+      {moviesData?.map((movie, i) => {
         return (
           <Link
             key={movie.id}
@@ -30,8 +26,9 @@ export default function AllPostsList({
           >
             <LinkStyled>
               <CardStyled>
-                <AllPostsImage
+                <MoviesImage
                   image={movie.attributes.image.data.attributes.url}
+                  index={i}
                 />
                 <ContentStyled className="spacer">
                   <TextContent>
@@ -125,7 +122,7 @@ const TextContent = styled.div``;
 const HeadingStyled = styled.h1`
   font: 300 2.6rem var(--le);
   margin: 1.5rem 0 1.5rem 0;
-  transition: color 0.5s cubic-bezier(0.2, 0, 0.2, 1);
+  transition: color 0.4s cubic-bezier(0.2, 0, 0.2, 1);
 `;
 const TextStyled = styled.p`
   font: 300 1.8rem/1.4 var(--le);

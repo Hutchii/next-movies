@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function AllPostsResults({ moviesDataTotal }) {
+export default function MoviesResults({ moviesDataTotal }) {
   return (
     <ResultsStyled>
       {moviesDataTotal} <GreyStyled>results</GreyStyled>

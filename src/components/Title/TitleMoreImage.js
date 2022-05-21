@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { imageUrlBuilder } from "../../libs/imageUrlBuilder";
+import { imageUrlBuilder } from "../../utils/imageUrlBuilder";
 
 export default function TitleMoreImage({ imageUrl }) {
   return (
-    <div className="title-home--image">
+
       <Image
         src={imageUrlBuilder(imageUrl)}
         alt="Movie"
@@ -12,6 +12,5 @@ export default function TitleMoreImage({ imageUrl }) {
         priority
         quality={90}
       />
-    </div>
   );
 }

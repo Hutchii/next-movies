@@ -1,5 +1,5 @@
 import ArticlesImage from "./ArticlesImage";
-import { dateConverter } from "../../libs/dateConverter";
+import { dateConverter } from "../../utils/dateConverter";
 import styled, { css } from "styled-components";
 import Link from "next/link";
 
@@ -110,7 +110,7 @@ const HeadingStyled = styled.h1`
   font: 300 2.6rem var(--le);
   margin-bottom: 1.5rem;
   color: var(--black);
-  transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
+  transition: color 0.4s cubic-bezier(0.2, 0, 0.2, 1);
   @media (min-width: 768px) {
     font-size: 3rem;
   }

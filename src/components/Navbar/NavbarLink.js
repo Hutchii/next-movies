@@ -10,7 +10,7 @@ export default function NavbarLink({
   footerLink,
 }) {
   return (
-    <Item dropdown={dropdown}>
+    <Item>
       <Link href={linkHref} passHref>
         {dropdown ? (
           <HrefDropdown onClick={onClickHandler}>
@@ -26,34 +26,25 @@ export default function NavbarLink({
   );
 }
 
-const Item = styled.li`
-  & + & {
-    margin-top: ${({ dropdown }) => (dropdown ? "2rem" : "0")};
-  }
-  @media (min-width: 768px) {
-    & + & {
-      margin-top: 0;
-    }
-  }
-`;
+const Item = styled.li``;
 const Href = styled.a`
   font-family: var(--le);
   color: var(--lightgrey);
-  font-size: ${({footerLink}) => footerLink ? "2rem" : "2.8rem"};
+  font-size: ${({ footerLink }) => (footerLink ? "2rem" : "2.8rem")};
   transition: color 250ms cubic-bezier(0.1, 0, 0.1, 1);
   font-weight: 300;
   &:hover {
     color: var(--gold);
   }
   @media (min-width: 768px) {
-    color: ${({footerLink}) => footerLink ? "var(--lightgrey)" : "var(--black)"};
-    font-size: ${({footerLink}) => footerLink ? "2rem" : "2.2rem"};
+    color: ${({ footerLink }) =>
+      footerLink ? "var(--lightgrey)" : "var(--black)"};
+    font-size: ${({ footerLink }) => (footerLink ? "2rem" : "2.2rem")};
   }
 `;
 const HrefDropdown = styled(Href)`
-  font-family: var(--inter);
+  font: 500 1.8rem var(--grey);
   color: var(--grey);
-  font-size: 1.8rem;
   @media (min-width: 768px) {
     color: var(--black);
     display: block;

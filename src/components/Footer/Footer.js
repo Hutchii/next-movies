@@ -4,46 +4,20 @@ import styled from "styled-components";
 
 export default function Footer() {
   return (
-    // <footer className="margin--top">
-    //   <div className="footer-nav spacer">
-    //     <div className="footer-home">
-    //       <Logo className="footer-logo" />
-    //     </div>
-    //     <nav>
-    //       <ul className="footer-list">
-    //         <p>Informations</p>
-    //         <NavbarLink linkName="Home" linkHref="/" />
-    //       </ul>
-    //       <ul className="footer-list">
-    //         <p>Server Side Rendering</p>
-    //         <NavbarLink linkName="Load More" linkHref="/ssr/load-more" />
-    //         <NavbarLink linkName="Pagination" linkHref="/ssr/pagination" />
-    //         <NavbarLink
-    //           linkName="Infinite Scrolling"
-    //           linkHref="/ssr/infinite-scrolling"
-    //         />
-    //       </ul>
-    //       <ul className="footer-list">
-    //         <p>Static Generation</p>
-    //         <NavbarLink linkName="Load More" linkHref="/ssr/load-more" />
-    //         <NavbarLink linkName="Pagination" linkHref="/ssr/pagination" />
-    //       </ul>
-    //     </nav>
-    //     <p className="footer-copyright">© Sebastian Blaik 2022</p>
-    //   </div>
-    // </footer>
-    <FooterStyled>
+    <FooterStyled className="mtb">
       <WrapperStyled className="spacer center">
         <UpperStyled>
           <Logo />
           <LinksStyled>
-            <NavbarLink linkName="Home" linkHref="/" footerLink={true} />
-            <NavbarLink linkName="Articles" linkHref="/" footerLink={true} />
-            <NavbarLink linkName="Movies" linkHref="/" footerLink={true} />
-            <NavbarLink linkName="Contact" linkHref="/" footerLink={true} />
+            <NavbarLink linkName="Home" linkHref="/" footerLink />
+            <NavbarLink linkName="Articles" linkHref="/" footerLink />
+            <NavbarLink linkName="Movies" linkHref="/" footerLink />
+            <NavbarLink linkName="Contact" linkHref="/" footerLink />
           </LinksStyled>
         </UpperStyled>
-        <CopyrightStyled>Copyright © 2022 Sebastian Blaik. All Rights Reserved.</CopyrightStyled>
+        <CopyrightStyled>
+          Copyright © 2022 Sebastian Blaik. All Rights Reserved.
+        </CopyrightStyled>
       </WrapperStyled>
     </FooterStyled>
   );
@@ -76,10 +50,7 @@ const LinksStyled = styled.ul`
   }
 `;
 const CopyrightStyled = styled.p`
+  font: 600 1.4rem var(--inter);
   color: var(--grey);
-  font-size: 1.4rem;
   margin-top: 4rem;
-  font-family: var(--inter);
-  font-weight: 500;
-
-`
+`;

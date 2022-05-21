@@ -1,10 +1,10 @@
-import { usePagination, DOTS } from "../../libs/pagination";
+import { usePagination, DOTS } from "../../hooks/usePagination";
 import ArrowPagination from "../../../public/svg/ArrowPagination.svg";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ButtonPagination from "../UI/ButtonPagination";
 
-export default function AllPostsPaginationUI({
+export default function MoviesPagination({
   totalCount,
   currentPage,
   pageSize,

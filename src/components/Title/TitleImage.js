@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { imageUrlBuilder } from "../../libs/imageUrlBuilder";
+import { imageUrlBuilder } from "../../utils/imageUrlBuilder";
 import styled from "styled-components";
 
 export default function TitleImage({ imageUrl, link, index }) {
@@ -15,7 +15,7 @@ export default function TitleImage({ imageUrl, link, index }) {
             height={600}
             priority={index === 0}
             layout="responsive"
-            quality={95}
+            quality={90}
           />
         </ImageWrapperSlide>
       </LinkSlide>

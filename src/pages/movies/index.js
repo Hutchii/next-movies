@@ -1,18 +1,18 @@
-import { initializeApollo, addApolloState } from "../../libs/apolloClient";
-import { MOVIES_FILTERS_PAGINATION } from "../../libs/apolloQueries";
-import AllPosts from "../../components/AllPosts/AllPosts";
+import { initializeApollo, addApolloState } from "../../utils/apolloClient";
+import { MOVIES_FILTERS_PAGINATION } from "../../utils/apolloQueries";
+import Movies from "../../components/Movies/Movies";
 import Head from "next/head";
 import Error from "../_error";
 import { apolloError } from "../../utils/apolloError";
 
-export default function SSRLoadMore({ moviesData, errorCode }) {
+export default function MoviesBlog({ moviesData, errorCode }) {
   if (errorCode || !moviesData) return <Error statusCode={errorCode} />;
   return (
     <>
       <Head>
-        <title>Movies</title>
+        <title>All Movies</title>
       </Head>
-      {moviesData && <AllPosts data={moviesData} />}
+      {moviesData && <Movies data={moviesData} />}
     </>
   );
 }
