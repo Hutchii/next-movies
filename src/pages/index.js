@@ -15,20 +15,20 @@ export default function Home({
   errorCode,
 }) {
   if (errorCode || !moviesData) return <Error statusCode={errorCode} />;
+
   return (
     <>
       <Head>
         <title>Movies - Blog</title>
-        <meta
-          name="description"
-          content="Movies - Blog."
-        />
+        <meta name="description" content="Movies - Blog." />
       </Head>
       <Title data={moviesData.slice(0, 4)}>
         <TitleMore data={moviesData.slice(4)} />
       </Title>
       {directorData && <Director data={directorData} />}
-      {articlesData && <Articles data={articlesData} />}
+      {articlesData != null && articlesData.length > 0 && (
+        <Articles data={articlesData} />
+      )}
     </>
   );
 }

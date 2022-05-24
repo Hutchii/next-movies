@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 export default function MoviesSearch({ refHandler, onChangeHandler }) {
   const { query } = useRouter();
-  
+
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 480px)");
     if (mq.matches) {

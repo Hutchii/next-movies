@@ -1,5 +1,5 @@
 import MoviesGenres from "./MoviesGenres";
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState } from "react";
 import { debounce } from "lodash";
 import MoviesList from "./MoviesList";
 import MoviesSearch from "./MoviesSearch";
@@ -14,37 +14,52 @@ export default function AllPosts({ data }) {
   const pageQuery = +query.page || 1;
   const genreQuery = query.genre || "all";
   const searchQuery = query.search || "";
+  
+  const filteredData = useMemo(() => {
+    if (!query.genre && !query.search) return data;
+    const filterMethods = [
+      {
+        condition: query.genre,
+        filter(a) {
+          return a.attributes.genres.data.some(
+            (b) => b.attributes.title === this.condition
+          );
+        },
+      },
+      {
+        condition: query.search,
+        filter(a) {
+          return a.attributes.title
+            .toLowerCase()
+            .includes(this.condition?.toLowerCase());
+        },
+      },
+    ];
+    return data.filter((item) => {
+      for (let i = 0; i < filterMethods.length; i++) {
+        if (!filterMethods[i].condition) continue;
+        if (!filterMethods[i].filter(item)) return false;
+      }
+      return true;
+    });
+  }, [data, query.genre, query.search]);
 
-  const filterData = useMemo(() => {
-    let results = data;
-    if (genreQuery !== "all")
-      results = data.filter((el) =>
-        el.attributes.genres.data.some(
-          (el) => el.attributes.title === genreQuery
-        )
-      );
-    if (searchQuery !== "")
-      results = results.filter((el) =>
-        el.attributes.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    return results;
-  }, [searchQuery, genreQuery, data]);
+  const filteredDataLength = filteredData?.length;
 
-  const filterDataLength = filterData.length;
-
-  const searchHelper = ({ target }) => {
-    const search = target.value;
-    const searchEmpty = search !== "";
+  const searchHelper = ({ target }) =>
     Router.push(
-      `/movies/${searchEmpty || query.genre ? "?" : ""}${
-        query.genre ? `genre=${query.genre}${searchEmpty ? "&" : ""}` : ""
-      }${searchEmpty ? `search=${search}` : ""}`,
+      {
+        pathname: "/movies",
+        query: {
+          genre: query.genre,
+          search: target.value,
+        },
+      },
       undefined,
       {
         shallow: true,
       }
     );
-  };
   const debouncedSearchHandler = useMemo(
     () => debounce(searchHelper, 350),
     [query.genre]
@@ -56,9 +71,12 @@ export default function AllPosts({ data }) {
           onClickHandler={(currentGenre) => {
             searchInput.current.value = "";
             Router.push(
-              `/movies/${
-                currentGenre !== "all" ? `?genre=${currentGenre}` : ""
-              }`,
+              {
+                pathname: "/movies",
+                query: {
+                  genre: currentGenre,
+                },
+              },
               undefined,
               {
                 shallow: true,
@@ -72,9 +90,9 @@ export default function AllPosts({ data }) {
           onChangeHandler={debouncedSearchHandler}
         />
       </FiltersStyled>
-      <MoviesResults moviesDataTotal={filterDataLength} />
+      <MoviesResults moviesDataTotal={filteredDataLength} />
       <MoviesList
-        moviesData={filterData.slice(pageQuery * 6 - 6, pageQuery * 6)}
+        moviesData={filteredData.slice(pageQuery * 6 - 6, pageQuery * 6)}
         activeGenre={genreQuery}
         activeSearch={searchQuery}
       />
@@ -83,19 +101,22 @@ export default function AllPosts({ data }) {
         morePostsAmount={6}
         pageSize={6}
         currentPage={pageQuery}
-        totalCount={filterDataLength}
-        fetchMore={(sign, pageNumber = false) => {
-          const pageCondition = pageNumber ? pageNumber : pageQuery + sign;
+        totalCount={filteredDataLength}
+        fetchMore={(sign, pageNumber = false) =>
           Router.push(
-            `/movies?${query.genre ? `genre=${query.genre}&` : ""}${
-              query.search ? `search=${query.search}&` : ""
-            }page=${pageCondition}`,
+            {
+              pathname: "/movies",
+              query: {
+                ...query,
+                page: pageNumber ? pageNumber : pageQuery + sign,
+              },
+            },
             undefined,
             {
               shallow: true,
             }
-          );
-        }}
+          )
+        }
       />
     </main>
   );

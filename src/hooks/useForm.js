@@ -80,9 +80,7 @@ function useForm(formObj) {
         for (const [key, value] of Object.entries(form)) {
           if (value.optional || value.renderType === "captcha") continue;
           value.error = value.defaultError;
-          value.renderType === "checkbox"
-            ? (value.value = false)
-            : (value.value = "");
+          value.value = value.defaultValue;
           value.isTouched = false;
           setForm({ ...form, [key]: value });
         }
@@ -98,3 +96,7 @@ function useForm(formObj) {
 }
 
 export default useForm;
+
+// value.renderType === "checkbox"
+//   ? (value.value = false)
+//   : (value.value = "");

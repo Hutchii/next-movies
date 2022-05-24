@@ -12,14 +12,14 @@ export function createFormInput(
   defaultValue = ""
 ) {
   return {
-    renderInput: (
+    renderInput(
       onChangeHandler,
       value,
       isTouched,
       error,
       wasSubmitted,
       onBlurHandler
-    ) => {
+    ) {
       return (
         <Input
           key={label}
@@ -49,17 +49,17 @@ export function createFormTextarea(
   type,
   placeholder,
   defaultError,
-  defaultValue = ""
+  value = ""
 ) {
   return {
-    renderInput: (
+    renderInput(
       onChangeHandler,
       value,
       isTouched,
       error,
       wasSubmitted,
       onBlurHandler
-    ) => {
+    ) {
       return (
         <Textarea
           key={label}
@@ -76,10 +76,11 @@ export function createFormTextarea(
         />
       );
     },
-    value: defaultValue,
+    value,
     error: defaultError,
     isTouched: false,
-    defaultError: defaultError,
+    defaultError,
+    defaultValue: value,
   };
 }
 
@@ -91,7 +92,7 @@ export function createFormCheckbox(
   defaultValue = false
 ) {
   return {
-    renderInput: (onChangeHandler, value, isTouched, error, wasSubmitted) => {
+    renderInput(onChangeHandler, value, isTouched, error, wasSubmitted) {
       return (
         <Checkbox
           key={label}
@@ -110,21 +111,16 @@ export function createFormCheckbox(
     error: defaultError,
     isTouched: false,
     defaultError: defaultError,
+    defaultValue: defaultValue,
     optional: false,
   };
 }
 
 export function createReCaptcha(sitekey) {
   return {
-    renderInput: (ref, onChangeHandler) => {
+    renderInput(ref) {
       return (
-        <ReCAPTCHA
-          key="captcha"
-          ref={ref}
-          size="invisible"
-          sitekey={sitekey}
-          // onChange={onChangeHandler}
-        />
+        <ReCAPTCHA key="captcha" ref={ref} size="invisible" sitekey={sitekey} />
       );
     },
   };

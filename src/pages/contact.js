@@ -4,11 +4,8 @@ import { form } from "../utils/formConfig";
 import Buttton from "../components/UI/Button";
 import Spinner from "../components/UI/Spinner";
 import Overlay from "../components/Form/overlay";
-// import Input from "../components/Form/Input";
-import { useState } from "react";
 
 export default function Contact() {
-  const [wasSubmitted, setWasSubmitted] = useState(false);
   const { renderFormInputs, onSubmit, isSending, sendingStatus } =
     useForm(form);
 

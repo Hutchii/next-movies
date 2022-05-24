@@ -18,10 +18,10 @@ export default function Title({ data, children }) {
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
-    if (data.length < 2 || mq.matches) return;
+    if (maxSlides < 1 || mq.matches) return;
     const interval = setInterval(() => nextSlide(), timer);
     return () => clearInterval(interval);
-  }, [whichSlide, data.length]);
+  }, [whichSlide, maxSlides]);
 
   return (
     <main className="spacer center">
