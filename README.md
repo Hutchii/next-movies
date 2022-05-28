@@ -7,6 +7,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - Custom form hook
 - [API Route for sending mail](https://nextjs.org/docs/api-routes/introduction)
 - [Sendgrid](https://sendgrid.com/)
-- [API Route for preview mode](https://nextjs.org/docs/api-routes/introduction)
+- [API Route for preview mode](https://nextjs.org/docs/advanced-features/preview-mode)
 - Pagination and load more
 - [Query parameters (shallow routing)](https://nextjs.org/docs/routing/shallow-routing)
