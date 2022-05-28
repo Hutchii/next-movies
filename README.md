@@ -3,4 +3,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Includes:
 
 - [Apollo Graphql](https://www.apollographql.com)
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Custom form hook
+- API Route for sending mail (sendgrid)
+- API Route for preview mode
+- Pagination and load more
+- Query parameters (shallow routing)
