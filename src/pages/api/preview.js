@@ -3,7 +3,7 @@ import { MOVIES_PREVIEW, ARTICLES_PREVIEW } from "../../utils/apolloQueries";
 
 const prev = async (req, res) => {
   if (req.query.secret !== (process.env.PREVIEW || !req.query.slug)) {
-    return res.status(401).json({ message: `Invalid token ${req.query.slug}` });
+    return res.status(401).json({ message: `Invalid token for slug: ${req.query.slug}` });
   }
   const slug = req.query.slug;
   const type = req.query.type;
@@ -15,7 +15,6 @@ const prev = async (req, res) => {
     });
     return data;
   }
-  //ARTICLES_PREVIEW NIE MA VARIABLES A DZIAŁA?
   const post = await getPostBySlug(slug);
   if (!post || post[type].data.length === 0) {
     return res.status(401).json({ message: "Invalid slug" });

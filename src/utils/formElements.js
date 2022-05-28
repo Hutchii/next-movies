@@ -9,7 +9,7 @@ export function createFormInput(
   type,
   placeholder,
   defaultError,
-  defaultValue = ""
+  value = ""
 ) {
   return {
     renderInput(
@@ -36,10 +36,11 @@ export function createFormInput(
         />
       );
     },
-    value: defaultValue,
+    value,
     error: defaultError,
     isTouched: false,
     defaultError: defaultError,
+    defaultValue: value,
   };
 }
 
@@ -89,7 +90,7 @@ export function createFormCheckbox(
   name,
   defaultError,
   optional = false,
-  defaultValue = false
+  value = false
 ) {
   return {
     renderInput(onChangeHandler, value, isTouched, error, wasSubmitted) {
@@ -107,11 +108,11 @@ export function createFormCheckbox(
         />
       );
     },
-    value: defaultValue,
+    value,
     error: defaultError,
     isTouched: false,
     defaultError: defaultError,
-    defaultValue: defaultValue,
+    defaultValue: value,
     optional: false,
   };
 }

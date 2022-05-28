@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 
-function useForm(formObj) {
+export default function useForm(formObj) {
   const [form, setForm] = useState(formObj);
   const [isSending, setIsSending] = useState(false);
   const [sendingStatus, setSendingStatus] = useState("");
@@ -94,9 +94,3 @@ function useForm(formObj) {
 
   return { renderFormInputs, onSubmit, isSending, sendingStatus };
 }
-
-export default useForm;
-
-// value.renderType === "checkbox"
-//   ? (value.value = false)
-//   : (value.value = "");

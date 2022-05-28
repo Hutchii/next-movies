@@ -16,26 +16,26 @@ export const form = {
     ...createReCaptcha(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY),
     renderType: "captcha",
   },
-  // email: {
-  //   ...createFormInput(
-  //     "Address email:",
-  //     "email",
-  //     "email",
-  //     "Enter your email address",
-  //     "Email address is required!"
-  //   ),
-  //   validationRule: emailValidation,
-  // },
-  // fullName: {
-  //   ...createFormInput(
-  //     "Full name:",
-  //     "fullName",
-  //     "text",
-  //     "Enter your full name",
-  //     "Full name is required!"
-  //   ),
-  //   validationRule: nameValidation,
-  // },
+  email: {
+    ...createFormInput(
+      "Address email:",
+      "email",
+      "email",
+      "Enter your email address",
+      "Email address is required!"
+    ),
+    validationRule: emailValidation,
+  },
+  fullName: {
+    ...createFormInput(
+      "Full name:",
+      "fullName",
+      "text",
+      "Enter your full name",
+      "Full name is required!"
+    ),
+    validationRule: nameValidation,
+  },
   message: {
     ...createFormTextarea(
       "Message:",
@@ -46,13 +46,13 @@ export const form = {
     ),
     validationRule: messageValidation,
   },
-  // consent: {
-  //   ...createFormCheckbox(
-  //     "Accept terms of use.",
-  //     "consent",
-  //     "You have to accept terms of use!"
-  //   ),
-  //   validationRule: checkboxValidation,
-  //   renderType: "checkbox",
-  // },
+  consent: {
+    ...createFormCheckbox(
+      "Accept terms of use.",
+      "consent",
+      "You have to accept terms of use!"
+    ),
+    validationRule: checkboxValidation,
+    renderType: "checkbox",
+  },
 };

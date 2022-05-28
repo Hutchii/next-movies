@@ -9,18 +9,18 @@ import Router, { useRouter } from "next/router";
 import styled from "styled-components";
 
 export default function AllPosts({ data }) {
-  const searchInput = useRef("");
   const { query } = useRouter();
   const pageQuery = +query.page || 1;
   const genreQuery = query.genre || "all";
   const searchQuery = query.search || "";
+  const searchInput = useRef("");
 
   const filteredData = useMemo(() => {
     if (!query.genre && !query.search) return data;
     const filterMethods = [
       {
         condition: query.genre,
-        filter(a) {
+        flt(a) {
           return a.attributes.genres.data.some(
             (b) => b.attributes.title === this.condition
           );
@@ -28,7 +28,7 @@ export default function AllPosts({ data }) {
       },
       {
         condition: query.search,
-        filter(a) {
+        flt(a) {
           return a.attributes.title
             .toLowerCase()
             .includes(this.condition?.toLowerCase());
@@ -38,28 +38,12 @@ export default function AllPosts({ data }) {
     return data.filter((item) => {
       for (let i = 0; i < filterMethods.length; i++) {
         if (!filterMethods[i].condition) continue;
-        if (!filterMethods[i].filter(item)) return false;
+        if (!filterMethods[i].flt(item)) return false;
       }
       return true;
     });
   }, [data, query.genre, query.search]);
 
-  const filteredDataLength = filteredData?.length;
-
-  // const searchHelper = ({ target }) =>
-  //   Router.push(
-  //     {
-  //       pathname: "/movies",
-  //       query: {
-  //         genre: query.genre,
-  //         search: target.value,
-  //       },
-  //     },
-  //     undefined,
-  //     {
-  //       shallow: true,
-  //     }
-  //   );
   const debouncedSearchHandler = useMemo(
     () =>
       debounce(
@@ -81,6 +65,8 @@ export default function AllPosts({ data }) {
       ),
     []
   );
+  const filteredDataLength = filteredData?.length;
+
   return (
     <main className="spacer center">
       <FiltersStyled>

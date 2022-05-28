@@ -26,7 +26,10 @@ export default async function sendMail(req, res) {
   if (method === "POST") {
     if (
       !captcha ||
-      messageValidation(message)
+      emailValidation(email) ||
+      nameValidation(fullName) ||
+      messageValidation(message) ||
+      checkboxValidation(consent)
     ) {
       return res.status(422).json({
         message: "Unproccesable request, please provide the required fields",
