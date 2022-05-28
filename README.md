@@ -5,9 +5,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [Apollo Graphql](https://www.apollographql.com)
 - [Strapi CMS](https://strapi.io/)
 - Custom form hook
-- [API Route for sending mail](https://nextjs.org/docs/api-routes/introduction)
+- [API Routes](https://nextjs.org/docs/api-routes/introduction)
 - [Sendgrid](https://sendgrid.com/)
-- [API Route for preview mode](https://nextjs.org/docs/advanced-features/preview-mode)
+- [Preview mode](https://nextjs.org/docs/advanced-features/preview-mode)
 - Pagination and load more
 - [Query parameters (shallow routing)](https://nextjs.org/docs/routing/shallow-routing)
-- [Styled components for CSS](https://styled-components.com/)
+- [Styled components](https://styled-components.com/)
