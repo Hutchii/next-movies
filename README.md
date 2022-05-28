@@ -10,3 +10,4 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [API Route for preview mode](https://nextjs.org/docs/advanced-features/preview-mode)
 - Pagination and load more
 - [Query parameters (shallow routing)](https://nextjs.org/docs/routing/shallow-routing)
+- [Styled components for CSS](https://styled-components.com/)
