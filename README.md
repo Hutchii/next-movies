@@ -11,3 +11,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - Pagination and load more
 - [Query parameters (shallow routing)](https://nextjs.org/docs/routing/shallow-routing)
 - [Styled components for CSS](https://styled-components.com/)
+
+### Link:
+https://nextjs-blog-movies.vercel.app/
