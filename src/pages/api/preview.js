@@ -15,6 +15,7 @@ const prev = async (req, res) => {
     });
     return data;
   }
+  //ARTICLES_PREVIEW NIE MA VARIABLES A DZIAŁA?
   const post = await getPostBySlug(slug);
   if (!post || post[type].data.length === 0) {
     return res.status(401).json({ message: "Invalid slug" });

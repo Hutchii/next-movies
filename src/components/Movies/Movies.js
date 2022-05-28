@@ -1,5 +1,5 @@
 import MoviesGenres from "./MoviesGenres";
-import { useRef, useMemo, useState } from "react";
+import { useRef, useMemo } from "react";
 import { debounce } from "lodash";
 import MoviesList from "./MoviesList";
 import MoviesSearch from "./MoviesSearch";
@@ -14,7 +14,7 @@ export default function AllPosts({ data }) {
   const pageQuery = +query.page || 1;
   const genreQuery = query.genre || "all";
   const searchQuery = query.search || "";
-  
+
   const filteredData = useMemo(() => {
     if (!query.genre && !query.search) return data;
     const filterMethods = [
@@ -46,23 +46,40 @@ export default function AllPosts({ data }) {
 
   const filteredDataLength = filteredData?.length;
 
-  const searchHelper = ({ target }) =>
-    Router.push(
-      {
-        pathname: "/movies",
-        query: {
-          genre: query.genre,
-          search: target.value,
-        },
-      },
-      undefined,
-      {
-        shallow: true,
-      }
-    );
+  // const searchHelper = ({ target }) =>
+  //   Router.push(
+  //     {
+  //       pathname: "/movies",
+  //       query: {
+  //         genre: query.genre,
+  //         search: target.value,
+  //       },
+  //     },
+  //     undefined,
+  //     {
+  //       shallow: true,
+  //     }
+  //   );
   const debouncedSearchHandler = useMemo(
-    () => debounce(searchHelper, 350),
-    [query.genre]
+    () =>
+      debounce(
+        ({ target }) =>
+          Router.push(
+            {
+              pathname: "/movies",
+              query: {
+                genre: query.genre,
+                search: target.value,
+              },
+            },
+            undefined,
+            {
+              shallow: true,
+            }
+          ),
+        350
+      ),
+    []
   );
   return (
     <main className="spacer center">

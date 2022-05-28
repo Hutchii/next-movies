@@ -6,22 +6,20 @@ import { useState } from "react";
 export default function Articles({ data }) {
   const [limit, setLimit] = useState(3);
 
-  const sortArticles = (articlesData) => {
-    const sortedArticles = [];
+  const sortedData = () => {
     let articleHorizontal = 0;
-    articlesData.forEach((el, i) => {
+    return data.reduce((acc, curr, i) => {
       if (i === articleHorizontal) {
         articleHorizontal += 3;
-        sortedArticles.push(el);
-      } else {
-        Array.isArray(sortedArticles[sortedArticles.length - 1])
-          ? sortedArticles[sortedArticles.length - 1].push(el)
-          : sortedArticles.push([el]);
-      }
-    });
-    return sortedArticles;
+        acc.push(curr);
+      } else
+        Array.isArray(acc[acc.length - 1])
+          ? acc[acc.length - 1].push(curr)
+          : acc.push([curr]);
+      return acc;
+    }, []);
   };
-  const finalData = sortArticles(data);
+  const finalData = sortedData(data);
   const dataLength = finalData?.length;
 
   return (
