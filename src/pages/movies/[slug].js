@@ -4,7 +4,6 @@ import { MOVIES_SLUG, MOVIES_ALL } from "../../utils/apolloQueries";
 import { dateConverter } from "../../utils/dateConverter";
 import Markdown from "../../components/Post/Markdown";
 import { directorsFormatter } from "../../utils/directorsFormatter";
-import Share from "../../components/Post/Share";
 import Error from "../_error";
 import styled from "styled-components";
 import { apolloError } from "../../utils/apolloError";
@@ -30,7 +29,6 @@ export default function Post({ data, errorCode }) {
           </ContentStyled>
           <PostImage image={slugData.image.data.attributes.url} />
           <Markdown content={slugData.content} />
-          {/* <Share /> */}
         </WrapperStyled>
       </article>
     </>

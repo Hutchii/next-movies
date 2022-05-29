@@ -67,6 +67,7 @@ img {
 .title-slug--markdown {
   margin-top: 2.4rem;
   align-self: flex-start;
+  font-family: var(--le);
 }
 .title-slug--markdown p,
 .title-slug--markdown li {
