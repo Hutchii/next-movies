@@ -63,7 +63,7 @@ export default function AllPosts({ data }) {
           ),
         350
       ),
-    []
+    [query.genre]
   );
   const filteredDataLength = filteredData?.length;
 
