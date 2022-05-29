@@ -9,7 +9,7 @@ export const HOME = gql`
       data {
         id
         attributes {
-          title
+          titless
           description
           createdAt
           slug

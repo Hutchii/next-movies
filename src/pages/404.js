@@ -1,23 +1,14 @@
 import styled from "styled-components";
-export default function Error({ statusCode }) {
+
+export default function Custom404() {
   return (
     <main className="spacer center">
       <Wrapper>
-        <ErrorWrapper>
-          <ItalicStyled>{statusCode}:</ItalicStyled>{" "}
-          {statusCode === "500"
-            ? `An error occurred on server`
-            : "An error occurred on client"}
-        </ErrorWrapper>
+        <Error><ItalicStyled>404:</ItalicStyled> Page not found!</Error>
       </Wrapper>
     </main>
   );
 }
-
-Error.getInitialProps = ({ res, err }) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  return { statusCode };
-};
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,12 +16,12 @@ const Wrapper = styled.div`
   justify-content: center;
   min-height: 50vh;
 `;
-const ErrorWrapper = styled.p`
+const Error = styled.p`
   font-size: 1.8rem;
   font-family: var(--inter);
   font-weight: 600;
   text-transform: uppercase;
-`;
+`
 const ItalicStyled = styled.span`
   color: var(--gold);
   font-style: italic;
