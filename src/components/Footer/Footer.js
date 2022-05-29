@@ -10,9 +10,8 @@ export default function Footer() {
           <Logo />
           <LinksStyled>
             <NavbarLink linkName="Home" linkHref="/" footerLink />
-            <NavbarLink linkName="Articles" linkHref="/" footerLink />
-            <NavbarLink linkName="Movies" linkHref="/" footerLink />
-            <NavbarLink linkName="Contact" linkHref="/" footerLink />
+            <NavbarLink linkName="Movies" linkHref="/movies" footerLink />
+            <NavbarLink linkName="Contact" linkHref="/contact" footerLink />
           </LinksStyled>
         </UpperStyled>
         <CopyrightStyled>
