@@ -9,11 +9,12 @@ export default function Message({ message }) {
 }
 
 const ErrorMessage = styled.div`
-    width: 100%;
+  font-family: var(--le);
+  width: 100%;
   min-height: 40rem;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2.6rem;
   text-align: center;
-`
+`;
