@@ -4,7 +4,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ["movies.luckyseven.li"],
+    domains: ["example.com"],
   },
   // optimizeFonts: false,
 };
